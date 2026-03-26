@@ -79,18 +79,13 @@ function drawCoastline() {
   mapped.forEach((p, i) => { if (i === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); });
   ctx.closePath();
 
-  const g = ctx.createRadialGradient(CW * .5, CH * .4, 40, CW * .5, CH * .4, CW * .4);
-  g.addColorStop(0, 'rgba(0,240,255,0.06)');
-  g.addColorStop(1, 'rgba(0,240,255,0.01)');
-  ctx.fillStyle = g;
+  // 性能优化：使用静态颜色替代渐变，减少 CPU 消耗
+  ctx.fillStyle = 'rgba(0,240,255,0.03)';
   ctx.fill();
-  ctx.strokeStyle = 'rgba(0,240,255,0.2)';
+  ctx.strokeStyle = 'rgba(0,240,255,0.15)';
   ctx.lineWidth = 2;
   ctx.stroke();
-  ctx.shadowColor = 'rgba(0,240,255,0.3)';
-  ctx.shadowBlur  = 8;
-  ctx.stroke();
-  ctx.shadowBlur  = 0;
+  // 移除 shadowBlur 优化性能
 
   // 海域标注
   ctx.fillStyle = 'rgba(0,240,255,0.1)';
@@ -126,8 +121,9 @@ function drawRouteActive() {
   g.addColorStop(1,   '#ff4466');
   ctx.strokeStyle = g;
   ctx.lineWidth   = 6;
+  // 性能优化：降低 shadowBlur 强度从 20 到 10
   ctx.shadowColor = '#ff2244';
-  ctx.shadowBlur  = 20;
+  ctx.shadowBlur  = 10;
   for (let i = 0; i <= s && i < N; i++) {
     if (i === 0) ctx.moveTo(route[i].x, route[i].y);
     else         ctx.lineTo(route[i].x, route[i].y);
@@ -136,17 +132,15 @@ function drawRouteActive() {
   ctx.stroke();
   ctx.shadowBlur = 0;
 
-  // 轨迹光效
+  // 性能优化：移除轨迹光效的 shadowBlur
   for (let i = Math.max(0, s - 15); i <= s; i++) {
     const alpha = .3 + ((i - s + 15) / 15) * .5;
     ctx.beginPath();
     ctx.arc(route[i].x, route[i].y, 4, 0, Math.PI * 2);
     ctx.fillStyle  = `rgba(255,68,102,${alpha})`;
-    ctx.shadowColor = '#ff4466';
-    ctx.shadowBlur  = 8;
+    // 移除 shadowBlur 优化性能
     ctx.fill();
   }
-  ctx.shadowBlur = 0;
 }
 
 function drawCheckpoints() {
@@ -172,12 +166,12 @@ function drawCheckpoints() {
     ctx.lineWidth   = 2;
     ctx.stroke();
 
-    // 内圈填充
+    // 内圈填充 - 性能优化：降低 shadowBlur 从 25 到 10
     ctx.beginPath();
     ctx.arc(px, py, 18, 0, Math.PI * 2);
     ctx.fillStyle = passed ? 'rgba(255,0,255,0.95)' : 'rgba(255,0,255,0.15)';
     ctx.fill();
-    if (passed) { ctx.shadowColor = '#ff00ff'; ctx.shadowBlur = 25; ctx.fill(); ctx.shadowBlur = 0; }
+    if (passed) { ctx.shadowColor = '#ff00ff'; ctx.shadowBlur = 10; ctx.fill(); ctx.shadowBlur = 0; }
 
     // 最内层白圈
     ctx.beginPath();
@@ -249,7 +243,8 @@ function drawCheckpoints() {
     ctx.arc(px, py, 14, 0, Math.PI * 2);
     ctx.fillStyle = passed ? 'rgba(255,107,0,0.95)' : 'rgba(255,107,0,0.15)';
     ctx.fill();
-    if (passed) { ctx.shadowColor = '#ff6b00'; ctx.shadowBlur = 20; ctx.fill(); ctx.shadowBlur = 0; }
+    // 性能优化：降低 shadowBlur 从 20 到 10
+    if (passed) { ctx.shadowColor = '#ff6b00'; ctx.shadowBlur = 10; ctx.fill(); ctx.shadowBlur = 0; }
 
     ctx.fillStyle    = '#fff';
     ctx.font         = '14px serif';
@@ -285,8 +280,9 @@ function drawBike(x, y, angle) {
   ctx.lineWidth   = 3;
   ctx.stroke();
 
+  // 性能优化：降低 shadowBlur 从 15 到 8
   ctx.shadowColor = '#f0f000';
-  ctx.shadowBlur  = 15;
+  ctx.shadowBlur  = 8;
   ctx.fillStyle   = '#f0f000';
   ctx.font        = '24px serif';
   ctx.textAlign   = 'center';
@@ -397,7 +393,7 @@ function drawElevation() {
     ctx.beginPath(); ctx.arc(px, py, 4, 0, Math.PI * 2);
     ctx.fillStyle = passed ? cp.color : 'rgba(255,255,255,0.3)';
     ctx.fill();
-    if (passed) { ctx.shadowColor = cp.color; ctx.shadowBlur = 8; ctx.fill(); ctx.shadowBlur = 0; }
+    // 性能优化：移除打卡点 shadowBlur
 
     ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px, cy + ch + 1);
     ctx.strokeStyle = passed ? 'rgba(255,0,255,0.4)' : 'rgba(255,255,255,0.1)';
@@ -452,7 +448,7 @@ function drawElevation() {
 
   ctx.beginPath(); ctx.arc(maxPx, maxPy, 5, 0, Math.PI * 2);
   ctx.fillStyle = maxPassed ? 'rgba(255,107,0,0.95)' : 'rgba(255,107,0,0.3)'; ctx.fill();
-  if (maxPassed) { ctx.shadowColor = '#ff6b00'; ctx.shadowBlur = 10; ctx.fill(); ctx.shadowBlur = 0; }
+  // 性能优化：移除最高海拔点 shadowBlur
 
   ctx.font = 'bold 7px "Noto Sans SC",sans-serif';
   const maxTw = ctx.measureText(maxElevPoint.name).width;
@@ -472,7 +468,9 @@ function drawElevation() {
   const mx  = cx + (cp.km / TOTAL_KM) * cw;
   const my  = cy + ch - (Math.min(cp.elev, MAX_ELEV) / MAX_ELEV) * ch;
   ctx.beginPath(); ctx.arc(mx, my, 4, 0, Math.PI * 2);
-  ctx.fillStyle  = '#f0f000'; ctx.shadowColor = '#f0f000'; ctx.shadowBlur = 8; ctx.fill(); ctx.shadowBlur = 0;
+  ctx.fillStyle  = '#f0f000';
+  // 性能优化：移除当前位置 shadowBlur
+  ctx.fill();
   ctx.beginPath(); ctx.strokeStyle = 'rgba(240,240,0,0.3)'; ctx.setLineDash([2, 2]);
   ctx.moveTo(mx, cy); ctx.lineTo(mx, cy + ch); ctx.stroke(); ctx.setLineDash([]);
 }

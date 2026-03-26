@@ -65,6 +65,8 @@ body::after {
   background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px);
 }
 .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+/* 粒子动画已禁用 - 优化 CPU 性能 */
+/*
 .particle {
   position: absolute; width: 4px; height: 4px;
   background: var(--neon-cyan); border-radius: 50%;
@@ -78,6 +80,7 @@ body::after {
   90%  { opacity: .6; }
   100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
 }
+*/
 
 /* ── Loader ── */
 .loader {
