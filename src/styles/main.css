@@ -29,7 +29,8 @@ body {
   position: relative;
 }
 
-/* Route Map Background Layer */
+/* Route Map Background Layer - 性能优化：移除固定定位的全局背景图，改用局部背景 */
+/*
 body::before {
   content: '';
   position: fixed;
@@ -41,6 +42,7 @@ body::before {
   z-index: 0;
   mix-blend-mode: screen;
 }
+*/
 body::after {
   content: '';
   position: fixed;
@@ -50,7 +52,8 @@ body::after {
   z-index: 0;
 }
 
-/* ── 背景装饰 ── */
+/* ── 背景装饰 - 性能优化：移除固定定位的全局装饰层 ── */
+/*
 .cyber-grid {
   position: fixed; inset: 0;
   background:
@@ -64,6 +67,7 @@ body::after {
   pointer-events: none; z-index: 9998;
   background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px);
 }
+*/
 .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
 /* 粒子动画已禁用 - 优化 CPU 性能 */
 /*
