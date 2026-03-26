@@ -561,6 +561,21 @@ footer { background: #1d1d1f; padding: 60px 20px; text-align: center; position: 
   .gallery-thumb { aspect-ratio: 4/3; }
   .checkpoints-grid { grid-template-columns: 1fr; padding: 0; }
 
+  /* 荣耀时刻移动端横向滚动 */
+  .winners-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 20px;
+    padding: 0 20px;
+    max-width: 100%;
+  }
+  .winner-card {
+    min-width: 280px;
+    scroll-snap-align: center;
+  }
+
   .timeline::before { left: 20px; }
   .timeline-item { width: 100%; padding-left: 50px; padding-right: 0; text-align: left; }
   .timeline-item:nth-child(odd)  { text-align: left; }
