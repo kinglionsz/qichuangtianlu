@@ -1,0 +1,10 @@
+## Qwen Added Memories
+- 项目：骑闯天路 2017 赛博朋克纪念版 - 单页 Web 应用纪念自行车赛。技术栈：Vite 5.4 + ES6 Modules + HTML5 Canvas + 原生 JS/CSS。结构：index.html(520 行)+src/js/{main.js,trajectory.js(420 行),trajectoryData.js(120 行),ui.js(60 行)}+src/styles/main.css(551 行)。核心功能：Canvas 轨迹动画 (30fps 节流 + 脉冲缓存优化)、6 打卡点、4 一级虐点、HUD 遥测、海拔剖面图、响应式设计。命令：npm run dev/build/preview。
+- trajectory.js 核心：Canvas 1100×770，OFFSET_X=160/OFFSET_Y=60。状态：progress(0-1),playing,speed。动画循环 frame() 含帧率节流 (33ms)。绘制函数：drawGrid/Coastline/RouteFull/RouteActive/Checkpoints/Bike/HUD/Elevation/SegLabels。控制 API：togglePlay(),cycleSpeed(),resetAnim()。性能优化：TARGET_FRAME_INTERVAL=33ms,脉冲值每 10 帧更新。
+- trajectoryData.js 数据结构：waypoints(42 个路径点，含 x/y/km/elev/isCheck/challenge/road/gps 字段),coastPts(32 个海岸线点),checkpoints(6 个：满京华→鹅公湾→西涌→杨梅坑→坝光→终点),challengePoints(4 个一级虐点：富民路/西涌返/径心水库/径心水库返),maxElevPoint(径心水库 265m@113km),TOTAL_KM=131.4,MAX_ELEV=300。
+- main.css 核心：CSS 变量 (--neon-cyan/magenta/yellow/orange/green/red)，赛博朋克风格特效 (glitch 故障动画/scanlines 扫描线/neon 霓虹光晕/glassmorphism 玻璃态)。响应式断点：1024px(图集 2 列)/768px(单列 + 汉堡菜单)。关键组件：.hero/.trajectory-wrapper/.checkpoint-card/.timeline/.winners-grid/.gallery-grid/.lightbox。
+- index.html 结构：8 个 section(#hero/#trajectory/#route/#detail/#timeline/#winners/#routebook/#gallery)+nav+footer+lightbox。Canvas 元素#trajectory-canvas(1100×770)。控制按钮#btn-play/#btn-speed。图集#gallery-grid 含 10 张图片项。
+- ui.js 功能：Scroll Reveal(IntersectionObserver threshold=0.15),Lightbox(openLightbox/closeLightbox),Mobile Menu(toggleMenu/closeMenu),Gallery click 绑定，Loader hide(800ms 延迟)。
+- vite.config.js 配置：server.port=3000,build.outDir='dist-build',publicDir='public',resolve.alias={'@':'/src'}。package.json：name='bike-project',devDependencies={vite:^5.4.0},scripts={dev/build/preview}。
+- 开发服务器配置：vite.config.js 中 server.host=true 确保监听 0.0.0.0，同一 WiFi 下其他 PC/手机可通过 http://本机IP:3000 访问。端口 port=3000，open=true 自动打开浏览器。
+- Playwright 测试配置：已安装@playwright/test，配置了 3 个测试文件 (trajectory.spec.js 核心功能、mobile.spec.js 移动端、visual.spec.js 视觉回归)，51 个测试用例覆盖页面加载、轨迹动画、UI 交互、内容验证、响应式布局。命令：npm test/test:ui/test:headed/test:debug/test:report。支持 6 种浏览器/设备 (Chromium/Firefox/WebKit/iPhone/Android/iPad)。webServer 自动启动开发服务器在 3000 端口。
