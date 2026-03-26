@@ -501,25 +501,30 @@ function frame(ts) {
   if (elapsed < TARGET_FRAME_INTERVAL) { requestAnimationFrame(frame); return; }
   lastFrameTime = ts - (elapsed % TARGET_FRAME_INTERVAL);
 
-  // 更新脉冲缓存
-  updatePulseValues();
-
   const dt = ts - lastTime; lastTime = ts;
-  if (playing) { progress += 0.00035 * speed; if (progress > 1) progress = 0; }
+  
+  // 性能优化：只在播放时更新进度和重绘，暂停时完全停止渲染
+  if (playing) {
+    progress += 0.00035 * speed;
+    if (progress > 1) progress = 0;
 
-  ctx.fillStyle = '#0a0a0f';
-  ctx.fillRect(0, 0, CW, CH);
-  drawGrid();
-  drawCoastline();
-  drawSegLabels();
-  drawRouteFull();
-  drawRouteActive();
-  drawCheckpoints();
+    // 更新脉冲缓存
+    updatePulseValues();
 
-  const p = posAt(progress);
-  drawBike(p.x, p.y, p.a);
-  drawHUD(p);
-  drawElevation();
+    ctx.fillStyle = '#0a0a0f';
+    ctx.fillRect(0, 0, CW, CH);
+    drawGrid();
+    drawCoastline();
+    drawSegLabels();
+    drawRouteFull();
+    drawRouteActive();
+    drawCheckpoints();
+
+    const p = posAt(progress);
+    drawBike(p.x, p.y, p.a);
+    drawHUD(p);
+    drawElevation();
+  }
 
   requestAnimationFrame(frame);
 }
