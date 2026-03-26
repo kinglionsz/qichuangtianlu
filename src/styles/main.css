@@ -289,6 +289,15 @@ section { position: relative; padding: 100px 20px; z-index: 1; }
     linear-gradient(225deg, rgba(255,0,255,0.04) 0%, transparent 50%);
 }
 
+/* 覆盖 trajectory-wrapper 的背景，使用 route-map-layer 作为背景 */
+.trajectory-wrapper {
+  background: transparent;
+}
+#trajectory-canvas {
+  position: relative;
+  z-index: 1;
+}
+
 /* ── Checkpoint cards ── */
 .route-section { background: var(--dark-bg); }
 .checkpoints-grid {

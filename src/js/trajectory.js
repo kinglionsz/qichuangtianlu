@@ -42,11 +42,7 @@ function updatePulseValues() {
   }
 }
 
-// ── 背景图叠加 ────────────────────────────────────────────────
-let bgImg = new Image();
-let bgLoaded = false;
-bgImg.onload = () => { bgLoaded = true; };
-bgImg.src = '/imgs/route-map.jpg';  // 作为 Canvas 内部叠加图
+// 背景图现在由 CSS .route-map-layer 控制
 
 // ── 工具函数 ──────────────────────────────────────────────────
 function lerp(a, b, t) { return a + (b - a) * t; }
