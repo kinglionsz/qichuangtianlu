@@ -496,10 +496,14 @@ function drawSegLabels() {
 
 // ── 主循环 ────────────────────────────────────────────────────
 function frame(ts) {
+  // 性能优化：暂停时降低帧率到 10fps，播放时保持 30fps
+  const IDLE_FRAME_INTERVAL = 100;  // 暂停时 10fps
+  const currentInterval = playing ? TARGET_FRAME_INTERVAL : IDLE_FRAME_INTERVAL;
+  
   // 帧率节流
   const elapsed = ts - lastFrameTime;
-  if (elapsed < TARGET_FRAME_INTERVAL) { requestAnimationFrame(frame); return; }
-  lastFrameTime = ts - (elapsed % TARGET_FRAME_INTERVAL);
+  if (elapsed < currentInterval) { requestAnimationFrame(frame); return; }
+  lastFrameTime = ts - (elapsed % currentInterval);
 
   const dt = ts - lastTime; lastTime = ts;
   
