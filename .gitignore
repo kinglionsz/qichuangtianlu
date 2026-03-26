@@ -11,3 +11,7 @@ test-results/
 *.png
 *.jpg
 *.mp4
+
+# Agent Browser
+.agent-browser/
+agent-browser-report/
