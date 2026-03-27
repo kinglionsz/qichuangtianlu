@@ -1,8 +1,34 @@
 import { defineConfig } from 'vite';
+import UnpluginInjectPreload from 'unplugin-inject-preload/vite';
 
 export default defineConfig({
   // 根目录是项目根（index.html 在这里）
   root: '.',
+
+  // 插件配置
+  plugins: [
+    // 自动为构建输出的 JS 和 CSS 添加预加载标签
+    UnpluginInjectPreload({
+      files: [
+        {
+          // 匹配所有 JS 文件
+          outputMatch: /\.js$/,
+          attributes: {
+            as: 'script',
+            crossorigin: 'anonymous'
+          }
+        },
+        {
+          // 匹配所有 CSS 文件
+          outputMatch: /\.css$/,
+          attributes: {
+            as: 'style',
+            crossorigin: 'anonymous'
+          }
+        }
+      ]
+    })
+  ],
 
   // 开发服务器配置
   server: {
