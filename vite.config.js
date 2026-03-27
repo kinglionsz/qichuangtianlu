@@ -27,11 +27,4 @@ export default defineConfig({
   // 静态资源（不经 Vite 处理，直接 copy 到输出）
   // public/imgs/*.jpg → dist-build/imgs/*.jpg
   publicDir: 'public',
-
-  // 确保图片路径在 CSS 和 JS 中正确解析
-  resolve: {
-    alias: {
-      '@': '/src',
-    },
-  },
 });

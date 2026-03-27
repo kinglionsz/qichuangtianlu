@@ -1,9 +1,12 @@
 {
   "name": "bike-project",
   "version": "1.0.0",
-  "description": "骑闯天路 2017 赛博朋克纪念版",
+  "description": "骑闯天路 2017 赛博朋克纪念版 - 深圳骑行轨迹可视化项目",
+  "author": "狮王李",
+  "license": "MIT",
   "private": true,
   "type": "module",
+  "keywords": ["cycling", "trajectory", "visualization", "cyberpunk", "shenzhen"],
   "scripts": {
     "dev": "vite",
     "build": "vite build",

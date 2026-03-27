@@ -30,19 +30,6 @@ body {
 }
 
 /* Route Map Background Layer - 性能优化：移除固定定位的全局背景图，改用局部背景 */
-/*
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: url('/imgs/route-map.jpg') center/cover no-repeat;
-  opacity: 0.08;
-  filter: saturate(0.4) contrast(1.2) hue-rotate(160deg);
-  pointer-events: none;
-  z-index: 0;
-  mix-blend-mode: screen;
-}
-*/
 body::after {
   content: '';
   position: fixed;
@@ -53,38 +40,7 @@ body::after {
 }
 
 /* ── 背景装饰 - 性能优化：移除固定定位的全局装饰层 ── */
-/*
-.cyber-grid {
-  position: fixed; inset: 0;
-  background:
-    linear-gradient(90deg, rgba(0,240,255,.03) 1px, transparent 1px),
-    linear-gradient(rgba(0,240,255,.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-  pointer-events: none; z-index: 0;
-}
-.scanlines {
-  position: fixed; inset: 0;
-  pointer-events: none; z-index: 9998;
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px);
-}
-*/
-.particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
 /* 粒子动画已禁用 - 优化 CPU 性能 */
-/*
-.particle {
-  position: absolute; width: 4px; height: 4px;
-  background: var(--neon-cyan); border-radius: 50%;
-  box-shadow: 0 0 10px var(--neon-cyan);
-  animation: floatUp var(--dur, 15s) var(--delay, 0s) infinite;
-  opacity: 0;
-}
-@keyframes floatUp {
-  0%   { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-  10%  { opacity: .6; }
-  90%  { opacity: .6; }
-  100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
-}
-*/
 
 /* ── Loader ── */
 .loader {
