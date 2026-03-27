@@ -509,25 +509,35 @@ function frame(ts) {
   
   // 性能优化：只在播放时更新进度和重绘，暂停时完全停止渲染
   if (playing) {
-    progress += 0.00035 * speed;
-    if (progress > 1) progress = 0;
+    try {
+      progress += 0.00035 * speed;
+      if (progress > 1) progress = 0;
 
-    // 更新脉冲缓存
-    updatePulseValues();
+      // 更新脉冲缓存
+      updatePulseValues();
 
-    ctx.fillStyle = '#0a0a0f';
-    ctx.fillRect(0, 0, CW, CH);
-    drawGrid();
-    drawCoastline();
-    drawSegLabels();
-    drawRouteFull();
-    drawRouteActive();
-    drawCheckpoints();
+      ctx.fillStyle = '#0a0a0f';
+      ctx.fillRect(0, 0, CW, CH);
+      drawGrid();
+      drawCoastline();
+      drawSegLabels();
+      drawRouteFull();
+      drawRouteActive();
+      drawCheckpoints();
 
-    const p = posAt(progress);
-    drawBike(p.x, p.y, p.a);
-    drawHUD(p);
-    drawElevation();
+      const p = posAt(progress);
+      drawBike(p.x, p.y, p.a);
+      drawHUD(p);
+      drawElevation();
+    } catch (err) {
+      console.error('[Trajectory] Render error:', err);
+      playing = false; // 停止动画，避免刷屏报错
+      const btn = document.getElementById('btn-play');
+      if (btn) {
+        btn.textContent = 'PLAY';
+        btn.classList.remove('active');
+      }
+    }
   }
 
   requestAnimationFrame(frame);

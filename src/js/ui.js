@@ -27,6 +27,13 @@ export function closeLightbox() {
 }
 lightbox.addEventListener('click', closeLightbox);
 
+// ESC 键关闭 Lightbox
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+    closeLightbox();
+  }
+});
+
 // ── Mobile Menu ───────────────────────────────────────────────
 const hamburger = document.querySelector('.hamburger');
 const navLinks  = document.getElementById('navLinks');
