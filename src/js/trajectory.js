@@ -21,7 +21,7 @@ const N = route.length;
 
 // ── 状态 ──────────────────────────────────────────────────────
 let progress  = 0;
-let playing   = true;
+let playing   = false;  // 默认暂停，降低CPU占用
 let speed     = 1;
 let lastTime  = 0;
 

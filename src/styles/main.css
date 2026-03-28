@@ -1,9 +1,7 @@
 /* =====================================================
    骑闯天路赛博朋克纪念版 - 主样式
+   字体通过 index.html 预加载和异步加载，不再在此处@import
    ===================================================== */
-
-/* Google Fonts - 仅加载实际使用的字重：Orbitron(700,900) + Noto Sans SC(300,400,500,600,700,900) */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap');
 
 :root {
   --neon-cyan: #00f0ff;
@@ -103,7 +101,7 @@ nav {
 }
 .hero-bg {
   position: absolute; inset: 0;
-  background: url('/imgs/qichuangtianlu-sichuan-tibet-highway-cycling-snow.jpg') center/cover;
+  background: url('/imgs/qichuangtianlu-sichuan-tibet-highway-cycling-snow.webp') center/cover;
   filter: brightness(.3) saturate(1.2);
   animation: heroPulse 8s ease-in-out infinite;
 }
@@ -244,7 +242,7 @@ section { position: relative; padding: 100px 20px; z-index: 1; }
 }
 .route-map-layer::before {
   content: ''; position: absolute; inset: 0;
-  background: url('/imgs/route-map.jpg') center/cover no-repeat;
+  background: url('/imgs/route-map.webp') center/cover no-repeat;
   opacity: 0.12;
   filter: saturate(0.5) contrast(1.3) hue-rotate(160deg);
   mix-blend-mode: screen;

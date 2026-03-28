@@ -3,11 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="2017 VAUDE 骑闯天路资格赛深圳站经典路线复刻，131.4公里大鹏半岛骑行轨迹动态可视化，赛博朋克纪念版">
   <title>骑闯天路深圳站 · 2017 经典路线复刻 · 赛博朋克纪念版</title>
-  <!-- 预连接第三方域名 - 加速回访用户连接建立 -->
+
+  <!-- ✅ 预连接 - 提前建立DNS/TCP/TLS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Vite 将自动处理 main.js 中的 CSS 导入 -->
+
+  <!-- ✅ 异步加载字体（不阻塞渲染） -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Noto+Sans+SC:wght@300;400;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Noto+Sans+SC:wght@300;400;700&display=swap"></noscript>
 </head>
 <body>
 
@@ -89,7 +94,7 @@
         <div class="legend-item"><div class="legend-dot" style="background:var(--neon-orange)"></div>一级虐点</div>
       </div>
       <div class="trajectory-controls reveal visible">
-        <button class="cyber-btn active" id="btn-play"  onclick="togglePlay()">PAUSE</button>
+        <button class="cyber-btn" id="btn-play"  onclick="togglePlay()">PLAY</button>
         <button class="cyber-btn"        id="btn-speed" onclick="cycleSpeed()">1x</button>
         <button class="cyber-btn"                       onclick="resetAnim()">RESET</button>
       </div>
@@ -259,7 +264,10 @@
     <div class="winners-grid">
       <div class="winner-card winner-champion">
         <div class="winner-badge">🥇</div>
-        <img src="/imgs/winner1.jpg" alt="冠军李祥" class="winner-img" loading="lazy">
+        <picture>
+          <source srcset="/imgs/winner1.webp" type="image/webp">
+          <img src="/imgs/winner1.webp" alt="冠军李祥" class="winner-img" loading="lazy" width="120" height="120">
+        </picture>
         <h3 class="winner-name">李祥</h3>
         <div class="winner-time">04:28:00</div>
         <div class="winner-team">SPEEDX车队</div>
@@ -267,7 +275,10 @@
       </div>
       <div class="winner-card winner-second">
         <div class="winner-badge">🥈</div>
-        <img src="/imgs/winner1.jpg" alt="亚军赵强" class="winner-img" loading="lazy">
+        <picture>
+          <source srcset="/imgs/vaude-2017-ride-across-the-sky-road-cycling-event.webp" type="image/webp">
+          <img src="/imgs/vaude-2017-ride-across-the-sky-road-cycling-event.webp" alt="亚军赵强" class="winner-img" loading="lazy" width="120" height="120">
+        </picture>
         <h3 class="winner-name">赵强</h3>
         <div class="winner-time">04:29:00</div>
         <div class="winner-team">个人选手</div>
@@ -275,7 +286,10 @@
       </div>
       <div class="winner-card winner-third">
         <div class="winner-badge">🥉</div>
-        <img src="/imgs/winner2.jpg" alt="季军刘潘辉/黄海林" class="winner-img" loading="lazy">
+        <picture>
+          <source srcset="/imgs/winner2.webp" type="image/webp">
+          <img src="/imgs/winner2.webp" alt="季军刘潘辉/黄海林" class="winner-img" loading="lazy" width="120" height="120">
+        </picture>
         <h3 class="winner-name">刘潘辉 / 黄海林</h3>
         <div class="winner-time">04:30:00</div>
         <div class="winner-team">并列第三</div>
@@ -342,43 +356,66 @@
         <h3 style="color:var(--neon-cyan);margin:40px 0 20px;font-size:1.3rem">赛事图集</h3>
         <div class="gallery-grid" id="gallery-grid">
           <div class="gallery-item gallery-wide reveal">
-            <img src="/imgs/route-map.jpg" alt="2017骑闯天路资格赛深圳站" loading="lazy">
+            <picture>
+              <source srcset="/imgs/route-map.webp" type="image/webp">
+              <img src="/imgs/route-map.webp" alt="2017骑闯天路资格赛深圳站" loading="lazy" width="1182" height="969">
+            </picture>
             <div class="gallery-overlay"><span class="gallery-tag">路线</span><span class="gallery-caption">2017 · 骑闯天路资格赛深圳站</span></div>
           </div>
           <div class="gallery-item gallery-hero reveal">
-            <img src="/imgs/qichuangtianlu-sichuan-tibet-highway-cycling-snow.jpg" alt="影像志 · 骑闯天路的九九八十一难" loading="lazy">
+            <picture>
+              <source srcset="/imgs/qichuangtianlu-sichuan-tibet-highway-cycling-snow.webp" type="image/webp">
+              <img src="/imgs/qichuangtianlu-sichuan-tibet-highway-cycling-snow.webp" alt="影像志 · 骑闯天路的九九八十一难" loading="lazy" width="1100" height="734">
+            </picture>
             <div class="gallery-overlay"><span class="gallery-tag">雪域</span><span class="gallery-caption">影像志 · 骑闯天路的九九八十一难</span></div>
           </div>
           <div class="gallery-item gallery-thumb reveal">
-            <img src="/imgs/winner1.jpg" alt="冠军咬奖牌庆祝" loading="lazy">
+            <picture>
+              <source srcset="/imgs/winner1.webp" type="image/webp">
+              <img src="/imgs/winner1.webp" alt="冠军咬奖牌庆祝" loading="lazy" width="1920" height="1279">
+            </picture>
             <div class="gallery-overlay"><span class="gallery-tag">冠军</span><span class="gallery-caption">冠军时刻 · 咬住荣誉，致敬极限</span></div>
           </div>
           <div class="gallery-item gallery-thumb reveal">
-            <img src="/imgs/tibetan-challenge-2017-bicycle-race-action.jpg" alt="VAUDE 318川藏赛冲刺" loading="lazy">
+            <picture>
+              <source srcset="/imgs/tibetan-challenge-2017-bicycle-race-action.webp" type="image/webp">
+              <img src="/imgs/tibetan-challenge-2017-bicycle-race-action.webp" alt="VAUDE 318川藏赛冲刺" loading="lazy" width="1200" height="801">
+            </picture>
             <div class="gallery-overlay"><span class="gallery-tag">冲刺</span><span class="gallery-caption">冲刺时刻 · 荧光绿席卷终点</span></div>
           </div>
           <div class="gallery-item gallery-thumb reveal">
-            <img src="/imgs/vaude-2017-ride-across-the-sky-road-cycling-event.jpg" alt="2017骑闯天路赛事全景" loading="lazy">
+            <picture>
+              <source srcset="/imgs/vaude-2017-ride-across-the-sky-road-cycling-event.webp" type="image/webp">
+              <img src="/imgs/vaude-2017-ride-across-the-sky-road-cycling-event.webp" alt="2017骑闯天路赛事全景" loading="lazy" width="1170" height="780">
+            </picture>
             <div class="gallery-overlay"><span class="gallery-tag">全景</span><span class="gallery-caption">赛事盛况 · 骑闯天路2017深圳站</span></div>
           </div>
           <div class="gallery-item gallery-wide reveal">
-            <img src="/imgs/ride-through-the-sky-road-2017-cycling-race.jpg" alt="俯拍骑行队伍穿越山野" loading="lazy">
+            <picture>
+              <source srcset="/imgs/ride-through-the-sky-road-2017-cycling-race.webp" type="image/webp">
+              <img src="/imgs/ride-through-the-sky-road-2017-cycling-race.webp" alt="俯拍骑行队伍穿越山野" loading="lazy" width="1170" height="781">
+            </picture>
             <div class="gallery-overlay"><span class="gallery-tag">赛事</span><span class="gallery-caption">骑行大军 · 成群结队穿越山野</span></div>
           </div>
           <div class="gallery-item gallery-thumb reveal">
-            <img src="/imgs/qi-chuang-tian-lu-2017-cycling-race-athlete.jpg" alt="VAUDE骑行服骑行者休息" loading="lazy">
+            <picture>
+              <source srcset="/imgs/qi-chuang-tian-lu-2017-cycling-race-athlete.webp" type="image/webp">
+              <img src="/imgs/qi-chuang-tian-lu-2017-cycling-race-athlete.webp" alt="VAUDE骑行服骑行者休息" loading="lazy" width="1200" height="801">
+            </picture>
             <div class="gallery-overlay"><span class="gallery-tag">纪实</span><span class="gallery-caption">休整时刻 · 疲惫与坚持交织</span></div>
           </div>
           <div class="gallery-item gallery-thumb reveal">
-            <img src="/imgs/vaude-g318-cycling-race-2017-athletes-backdrop.jpg" alt="G318川藏自行车极限赛背景墙" loading="lazy">
+            <picture>
+              <source srcset="/imgs/vaude-g318-cycling-race-2017-athletes-backdrop.webp" type="image/webp">
+              <img src="/imgs/vaude-g318-cycling-race-2017-athletes-backdrop.webp" alt="G318川藏自行车极限赛背景墙" loading="lazy" width="1170" height="781">
+            </picture>
             <div class="gallery-overlay"><span class="gallery-tag">背景</span><span class="gallery-caption">G318 · 川藏自行车极限赛</span></div>
           </div>
           <div class="gallery-item gallery-thumb reveal">
-            <img src="/imgs/winner1.jpg" alt="冠军咬奖牌特写" loading="lazy">
-            <div class="gallery-overlay"><span class="gallery-tag">冠军</span><span class="gallery-caption">巅峰时刻 · 另一视角的冠军荣耀</span></div>
-          </div>
-          <div class="gallery-item gallery-thumb reveal">
-            <img src="/imgs/winner2.jpg" alt="选手与伴侣庆祝G318川藏赛" loading="lazy">
+            <picture>
+              <source srcset="/imgs/winner2.webp" type="image/webp">
+              <img src="/imgs/winner2.webp" alt="选手与伴侣庆祝G318川藏赛" loading="lazy" width="1920" height="1279">
+            </picture>
             <div class="gallery-overlay"><span class="gallery-tag">庆典</span><span class="gallery-caption">胜利时刻 · 五彩经幡下的荣耀</span></div>
           </div>
         </div>
