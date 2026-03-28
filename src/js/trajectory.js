@@ -7,6 +7,18 @@ import {
   maxElevPoint, TOTAL_KM, MAX_ELEV,
 } from './trajectoryData.js';
 
+// ── HUD 常量配置 ───────────────────────────────────────────────
+const HUD = {
+  ROUTE_BOOK_ID: '#1387571',         // 路书编号
+  TOTAL_DISTANCE: 131.4,             // 总里程 (km)
+  TOTAL_TIME_MINUTES: 525,           // 总耗时 (分钟)
+  LABEL_OFFSET_X: 5,                 // 左侧标签 X 偏移
+  LABEL_OFFSET_Y_1: 28,              // 第一行 Y 偏移
+  LABEL_OFFSET_Y_2: 42,              // 第二行 Y 偏移
+  LABEL_OFFSET_Y_3: 56,              // 第三行 Y 偏移
+  VALUE_OFFSET_X: 70,                // 右侧数值 X 偏移
+};
+
 // ── Canvas 初始化 ──────────────────────────────────────────────
 const canvas = document.getElementById('trajectory-canvas');
 const ctx    = canvas.getContext('2d');
@@ -19,11 +31,49 @@ const OFFSET_Y = 60;
 const route = waypoints.map(p => ({ ...p, x: p.x + OFFSET_X, y: p.y + OFFSET_Y }));
 const N = route.length;
 
-// ── 状态 ──────────────────────────────────────────────────────
-let progress  = 0;
-let playing   = false;  // 默认暂停，降低CPU占用
-let speed     = 1;
-let lastTime  = 0;
+// ── 私有状态（封装全局变量）────────────────────────────────────
+const _state = {
+  progress: 0,
+  playing: false,  // 默认暂停，降低CPU占用
+  speed: 1,
+  lastTime: 0
+};
+
+// ── 公开 API ────────────────────────────────────────────────────
+export const TrajectoryEngine = {
+  get progress() { return _state.progress; },
+  get playing() { return _state.playing; },
+  get speed() { return _state.speed; },
+
+  setProgress(v) { _state.progress = v; },
+  togglePlay() {
+    _state.playing = !_state.playing;
+    const b = document.getElementById('btn-play');
+    if (b) {
+      b.textContent = _state.playing ? 'PAUSE' : 'PLAY';
+      b.classList.toggle('active', _state.playing);
+    }
+    return _state.playing;
+  },
+  cycleSpeed() {
+    const ss = [1, 2, 4, .5];
+    const ls = ['1x', '2x', '4x', '0.5x'];
+    const i = (ss.indexOf(_state.speed) + 1) % ss.length;
+    _state.speed = ss[i];
+    const b = document.getElementById('btn-speed');
+    if (b) b.textContent = ls[i];
+  },
+  reset() {
+    _state.progress = 0;
+  }
+};
+
+// ── 内部函数使用的状态访问器 ─────────────────────────────────────
+function getProgress() { return _state.progress; }
+function getPlaying() { return _state.playing; }
+function getSpeed() { return _state.speed; }
+function setLastTime(v) { _state.lastTime = v; }
+function getLastTime() { return _state.lastTime; }
 
 // ── 性能优化：帧率控制 (30 fps) ───────────────────────────────
 const TARGET_FRAME_INTERVAL = 1000 / 30;
@@ -109,7 +159,7 @@ function drawRouteFull() {
 }
 
 function drawRouteActive() {
-  const sf = progress * (N - 1);
+  const sf = getProgress() * (N - 1);
   const s  = Math.floor(sf);
   const f  = sf - s;
 
@@ -144,7 +194,7 @@ function drawRouteActive() {
 }
 
 function drawCheckpoints() {
-  const curKm    = progress * TOTAL_KM;
+  const curKm    = getProgress() * TOTAL_KM;
   const pulse    = pulseValue;
   const fastPulse = fastPulseValue;
 
@@ -312,18 +362,18 @@ function drawHUD(p) {
   ctx.textAlign = 'left';
   ctx.fillText('TELEMETRY', hx + 5, hy + 13);
 
-  const spd     = (14 + Math.sin(progress * 30) * 9).toFixed(1);
-  const elapsed = Math.round(progress * 525);
+  const spd     = (14 + Math.sin(getProgress() * 30) * 9).toFixed(1);
+  const elapsed = Math.round(getProgress() * HUD.TOTAL_TIME_MINUTES);
   const hrs     = Math.floor(elapsed / 60);
   const mins    = elapsed % 60;
 
   ctx.fillStyle = '#fff';
   ctx.font      = '9px "Noto Sans SC",sans-serif';
-  ctx.fillText(`里程:${p.km.toFixed(1)}/131.4km`,  hx + 5,  hy + 28);
-  ctx.fillText(`海拔:${p.elev.toFixed(0)}m`,        hx + 5,  hy + 42);
-  ctx.fillText(`速度:${spd}km/h`,                   hx + 5,  hy + 56);
-  ctx.fillText(`耗时:${hrs}h${String(mins).padStart(2,'0')}m`, hx + 70, hy + 28);
-  ctx.fillText('#1387571',                           hx + 70, hy + 42);
+  ctx.fillText(`里程:${p.km.toFixed(1)}/${HUD.TOTAL_DISTANCE}km`,  hx + HUD.LABEL_OFFSET_X,  hy + HUD.LABEL_OFFSET_Y_1);
+  ctx.fillText(`海拔:${p.elev.toFixed(0)}m`,        hx + HUD.LABEL_OFFSET_X,  hy + HUD.LABEL_OFFSET_Y_2);
+  ctx.fillText(`速度:${spd}km/h`,                   hx + HUD.LABEL_OFFSET_X,  hy + HUD.LABEL_OFFSET_Y_3);
+  ctx.fillText(`耗时:${hrs}h${String(mins).padStart(2,'0')}m`, hx + HUD.VALUE_OFFSET_X, hy + HUD.LABEL_OFFSET_Y_1);
+  ctx.fillText(HUD.ROUTE_BOOK_ID,                           hx + HUD.VALUE_OFFSET_X, hy + HUD.LABEL_OFFSET_Y_2);
 
   const bx = hx + 5, by = hy + hh + 5, bw = hw - 10, bh = 4;
   ctx.fillStyle = 'rgba(255,255,255,0.08)';
@@ -332,11 +382,11 @@ function drawHUD(p) {
   bg.addColorStop(0, '#ff4466');
   bg.addColorStop(1, '#ff00ff');
   ctx.fillStyle = bg;
-  ctx.fillRect(bx, by, bw * progress, bh);
+  ctx.fillRect(bx, by, bw * getProgress(), bh);
   ctx.fillStyle = 'rgba(255,255,255,0.5)';
   ctx.font      = '8px Orbitron,monospace';
   ctx.textAlign = 'right';
-  ctx.fillText((progress * 100).toFixed(0) + '%', bx + bw, by - 2);
+  ctx.fillText((getProgress() * 100).toFixed(0) + '%', bx + bw, by - 2);
   ctx.textAlign = 'left';
 }
 
@@ -384,7 +434,7 @@ function drawElevation() {
   ctx.stroke();
 
   // 打卡点标注
-  const curKm = progress * TOTAL_KM;
+  const curKm = getProgress() * TOTAL_KM;
   checkpoints.forEach(cp => {
     const px     = cx + (cp.km / TOTAL_KM) * cw;
     const py     = cy + ch - (cp.elev / MAX_ELEV) * ch;
@@ -464,7 +514,7 @@ function drawElevation() {
   ctx.lineWidth = 1; ctx.setLineDash([3, 3]); ctx.stroke(); ctx.setLineDash([]);
 
   // 当前骑行位置
-  const cp  = posAt(progress);
+  const cp  = posAt(getProgress());
   const mx  = cx + (cp.km / TOTAL_KM) * cw;
   const my  = cy + ch - (Math.min(cp.elev, MAX_ELEV) / MAX_ELEV) * ch;
   ctx.beginPath(); ctx.arc(mx, my, 4, 0, Math.PI * 2);
@@ -498,20 +548,20 @@ function drawSegLabels() {
 function frame(ts) {
   // 性能优化：暂停时降低帧率到 10fps，播放时保持 30fps
   const IDLE_FRAME_INTERVAL = 100;  // 暂停时 10fps
-  const currentInterval = playing ? TARGET_FRAME_INTERVAL : IDLE_FRAME_INTERVAL;
+  const currentInterval = getPlaying() ? TARGET_FRAME_INTERVAL : IDLE_FRAME_INTERVAL;
   
   // 帧率节流
   const elapsed = ts - lastFrameTime;
   if (elapsed < currentInterval) { requestAnimationFrame(frame); return; }
   lastFrameTime = ts - (elapsed % currentInterval);
 
-  const dt = ts - lastTime; lastTime = ts;
-  
+  const dt = ts - getLastTime(); setLastTime(ts);
+
   // 性能优化：只在播放时更新进度和重绘，暂停时完全停止渲染
-  if (playing) {
+  if (getPlaying()) {
     try {
-      progress += 0.00035 * speed;
-      if (progress > 1) progress = 0;
+      _state.progress += 0.00035 * getSpeed();
+      if (_state.progress > 1) _state.progress = 0;
 
       // 更新脉冲缓存
       updatePulseValues();
@@ -525,13 +575,13 @@ function frame(ts) {
       drawRouteActive();
       drawCheckpoints();
 
-      const p = posAt(progress);
+      const p = posAt(getProgress());
       drawBike(p.x, p.y, p.a);
       drawHUD(p);
       drawElevation();
     } catch (err) {
       console.error('[Trajectory] Render error:', err);
-      playing = false; // 停止动画，避免刷屏报错
+      _state.playing = false; // 停止动画，避免刷屏报错
       const btn = document.getElementById('btn-play');
       if (btn) {
         btn.textContent = 'PLAY';
@@ -544,22 +594,10 @@ function frame(ts) {
 }
 
 // ── 控制按钮 API ─────────────────────────────────────────────
-export function togglePlay() {
-  playing = !playing;
-  const b = document.getElementById('btn-play');
-  b.textContent = playing ? 'PAUSE' : 'PLAY';
-  b.classList.toggle('active', playing);
-}
-
-export function cycleSpeed() {
-  const ss = [1, 2, 4, .5];
-  const ls = ['1x', '2x', '4x', '0.5x'];
-  const i  = (ss.indexOf(speed) + 1) % ss.length;
-  speed    = ss[i];
-  document.getElementById('btn-speed').textContent = ls[i];
-}
-
-export function resetAnim() { progress = 0; }
+// 使用 TrajectoryEngine 的方法
+export function togglePlay() { return TrajectoryEngine.togglePlay(); }
+export function cycleSpeed() { TrajectoryEngine.cycleSpeed(); }
+export function resetAnim() { TrajectoryEngine.reset(); }
 
 // 启动 - 等待 DOM 和 Canvas 准备就绪
 function initTrajectory() {
@@ -575,3 +613,12 @@ if (document.readyState === 'loading') {
 } else {
   initTrajectory();
 }
+
+// ══════════════════════════════════════════════════════════════
+// 可选优化：Canvas 响应式支持
+// 当前 Canvas 尺寸为 1100x770，内部有大量硬编码的位置坐标。
+// 如需实现响应式，需要：
+// 1. 使用 ResizeObserver 动态监听尺寸变化
+// 2. 重新计算所有绘制坐标（OFFSET_X, OFFSET_Y, hx, hy 等）
+// 3. 保持宽高比或重新设计 HUD 布局
+// ══════════════════════════════════════════════════════════════

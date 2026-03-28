@@ -33,19 +33,19 @@
   <!-- ── 导航 ── -->
   <nav>
     <div class="nav-content">
-      <div class="hamburger" onclick="toggleMenu()">
+      <div class="hamburger" id="hamburger">
         <span></span><span></span><span></span>
       </div>
       <div class="logo">骑闯天路</div>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#hero"       onclick="closeMenu()">首页</a></li>
-        <li><a href="#trajectory" onclick="closeMenu()">轨迹</a></li>
-        <li><a href="#route"      onclick="closeMenu()">路线</a></li>
-        <li><a href="#detail"     onclick="closeMenu()">详情</a></li>
-        <li><a href="#timeline"   onclick="closeMenu()">时间线</a></li>
-        <li><a href="#winners"    onclick="closeMenu()">荣耀</a></li>
-        <li><a href="#routebook"  onclick="closeMenu()">路书</a></li>
-        <li><a href="#gallery"    onclick="closeMenu()">图集</a></li>
+        <li><a href="#hero" data-nav>首页</a></li>
+        <li><a href="#trajectory" data-nav>轨迹</a></li>
+        <li><a href="#route" data-nav>路线</a></li>
+        <li><a href="#detail" data-nav>详情</a></li>
+        <li><a href="#timeline" data-nav>时间线</a></li>
+        <li><a href="#winners" data-nav>荣耀</a></li>
+        <li><a href="#routebook" data-nav>路书</a></li>
+        <li><a href="#gallery" data-nav>图集</a></li>
       </ul>
     </div>
   </nav>
@@ -94,9 +94,9 @@
         <div class="legend-item"><div class="legend-dot" style="background:var(--neon-orange)"></div>一级虐点</div>
       </div>
       <div class="trajectory-controls reveal visible">
-        <button class="cyber-btn" id="btn-play"  onclick="togglePlay()">PLAY</button>
-        <button class="cyber-btn"        id="btn-speed" onclick="cycleSpeed()">1x</button>
-        <button class="cyber-btn"                       onclick="resetAnim()">RESET</button>
+        <button class="cyber-btn" id="btn-play">PLAY</button>
+        <button class="cyber-btn" id="btn-speed">1x</button>
+        <button class="cyber-btn" id="btn-reset">RESET</button>
       </div>
     </div>
   </section>
