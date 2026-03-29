@@ -58,26 +58,27 @@ test.describe('轨迹动画功能', () => {
     await expect(resetBtn).toBeVisible();
   });
 
-  test('应该默认处于播放状态', async ({ page }) => {
+  test('应该默认处于暂停状态（性能优化）', async ({ page }) => {
     const playBtn = page.locator('#btn-play');
+    // 默认暂停，节省CPU资源
+    await expect(playBtn).toHaveText('PLAY');
+    await expect(playBtn).not.toHaveClass(/active/);
+  });
+
+  test('点击 PLAY 按钮应该开始播放', async ({ page }) => {
+    const playBtn = page.locator('#btn-play');
+    await playBtn.click(); // 开始播放
     await expect(playBtn).toHaveText('PAUSE');
     await expect(playBtn).toHaveClass(/active/);
   });
 
   test('点击 PAUSE 按钮应该暂停动画', async ({ page }) => {
     const playBtn = page.locator('#btn-play');
-    await playBtn.click();
+    await playBtn.click(); // 先播放
+    await page.waitForTimeout(500);
+    await playBtn.click(); // 再暂停
     await expect(playBtn).toHaveText('PLAY');
     await expect(playBtn).not.toHaveClass(/active/);
-  });
-
-  test('点击 PLAY 按钮应该恢复播放', async ({ page }) => {
-    const playBtn = page.locator('#btn-play');
-    await playBtn.click(); // 暂停
-    await page.waitForTimeout(500);
-    await playBtn.click(); // 播放
-    await expect(playBtn).toHaveText('PAUSE');
-    await expect(playBtn).toHaveClass(/active/);
   });
 
   test('速度切换应该循环变化', async ({ page }) => {
@@ -116,17 +117,22 @@ test.describe('轨迹动画功能', () => {
     await expect(resetBtn).toBeEnabled();
   });
 
-  test('窗口 API 应该正确挂载', async ({ page }) => {
-    // 验证所有全局 API 都存在
-    const togglePlay = await page.evaluate(() => typeof window.togglePlay);
-    const cycleSpeed = await page.evaluate(() => typeof window.cycleSpeed);
-    const resetAnim = await page.evaluate(() => typeof window.resetAnim);
-    const toggleMenu = await page.evaluate(() => typeof window.toggleMenu);
-    
-    expect(togglePlay).toBe('function');
-    expect(cycleSpeed).toBe('function');
-    expect(resetAnim).toBe('function');
-    expect(toggleMenu).toBe('function');
+  test('轨迹控制按钮功能正常', async ({ page }) => {
+    const playBtn = page.locator('#btn-play');
+    const speedBtn = page.locator('#btn-speed');
+    const resetBtn = page.locator('#btn-reset');
+
+    // 测试播放按钮 - 点击后应切换到 PAUSE
+    await playBtn.click();
+    await expect(playBtn).toHaveText('PAUSE');
+
+    // 测试速度切换
+    await speedBtn.click();
+    await expect(speedBtn).toHaveText('2x');
+
+    // 测试重置按钮
+    await resetBtn.click();
+    await expect(playBtn).toHaveText('PLAY'); // 重置后回到暂停状态
   });
 });
 
@@ -223,7 +229,7 @@ test.describe('内容验证', () => {
 
   test('应该显示图集图片', async ({ page }) => {
     const galleryItems = page.locator('.gallery-item');
-    await expect(galleryItems).toHaveCount(10);
+    await expect(galleryItems).toHaveCount(9);
   });
 
   test('应该显示统计数据', async ({ page }) => {

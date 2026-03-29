@@ -65,6 +65,12 @@ export const TrajectoryEngine = {
   },
   reset() {
     _state.progress = 0;
+    // 重置按钮状态
+    const b = document.getElementById('btn-play');
+    if (b) {
+      b.textContent = 'PLAY';
+      b.classList.remove('active');
+    }
   }
 };
 

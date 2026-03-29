@@ -56,9 +56,9 @@ test.describe('移动端专项测试', () => {
       await expect(playBtn).toBeVisible();
       await expect(playBtn).toBeEnabled();
       
-      // 点击测试
+      // 点击测试：点击后从 PLAY → PAUSE
       await playBtn.click();
-      await expect(playBtn).toHaveText('PLAY');
+      await expect(playBtn).toHaveText('PAUSE');
     });
 
     test('图集应该支持触摸交互', async ({ page }) => {
