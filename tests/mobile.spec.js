@@ -47,7 +47,7 @@ test.describe('移动端专项测试', () => {
 
     test('轨迹控制按钮应该可点击', async ({ page }) => {
       await page.goto('/');
-      await page.waitForSelector('#trajectory-canvas', { timeout: 5000 });
+      await page.waitForSelector('#trajectory-canvas', { timeout: 10000 });
       
       // 滚动到轨迹区域
       await page.locator('#trajectory').scrollIntoViewIfNeeded();

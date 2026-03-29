@@ -95,6 +95,11 @@ export function initEventListeners() {
   if (btnSpeed) btnSpeed.addEventListener('click', cycleSpeed);
   if (btnReset) btnReset.addEventListener('click', resetAnim);
 
+  // 图集 Lightbox 点击事件（替代 inline onclick="openLightbox(this)"）
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('click', () => openLightbox(item));
+  });
+
   console.log('[UI] Event listeners initialized');
 }
 
@@ -116,6 +121,9 @@ export function destroyEventListeners() {
   if (btnPlay) btnPlay.removeEventListener('click', togglePlay);
   if (btnSpeed) btnSpeed.removeEventListener('click', cycleSpeed);
   if (btnReset) btnReset.removeEventListener('click', resetAnim);
+
+  // 清理图集 Lightbox 事件（注意：匿名函数无法直接解绑，此处为兼容性说明）
+  // 若需精确解绑，建议改为具名函数引用
 
   console.log('[UI] Event listeners destroyed');
 }

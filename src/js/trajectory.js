@@ -65,6 +65,7 @@ export const TrajectoryEngine = {
   },
   reset() {
     _state.progress = 0;
+    _state.playing = false; // 重置播放状态
     // 重置按钮状态
     const b = document.getElementById('btn-play');
     if (b) {
