@@ -1,9 +1,14 @@
 /**
  * 移动端专项测试
  * 测试移动端特有的交互和功能
+ *
+ * 跨浏览器优化：
+ * - WebKit 智能等待策略
+ * - 触摸事件优化
  */
 
 import { test, expect, devices } from '@playwright/test';
+import { scrollAndWait, smartClick } from './helpers/browser-helpers.js';
 
 // 移动设备配置
 const iPhone12 = devices['iPhone 12'];
@@ -63,18 +68,22 @@ test.describe('移动端专项测试', () => {
 
     test('图集应该支持触摸交互', async ({ page }) => {
       await page.goto('/');
-      
-      // 滚动到图集区域
-      await page.locator('#gallery').scrollIntoViewIfNeeded();
-      
+
+      // 使用智能滚动和等待
+      await scrollAndWait(page, '#gallery');
+
       const galleryItem = page.locator('.gallery-item').first();
       await expect(galleryItem).toBeVisible();
-      
-      // 点击打开灯箱
-      await galleryItem.click();
+
+      // 使用智能点击处理 WebKit 问题
+      await smartClick(page, '.gallery-item:first-child', {
+        retries: 2,
+        waitBeforeClick: 600,
+      });
+
       const lightbox = page.locator('#lightbox');
-      await expect(lightbox).toHaveClass(/active/);
-      
+      await expect(lightbox).toHaveClass(/active/, { timeout: 5000 });
+
       // 点击关闭
       await lightbox.click();
       await expect(lightbox).not.toHaveClass(/active/);

@@ -1,9 +1,15 @@
 /**
  * Playwright 测试套件 - 骑闯天路 2017 赛博朋克纪念版
  * 测试核心功能：页面加载、轨迹动画、控制按钮、UI 交互
+ *
+ * 跨浏览器优化：
+ * - WebKit 智能等待策略
+ * - 滚动后稳定时间
+ * - 点击重试机制
  */
 
 import { test, expect } from '@playwright/test';
+import { smartClick, scrollAndWait } from './helpers/browser-helpers.js';
 
 // ──────────────────────────────────────────────────────────────
 // 页面加载测试
@@ -153,15 +159,17 @@ test.describe('UI 交互功能', () => {
     const galleryItem = page.locator('.gallery-item').first();
     const lightbox = page.locator('#lightbox');
 
-    // 滚动到图集区域（跨浏览器兼容）
-    await page.evaluate(() => {
-      const el = document.querySelector('.gallery-item');
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // 使用智能滚动和等待 - 跨浏览器兼容
+    await scrollAndWait(page, '.gallery-item');
+
+    // 使用智能点击 - 处理 WebKit 点击超时问题
+    await smartClick(page, '.gallery-item:first-child', {
+      retries: 2,
+      waitBeforeClick: 600,
     });
-    await page.waitForTimeout(800);
-    // 点击图集图片
-    await galleryItem.click({ force: true, timeout: 15000 });
-    await expect(lightbox).toHaveClass(/active/);
+
+    // 验证灯箱打开
+    await expect(lightbox).toHaveClass(/active/, { timeout: 5000 });
   });
 
   test('点击灯箱应该关闭预览', async ({ page }) => {
