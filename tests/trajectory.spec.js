@@ -153,11 +153,14 @@ test.describe('UI 交互功能', () => {
     const galleryItem = page.locator('.gallery-item').first();
     const lightbox = page.locator('#lightbox');
 
-    // 滚动到图集区域（使用 evaluate 跨浏览器兼容）
-    await galleryItem.evaluate((el) => el.scrollIntoViewIfNeeded());
-    await page.waitForTimeout(500);
+    // 滚动到图集区域（跨浏览器兼容）
+    await page.evaluate(() => {
+      const el = document.querySelector('.gallery-item');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+    await page.waitForTimeout(800);
     // 点击图集图片
-    await galleryItem.click({ force: true, timeout: 10000 });
+    await galleryItem.click({ force: true, timeout: 15000 });
     await expect(lightbox).toHaveClass(/active/);
   });
 
