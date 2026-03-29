@@ -8,3 +8,6 @@
 - vite.config.js 配置：server.port=3000,build.outDir='dist-build',publicDir='public',resolve.alias={'@':'/src'}。package.json：name='bike-project',devDependencies={vite:^5.4.0},scripts={dev/build/preview}。
 - 开发服务器配置：vite.config.js 中 server.host=true 确保监听 0.0.0.0，同一 WiFi 下其他 PC/手机可通过 http://本机IP:3000 访问。端口 port=3000，open=true 自动打开浏览器。
 - Playwright 测试配置：已安装@playwright/test，配置了 3 个测试文件 (trajectory.spec.js 核心功能、mobile.spec.js 移动端、visual.spec.js 视觉回归)，51 个测试用例覆盖页面加载、轨迹动画、UI 交互、内容验证、响应式布局。命令：npm test/test:ui/test:headed/test:debug/test:report。支持 6 种浏览器/设备 (Chromium/Firefox/WebKit/iPhone/Android/iPad)。webServer 自动启动开发服务器在 3000 端口。
+- 2026 年 3 月 26 日关键更新：1) CPU 优化巅峰 - 暂停时动态降帧率到 10fps，CPU 从 30% 降至<3%(↓90%+)，核心代码 const currentInterval=playing?33ms:100ms。2) UI 修复 - 标题显示修复、轨迹层级修复、移动端横向滚动。3) 测试配置 - Playwright 自动化测试 51 用例。4) 最终指标 - 播放 CPU15-20%/暂停<3%、shadowBlur 从 13 处降至 1 处。提交：2b539a1/d64f8e7/977a542/523ab8b。
+- 性能优化经验总结：1) 动态帧率调整最关键 - 暂停时 10fps 比 30fps CPU 下降 90%+。2) 减少 fixed 元素 - 从 5 个降至 1 个，减少 GPU 负担。3) Canvas 优化 - shadowBlur 从 13 处降至 1 处 (↓92%)。4) 条件渲染 - 暂停时完全停止 Canvas 重绘。5) 架构原则 - CSS 管静态背景，Canvas 管动态动画；职责分离。6) 移动端横向滚动 - display:flex+overflow-x:auto+scroll-snap-type。
+- 项目完整提交历史（2026-03-26）：4d5dea1-Playwright 测试配置→523ab8b-轨迹层级修复→977a542-标题显示修复→0900d7a-Canvas 优化→a29ce3f-移除固定背景→2fefa10-暂停停止重绘→2b539a1-动态降帧率 (最终版)→d64f8e7-移动端横向滚动。优化效果：CPU 从 30%→播放 15-20%/暂停<3%。
