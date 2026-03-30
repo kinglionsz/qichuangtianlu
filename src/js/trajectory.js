@@ -356,27 +356,27 @@ function drawChallengePointsOnRoute() {
     const px = closest.x, py = closest.y;
     const passed = cp.km <= curKm;
 
-    // 外圈圆环 - 黄色
+    // 外圈圆环 - 橙色(与海拔曲线一致)
     ctx.beginPath();
     ctx.arc(px, py, 18, 0, Math.PI * 2);
-    ctx.strokeStyle = passed ? `rgba(255,255,0,${pulse})` : 'rgba(255,255,0,0.25)';
+    ctx.strokeStyle = passed ? `rgba(255,107,0,${pulse})` : 'rgba(255,107,0,0.25)';
     ctx.lineWidth = 2;
     ctx.stroke();
 
     // 内圈圆环
     ctx.beginPath();
     ctx.arc(px, py, 12, 0, Math.PI * 2);
-    ctx.strokeStyle = passed ? `rgba(255,200,0,${pulse})` : 'rgba(255,200,0,0.2)';
+    ctx.strokeStyle = passed ? `rgba(255,107,0,${pulse})` : 'rgba(255,107,0,0.2)';
     ctx.lineWidth = 1.5;
     ctx.stroke();
 
-    // 中心实心圆点 - 黄色
+    // 中心实心圆点 - 橙色
     ctx.beginPath();
     ctx.arc(px, py, 6, 0, Math.PI * 2);
-    ctx.fillStyle = passed ? 'rgba(255,255,0,0.95)' : 'rgba(255,255,0,0.35)';
+    ctx.fillStyle = passed ? 'rgba(255,107,0,0.95)' : 'rgba(255,107,0,0.35)';
     ctx.fill();
     if (passed) {
-      ctx.shadowColor = '#ffff00';
+      ctx.shadowColor = '#ff6b00';
       ctx.shadowBlur = 8;
       ctx.fill();
       ctx.shadowBlur = 0;
@@ -387,16 +387,16 @@ function drawChallengePointsOnRoute() {
     const tw = ctx.measureText(cp.name).width;
     ctx.fillStyle = 'rgba(10,10,15,0.9)';
     ctx.fillRect(px - tw / 2 - 4, py - 30, tw + 8, 16);
-    ctx.strokeStyle = 'rgba(255,255,0,0.6)';
+    ctx.strokeStyle = 'rgba(255,107,0,0.6)';
     ctx.lineWidth = 1;
     ctx.strokeRect(px - tw / 2 - 4, py - 30, tw + 8, 16);
-    ctx.fillStyle = '#ffff00';
+    ctx.fillStyle = '#ff6b00';
     ctx.textAlign = 'center';
     ctx.fillText(cp.name, px, py - 18);
 
     // 海拔
     ctx.font = '9px Orbitron,monospace';
-    ctx.fillStyle = passed ? 'rgba(255,255,0,0.9)' : 'rgba(255,255,255,0.4)';
+    ctx.fillStyle = passed ? 'rgba(255,107,0,0.9)' : 'rgba(255,255,255,0.4)';
     ctx.fillText(cp.elev + 'm', px, py + 28);
   });
 }
