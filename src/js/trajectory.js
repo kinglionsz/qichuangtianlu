@@ -3,14 +3,14 @@
  * 已优化：30fps帧率控制 + 脉冲值缓存
  */
 import {
-  coastPts, waypoints, checkpoints, challengePoints,
+  coastPts, waypoints, trajectoryPts, checkpoints, challengePoints,
   maxElevPoint, TOTAL_KM, MAX_ELEV,
 } from './trajectoryData.js';
 
 // ── HUD 常量配置 ───────────────────────────────────────────────
 const HUD = {
   ROUTE_BOOK_ID: '#1387571',         // 路书编号
-  TOTAL_DISTANCE: 131.4,             // 总里程 (km)
+  TOTAL_DISTANCE: 132.86,             // 总里程 (km)
   TOTAL_TIME_MINUTES: 525,           // 总耗时 (分钟)
   LABEL_OFFSET_X: 5,                 // 左侧标签 X 偏移
   LABEL_OFFSET_Y_1: 28,              // 第一行 Y 偏移
@@ -30,6 +30,10 @@ const OFFSET_X = 160;
 const OFFSET_Y = 60;
 const route = waypoints.map(p => ({ ...p, x: p.x + OFFSET_X, y: p.y + OFFSET_Y }));
 const N = route.length;
+
+// GPX 高精度轨迹 (333个密集采样点)
+const smoothRoute = trajectoryPts.map(p => ({ ...p, x: p.x + OFFSET_X, y: p.y + OFFSET_Y }));
+const SN = smoothRoute.length;
 
 // ── 私有状态（封装全局变量）────────────────────────────────────
 const _state = {
@@ -105,18 +109,26 @@ function updatePulseValues() {
 function lerp(a, b, t) { return a + (b - a) * t; }
 
 function posAt(t) {
-  const sf = t * (N - 1);
+  // 使用高精度 smoothRoute 做轨迹位置插值
+  const sf = t * (SN - 1);
   const s  = Math.floor(sf);
   const f  = sf - s;
-  if (s >= N - 1) return { x: route[N-1].x, y: route[N-1].y, km: route[N-1].km, elev: route[N-1].elev, a: 0, r: route[N-1].road };
-  const a = route[s], b = route[s + 1];
+  if (s >= SN - 1) return { x: smoothRoute[SN-1].x, y: smoothRoute[SN-1].y, km: smoothRoute[SN-1].km, a: 0, r: '' };
+  const a = smoothRoute[s], b = smoothRoute[s + 1];
+  // 海拔从 route (waypoints) 插值获取
+  const elevIdx = t * (N - 1);
+  const es = Math.min(Math.floor(elevIdx), N - 1);
+  const ef = elevIdx - es;
+  const elev = es < N - 1 ? lerp(route[es].elev, route[es+1].elev, ef) : route[N-1].elev;
+  // 路段名从最近的 waypoint 获取
+  const road = a.road || (route[es] ? route[es].road : '');
   return {
     x:    lerp(a.x,    b.x,    f),
     y:    lerp(a.y,    b.y,    f),
     km:   lerp(a.km,   b.km,   f),
-    elev: lerp(a.elev, b.elev, f),
+    elev: elev,
     a:    Math.atan2(b.y - a.y, b.x - a.x),
-    r:    a.road,
+    r:    road,
   };
 }
 
@@ -161,17 +173,17 @@ function drawRouteFull() {
   ctx.beginPath();
   ctx.strokeStyle = 'rgba(255,34,68,0.15)';
   ctx.lineWidth   = 4;
-  route.forEach((p, i) => { if (i === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); });
+  smoothRoute.forEach((p, i) => { if (i === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); });
   ctx.stroke();
 }
 
 function drawRouteActive() {
-  const sf = getProgress() * (N - 1);
+  const sf = getProgress() * (SN - 1);
   const s  = Math.floor(sf);
   const f  = sf - s;
 
   ctx.beginPath();
-  const g = ctx.createLinearGradient(route[0].x, 0, route[N-1].x, 0);
+  const g = ctx.createLinearGradient(smoothRoute[0].x, 0, smoothRoute[SN-1].x, 0);
   g.addColorStop(0,   '#ff4466');
   g.addColorStop(.3,  '#ff00ff');
   g.addColorStop(.6,  '#ff2244');
@@ -181,11 +193,11 @@ function drawRouteActive() {
   // 性能优化：降低 shadowBlur 强度从 20 到 10
   ctx.shadowColor = '#ff2244';
   ctx.shadowBlur  = 10;
-  for (let i = 0; i <= s && i < N; i++) {
-    if (i === 0) ctx.moveTo(route[i].x, route[i].y);
-    else         ctx.lineTo(route[i].x, route[i].y);
+  for (let i = 0; i <= s && i < SN; i++) {
+    if (i === 0) ctx.moveTo(smoothRoute[i].x, smoothRoute[i].y);
+    else         ctx.lineTo(smoothRoute[i].x, smoothRoute[i].y);
   }
-  if (s < N - 1) ctx.lineTo(lerp(route[s].x, route[s+1].x, f), lerp(route[s].y, route[s+1].y, f));
+  if (s < SN - 1) ctx.lineTo(lerp(smoothRoute[s].x, smoothRoute[s+1].x, f), lerp(smoothRoute[s].y, smoothRoute[s+1].y, f));
   ctx.stroke();
   ctx.shadowBlur = 0;
 
@@ -193,7 +205,7 @@ function drawRouteActive() {
   for (let i = Math.max(0, s - 15); i <= s; i++) {
     const alpha = .3 + ((i - s + 15) / 15) * .5;
     ctx.beginPath();
-    ctx.arc(route[i].x, route[i].y, 4, 0, Math.PI * 2);
+    ctx.arc(smoothRoute[i].x, smoothRoute[i].y, 4, 0, Math.PI * 2);
     ctx.fillStyle  = `rgba(255,68,102,${alpha})`;
     // 移除 shadowBlur 优化性能
     ctx.fill();
@@ -326,6 +338,70 @@ function drawCheckpoints() {
   ctx.textBaseline = 'alphabetic';
 }
 
+function drawChallengePointsOnRoute() {
+  const curKm = getProgress() * TOTAL_KM;
+  const pulse = pulseValue;
+
+  challengePoints.forEach(cp => {
+    // 根据 km 找到最近的 waypoint 获取 x, y 坐标
+    let closest = route[0];
+    let minDist = Math.abs(route[0].km - cp.km);
+    for (let i = 1; i < route.length; i++) {
+      const dist = Math.abs(route[i].km - cp.km);
+      if (dist < minDist) {
+        minDist = dist;
+        closest = route[i];
+      }
+    }
+    const px = closest.x, py = closest.y;
+    const passed = cp.km <= curKm;
+
+    // 外圈圆环 - 黄色
+    ctx.beginPath();
+    ctx.arc(px, py, 18, 0, Math.PI * 2);
+    ctx.strokeStyle = passed ? `rgba(255,255,0,${pulse})` : 'rgba(255,255,0,0.25)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // 内圈圆环
+    ctx.beginPath();
+    ctx.arc(px, py, 12, 0, Math.PI * 2);
+    ctx.strokeStyle = passed ? `rgba(255,200,0,${pulse})` : 'rgba(255,200,0,0.2)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // 中心实心圆点 - 黄色
+    ctx.beginPath();
+    ctx.arc(px, py, 6, 0, Math.PI * 2);
+    ctx.fillStyle = passed ? 'rgba(255,255,0,0.95)' : 'rgba(255,255,0,0.35)';
+    ctx.fill();
+    if (passed) {
+      ctx.shadowColor = '#ffff00';
+      ctx.shadowBlur = 8;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+
+    // 标签
+    ctx.font = 'bold 11px "Noto Sans SC",sans-serif';
+    const tw = ctx.measureText(cp.name).width;
+    ctx.fillStyle = 'rgba(10,10,15,0.9)';
+    ctx.fillRect(px - tw / 2 - 4, py - 30, tw + 8, 16);
+    ctx.strokeStyle = 'rgba(255,255,0,0.6)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(px - tw / 2 - 4, py - 30, tw + 8, 16);
+    ctx.fillStyle = '#ffff00';
+    ctx.textAlign = 'center';
+    ctx.fillText(cp.name, px, py - 18);
+
+    // 海拔
+    ctx.font = '9px Orbitron,monospace';
+    ctx.fillStyle = passed ? 'rgba(255,255,0,0.9)' : 'rgba(255,255,255,0.4)';
+    ctx.fillText(cp.elev + 'm', px, py + 28);
+  });
+}
+
+// ── 骑行位置标注 ───────────────────────────────────────────
 function drawBike(x, y, angle) {
   ctx.save();
   ctx.translate(x, y);
@@ -411,7 +487,7 @@ function drawElevation() {
   ctx.fillText('ELEV (m)', cx, cy - 6);
   ctx.fillText('0km',       cx,      cy + ch + 12);
   ctx.textAlign = 'right';
-  ctx.fillText('131.4km',   cx + cw, cy + ch + 12);
+  ctx.fillText('132.9km',   cx + cw, cy + ch + 12);
   ctx.textAlign = 'left';
   ctx.fillText('0',         cx - 16, cy + ch);
   ctx.fillText(MAX_ELEV + '', cx - 20, cy + 6);
@@ -581,6 +657,7 @@ function frame(ts) {
       drawRouteFull();
       drawRouteActive();
       drawCheckpoints();
+      drawChallengePointsOnRoute();
 
       const p = posAt(getProgress());
       drawBike(p.x, p.y, p.a);
