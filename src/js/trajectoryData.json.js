@@ -39,38 +39,35 @@ export const checkpoints = routeData.checkpoints.map((cp) => {
 });
 
 // 虐点 - 直接使用原有 waypoints 中的坐标
-// 原始 waypoints 数据 (km -> x, y 映射)
 const waypointCoords = {
-  0: { x: 331, y: 179 },
-  11.07: { x: 507, y: 299 },
-  22.21: { x: 514, y: 511 },
-  33.30: { x: 506, y: 398 },
-  44.40: { x: 605, y: 565 },
-  55.40: { x: 583, y: 457 },
-  66.47: { x: 710, y: 342 },
-  77.50: { x: 512, y: 303 },
-  88.60: { x: 329, y: 184 },
-  99.60: { x: 490, y: 102 },
-  110.70: { x: 753, y: 69 },
-  121.80: { x: 490, y: 102 },
-  132.86: { x: 330, y: 179 }
+  0: { x: 331, y: 179, elev: 35 },
+  11.07: { x: 507, y: 299, elev: 12 },
+  22.21: { x: 514, y: 511, elev: 12 },
+  33.30: { x: 506, y: 398, elev: 0 },
+  44.40: { x: 605, y: 565, elev: 8 },
+  55.40: { x: 583, y: 457, elev: 0 },
+  66.47: { x: 710, y: 342, elev: 12 },
+  77.50: { x: 512, y: 303, elev: 0 },
+  88.60: { x: 329, y: 184, elev: 0 },
+  99.60: { x: 490, y: 102, elev: 265 },
+  110.70: { x: 753, y: 69, elev: 145 },
+  121.80: { x: 490, y: 102, elev: 265 },
+  132.86: { x: 330, y: 179, elev: 35 }
 };
 
 export const challengePoints = routeData.challengePoints.map(cp => {
-  const coord = waypointCoords[cp.km] || trajectoryPts.find(p => Math.abs(p.km - cp.km) < 0.5) || trajectoryPts[0];
-  const x = coord.x || trajectoryPts[0].x;
-  const y = coord.y || trajectoryPts[0].y;
+  // 直接从 waypointCoords 获取坐标
+  const coord = waypointCoords[cp.km];
   return {
-    ...cp,
-    lat: 0,
-    lon: 0,
-    x: x,
-    y: y,
-    elev: cp.elev || 0
+    km: cp.km,
+    name: cp.name,
+    elev: cp.elev || (coord ? coord.elev : 0),
+    x: coord ? coord.x : 331,
+    y: coord ? coord.y : 179
   };
 });
 
-// 最高海拔点 - 使用原有坐标
+// 最高海拔点
 export const maxElevPoint = {
   km: 99.60,
   name: '径心水库',
@@ -92,28 +89,19 @@ export const TOTAL_KM = routeData.metadata.totalDistance;
 export const MAX_ELEV = routeData.metadata.maxElevation;
 export const ROUTE_BOOK_ID = routeData.metadata.routeBookId;
 
-// 构建 waypoints - 包含所有 6 个打卡点
-const checkpointData = [
-  { km: 0, isCheck: 1 },
-  { km: 22.21, isCheck: 2 },
-  { km: 44.40, isCheck: 3 },
-  { km: 66.47, isCheck: 4 },
-  { km: 110.70, isCheck: 5 },
-  { km: 132.86, isCheck: 6 }
+// 构建完整的 waypoints - 包含所有 13 个原始点
+export const waypoints = [
+  { km: 0, x: 331, y: 179, name: '起点满京华艺象', isCheck: 1, elev: 35, lat: 22.611661, lon: 114.426878, road: '' },
+  { km: 11.07, x: 507, y: 299, name: '鹅宫码头', isCheck: 0, elev: 12, lat: 22.569781, lon: 114.488358, road: '' },
+  { km: 22.21, x: 514, y: 511, name: '鹅公湾', isCheck: 2, elev: 12, lat: 22.495732, lon: 114.490872, road: '海港路' },
+  { km: 33.30, x: 506, y: 398, name: '折返点1', isCheck: 0, elev: 0, lat: 22.535173, lon: 114.488230, road: '' },
+  { km: 44.40, x: 605, y: 565, name: '西涌', isCheck: 3, elev: 8, lat: 22.476785, lon: 114.522783, road: '南西公路' },
+  { km: 55.40, x: 583, y: 457, name: '折返点2', isCheck: 0, elev: 0, lat: 22.514763, lon: 114.514855, road: '' },
+  { km: 66.47, x: 710, y: 342, name: '杨梅坑', isCheck: 4, elev: 12, lat: 22.554712, lon: 114.559252, road: '新东路' },
+  { km: 77.50, x: 512, y: 303, name: '折返点3', isCheck: 0, elev: 0, lat: 22.568356, lon: 114.490105, road: '' },
+  { km: 88.60, x: 329, y: 184, name: '返回满京华', isCheck: 0, elev: 0, lat: 22.609971, lon: 114.426467, road: '' },
+  { km: 99.60, x: 490, y: 102, name: '径心水库', isCheck: 0, elev: 265, lat: 22.638564, lon: 114.482453, road: '葵坝公路' },
+  { km: 110.70, x: 753, y: 69, name: '坝光', isCheck: 5, elev: 145, lat: 22.649916, lon: 114.574309, road: '核坝公路' },
+  { km: 121.80, x: 490, y: 102, name: '径心水库返', isCheck: 0, elev: 265, lat: 22.638564, lon: 114.482453, road: '葵坝公路' },
+  { km: 132.86, x: 330, y: 179, name: '终点满京华艺象', isCheck: 6, elev: 35, lat: 22.611641, lon: 114.426828, road: '' }
 ];
-
-export const waypoints = checkpointData.map(cp => {
-  const coord = waypointCoords[cp.km] || trajectoryPts[0];
-  const cpData = routeData.checkpoints.find(c => Math.abs(c.km - cp.km) < 1);
-  return {
-    km: cp.km,
-    x: coord.x,
-    y: coord.y,
-    name: cpData ? cpData.name : '',
-    isCheck: cp.isCheck,
-    elev: cpData ? cpData.elev : 0,
-    lat: cpData ? cpData.lat : 0,
-    lon: cpData ? cpData.lon : 0,
-    road: ''
-  };
-});
