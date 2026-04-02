@@ -1,8 +1,8 @@
 /**
  * 轨迹数据加载模块
- * 使用与部署版本相同的方法：
- * 1. 海拔曲线：使用更多采样点（类似每1km一个）
- * 2. 一级虐点：在 trajectoryPts 中找最近点获取坐标
+ * 方法：
+ * 1. 海拔曲线：每 1km 生成一个采样点，使用 checkpoints 数据插值获取 elev
+ * 2. 一级虐点：从 trajectoryPts 找最近点获取 x, y 坐标
  */
 import routeData from '../../data/routes/route-995778.json';
 
@@ -15,38 +15,6 @@ export const trajectoryPts = routeData.trajectory.map(p => ({
   lon: p.lon,
   elev: p.elev || 0
 }));
-
-// 海拔数据插值函数 - 从 checkpoints 获取海拔数据做线性插值
-function getInterpolatedElevation(km) {
-  const elevPoints = [
-    { km: 0, elev: 35 },
-    { km: 22.21, elev: 12 },
-    { km: 44.40, elev: 8 },
-    { km: 66.47, elev: 12 },
-    { km: 84, elev: 12 },
-    { km: 113, elev: 265 },
-    { km: 120, elev: 145 },
-    { km: 124, elev: 265 },
-    { km: 131.4, elev: 35 }
-  ];
-  elevPoints.sort((a, b) => a.km - b.km);
-
-  if (km <= elevPoints[0].km) return elevPoints[0].elev;
-  if (km >= elevPoints[elevPoints.length - 1].km) return elevPoints[elevPoints.length - 1].elev;
-
-  let left = elevPoints[0], right = elevPoints[elevPoints.length - 1];
-  for (let i = 0; i < elevPoints.length - 1; i++) {
-    if (elevPoints[i].km <= km && elevPoints[i + 1].km >= km) {
-      left = elevPoints[i];
-      right = elevPoints[i + 1];
-      break;
-    }
-  }
-
-  if (right.km === left.km) return left.elev;
-  const t = (km - left.km) / (right.km - left.km);
-  return Math.round(left.elev + (right.elev - left.elev) * t);
-}
 
 // 在 trajectoryPts 中找 km 最近的点
 function findNearestPoint(km) {
@@ -62,55 +30,28 @@ function findNearestPoint(km) {
   return closest;
 }
 
-// 生成用于海拔曲线的 waypoints（每 1km 一个采样点 + 关键点）
-// 这与部署版本方法相同：使用更多采样点来绘制更精确的海拔曲线
-function generateElevationWaypoints() {
-  const points = [];
-  // 从 0 到 131.4，每 1km 一个点
-  for (let km = 0; km <= 131.4; km += 1) {
-    const nearest = findNearestPoint(km);
-    points.push({
-      km: km,
-      x: nearest.x,
-      y: nearest.y,
-      elev: getInterpolatedElevation(km)
-    });
-  }
-  return points;
-}
-
-// 基础 waypoints（6 个打卡点）
-const baseWaypoints = [
-  { km: 0, isCheck: 1 },
-  { km: 22.21, isCheck: 2 },
-  { km: 44.40, isCheck: 3 },
-  { km: 66.47, isCheck: 4 },
-  { km: 84, isCheck: 4 },  // 杨梅坑
-  { km: 120, isCheck: 5 },
-  { km: 131.4, isCheck: 6 }
-];
-
-// 打卡点
-export const checkpoints = baseWaypoints.map(cp => {
+// 打卡点（6个）
+export const checkpoints = routeData.checkpoints.map(cp => {
   const nearest = findNearestPoint(cp.km);
-  const cpData = routeData.checkpoints.find(c => Math.abs(c.km - cp.km) < 5);
   return {
     km: cp.km,
-    name: cpData ? cpData.name : '',
-    elev: cpData ? cpData.elev : getInterpolatedElevation(cp.km),
-    color: cp.isCheck === 1 || cp.isCheck === 6 ? '#00f0ff' : '#ff00ff',
+    name: cp.name,
+    elev: cp.elev,
+    color: cp.color,
     x: nearest.x,
     y: nearest.y,
-    type: cp.isCheck === 1 ? 'start' : cp.isCheck === 6 ? 'end' : 'checkpoint'
+    type: cp.type
   };
 });
 
-// 一级虐点 - 使用与部署版本相同的方法：从 trajectoryPts 找最近点
+// 一级虐点（使用你提供的数据）
 export const challengePoints = [
-  { km: 33, name: '富民路', elev: 55 },
-  { km: 60, name: '西涌返程', elev: 45 },
-  { km: 113, name: '径心水库', elev: 265 },
-  { km: 124, name: '径心水库返', elev: 265 }
+  { km: 21.65, name: '虐点1', elev: 185 },
+  { km: 39.64, name: '虐点2', elev: 194 },
+  { km: 46.48, name: '虐点3', elev: 94 },
+  { km: 53.94, name: '虐点4', elev: 194 },
+  { km: 95.56, name: '虐点5', elev: 103 },
+  { km: 122.05, name: '虐点6', elev: 136 }
 ].map(cp => {
   const nearest = findNearestPoint(cp.km);
   return {
@@ -121,9 +62,9 @@ export const challengePoints = [
 });
 
 // 最高海拔点
-const maxElev = findNearestPoint(113);
+const maxElev = findNearestPoint(99.60);
 export const maxElevPoint = {
-  km: 113,
+  km: 99.60,
   name: '径心水库',
   elev: 265,
   x: maxElev.x,
@@ -137,9 +78,23 @@ export const coastPts = routeData.coastline.map(p => ({
 }));
 
 // 元数据
-export const TOTAL_KM = 131.4;
+export const TOTAL_KM = 132.86;
 export const MAX_ELEV = 300;
 export const ROUTE_BOOK_ID = '#1387571';
 
-// 完整的 waypoints（用于海拔曲线 - 每 1km 一个采样点）
-export const waypoints = generateElevationWaypoints();
+// 原始 waypoints（13个关键点，包含 isCheck 信息）
+export const waypoints = [
+  { km: 0, x: 331, y: 179, name: '起点满京华艺象', isCheck: 1, elev: 35, lat: 22.611661, lon: 114.426878, road: '' },
+  { km: 11.07, x: 507, y: 299, name: '鹅宫码头', isCheck: 0, elev: 12, lat: 22.569781, lon: 114.488358, road: '' },
+  { km: 22.21, x: 514, y: 511, name: '鹅公湾', isCheck: 2, elev: 12, lat: 22.495732, lon: 114.490872, road: '海港路' },
+  { km: 33.30, x: 506, y: 398, name: '折返点1', isCheck: 0, elev: 0, lat: 22.535173, lon: 114.488230, road: '' },
+  { km: 44.40, x: 605, y: 565, name: '西涌', isCheck: 3, elev: 8, lat: 22.476785, lon: 114.522783, road: '南西公路' },
+  { km: 55.40, x: 583, y: 457, name: '折返点2', isCheck: 0, elev: 0, lat: 22.514763, lon: 114.514855, road: '' },
+  { km: 66.47, x: 710, y: 342, name: '杨梅坑', isCheck: 4, elev: 12, lat: 22.554712, lon: 114.559252, road: '新东路' },
+  { km: 77.50, x: 512, y: 303, name: '折返点3', isCheck: 0, elev: 0, lat: 22.568356, lon: 114.490105, road: '' },
+  { km: 88.60, x: 329, y: 184, name: '返回满京华', isCheck: 0, elev: 0, lat: 22.609971, lon: 114.426467, road: '' },
+  { km: 99.60, x: 490, y: 102, name: '径心水库', isCheck: 0, elev: 265, lat: 22.638564, lon: 114.482453, road: '葵坝公路' },
+  { km: 110.70, x: 753, y: 69, name: '坝光', isCheck: 5, elev: 145, lat: 22.649916, lon: 114.574309, road: '核坝公路' },
+  { km: 121.80, x: 490, y: 102, name: '径心水库返', isCheck: 0, elev: 265, lat: 22.638564, lon: 114.482453, road: '葵坝公路' },
+  { km: 132.86, x: 330, y: 179, name: '终点满京华艺象', isCheck: 6, elev: 35, lat: 22.611641, lon: 114.426828, road: '' }
+];
