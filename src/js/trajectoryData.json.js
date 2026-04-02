@@ -1,77 +1,98 @@
 /**
  * 轨迹数据加载模块
- * 从 JSON 文件加载 GPS 数据并转换为 Canvas 坐标
+ * 直接使用原有的 Canvas 坐标（已人工调整好）
+ * 保留 GPS 坐标作为元数据
+ *
+ * 注意：此模块直接复用原有的 trajectoryData.js 数据
+ * 只是作为 JSON 数据格式的适配层
  */
-import { gpsToCanvas, convertPoints } from './coordinateUtils.js';
-
-// 直接导入 JSON 数据
 import routeData from '../../data/routes/route-995778.json';
 
-// 转换轨迹点
-export const trajectoryPts = convertPoints(routeData.trajectory);
+// 直接使用原有的 Canvas 坐标
+export const trajectoryPts = routeData.trajectory.map(p => ({
+  km: p.km,
+  x: p.x,
+  y: p.y,
+  lat: p.lat,
+  lon: p.lon,
+  elev: p.elev || 0
+}));
 
-// 转换打卡点
-export const checkpoints = routeData.checkpoints.map(cp => {
-  const { x, y } = gpsToCanvas(cp.lat, cp.lon);
-  return { ...cp, x, y };
-});
+// 打卡点 - 直接使用原有坐标，并包含海拔信息
+export const checkpoints = routeData.checkpoints.map(cp => ({
+  km: cp.km,
+  name: cp.name,
+  elev: cp.elev,
+  color: cp.color,
+  lat: cp.lat,
+  lon: cp.lon,
+  type: cp.type
+}));
 
-// 虐点（需要根据 km 找到对应的 waypoint 坐标）
-// 从 trajectoryPts 中找到最近的距离点获取坐标
+// 虐点 - 从 checkpoints 获取海拔信息
 export const challengePoints = routeData.challengePoints.map(cp => {
-  // 找到最近的轨迹点
-  let closest = trajectoryPts[0];
-  let minDist = Math.abs(trajectoryPts[0].km - cp.km);
-  for (let i = 1; i < trajectoryPts.length; i++) {
-    const dist = Math.abs(trajectoryPts[i].km - cp.km);
-    if (dist < minDist) {
-      minDist = dist;
-      closest = trajectoryPts[i];
-    }
-  }
   return {
     ...cp,
-    lat: closest.lat,
-    lon: closest.lon,
-    x: closest.x,
-    y: closest.y
+    elev: cp.elev || 0
   };
 });
 
 // 最高海拔点
-export const maxElevPoint = (() => {
-  const p = routeData.maxElevPoint;
-  const { x, y } = gpsToCanvas(p.lat, p.lon);
-  return { ...p, x, y };
-})();
+export const maxElevPoint = routeData.maxElevPoint;
 
-// 转换海岸线点
-// 注意：coastline 数据当前是 Canvas 坐标，需要先添加 GPS 坐标
-// 暂时使用原始数据，稍后可以从 GPX 文件补充
-export const coastPts = routeData.coastline.map(p => {
-  // 如果有 lat/lon 则转换，否则保留原样
-  if (p.lat !== undefined && p.lon !== undefined) {
-    const { x, y } = gpsToCanvas(p.lat, p.lon);
-    return { ...p, x, y };
-  }
-  return p;
-});
+// 海岸线点 - 直接使用 Canvas 坐标
+export const coastPts = routeData.coastline.map(p => ({
+  x: p.x,
+  y: p.y
+}));
 
 // 元数据
 export const TOTAL_KM = routeData.metadata.totalDistance;
 export const MAX_ELEV = routeData.metadata.maxElevation;
 export const ROUTE_BOOK_ID = routeData.metadata.routeBookId;
 
-// 导出 waypoints（从 checkpoints 和 trajectory 组合）
-// 用于保持与原有代码的兼容性
-export const waypoints = routeData.trajectory.filter((_, i) => i % 30 === 0).map((p, i, arr) => ({
-  km: p.km,
-  x: p.x,
-  y: p.y,
-  name: i === 0 ? '起点' : i === arr.length - 1 ? '终点' : '',
-  isCheck: 0,
-  elev: p.elev || 0,
-  lat: p.lat,
-  lon: p.lon,
-  road: ''
-}));
+// waypoints - 从 checkpoints 和 trajectory 组合生成
+// 使用 checkpoints 的海拔数据
+function getInterpolatedElevation(km) {
+  // 从 checkpoints 获取海拔数据点
+  const elevPoints = routeData.checkpoints.map(cp => ({ km: cp.km, elev: cp.elev }));
+  elevPoints.push({ km: 0, elev: 35 }); // 起点
+  elevPoints.sort((a, b) => a.km - b.km);
+
+  // 找到最近的左右点
+  let left = elevPoints[0];
+  let right = elevPoints[elevPoints.length - 1];
+
+  for (let i = 0; i < elevPoints.length - 1; i++) {
+    if (elevPoints[i].km <= km && elevPoints[i + 1].km >= km) {
+      left = elevPoints[i];
+      right = elevPoints[i + 1];
+      break;
+    }
+  }
+
+  // 线性插值
+  if (right.km === left.km) return left.elev;
+  const t = (km - left.km) / (right.km - left.km);
+  return Math.round(left.elev + (right.elev - left.elev) * t);
+}
+
+// 生成完整的 waypoints 数组，包含正确的海拔数据
+export const waypoints = [
+  // 起点
+  { km: 0.00, x: 331, y: 179, name: '起点满京华艺象', isCheck: 1, elev: 35, lat: 22.611661, lon: 114.426878, road: '' },
+  // 中间点（从 trajectory 采样，并使用 checkpoints 的海拔插值）
+  ...trajectoryPts.filter((_, i) => i > 0 && i % 25 === 0 && i < trajectoryPts.length - 1).map(p => ({
+    km: p.km,
+    x: p.x,
+    y: p.y,
+    name: '',
+    isCheck: 0,
+    elev: getInterpolatedElevation(p.km),
+    lat: p.lat,
+    lon: p.lon,
+    road: ''
+  })),
+  // 终点
+  { km: 132.86, x: 330, y: 179, name: '终点满京华艺象', isCheck: 6, elev: 35, lat: 22.611641, lon: 114.426828, road: '' }
+];
