@@ -5,7 +5,7 @@
 import { CANVAS_CONFIG, CHECKPOINT_CONFIG, TRAJECTORY_CONFIG, ANIMATION_CONFIG } from './config.js';
 import {
   coastPts, waypoints, trajectoryPts, checkpoints, challengePoints,
-  maxElevPoint, TOTAL_KM, MAX_ELEV,
+  maxElevPoint, TOTAL_KM, MAX_ELEV, elevationPoints,
 } from './trajectoryData.json.js';
 
 // ── HUD 常量配置 (从 config.js 导入) ─────────────────────────────
@@ -508,11 +508,15 @@ function drawElevation() {
   ctx.fillText('0',         cx - 16, cy + ch);
   ctx.fillText(MAX_ELEV + '', cx - 20, cy + 6);
 
+  // 海拔曲线数据（使用 elevationPoints 有 133 个采样点）
+  const elevRoute = elevationPoints;
+  const EN = elevRoute.length;
+
   // 海拔曲线填充
   ctx.beginPath();
-  for (let i = 0; i < N; i++) {
-    const px = cx + (route[i].km / TOTAL_KM) * cw;
-    const py = cy + ch - (Math.min(route[i].elev, MAX_ELEV) / MAX_ELEV) * ch;
+  for (let i = 0; i < EN; i++) {
+    const px = cx + (elevRoute[i].km / TOTAL_KM) * cw;
+    const py = cy + ch - (Math.min(elevRoute[i].elev, MAX_ELEV) / MAX_ELEV) * ch;
     if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
   }
   ctx.lineTo(cx + cw, cy + ch); ctx.lineTo(cx, cy + ch); ctx.closePath();
@@ -525,9 +529,9 @@ function drawElevation() {
   ctx.beginPath();
   ctx.strokeStyle = 'rgba(0,255,136,0.8)';
   ctx.lineWidth   = 2;
-  for (let i = 0; i < N; i++) {
-    const px = cx + (route[i].km / TOTAL_KM) * cw;
-    const py = cy + ch - (Math.min(route[i].elev, MAX_ELEV) / MAX_ELEV) * ch;
+  for (let i = 0; i < EN; i++) {
+    const px = cx + (elevRoute[i].km / TOTAL_KM) * cw;
+    const py = cy + ch - (Math.min(elevRoute[i].elev, MAX_ELEV) / MAX_ELEV) * ch;
     if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
   }
   ctx.stroke();

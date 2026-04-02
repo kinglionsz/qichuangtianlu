@@ -1,8 +1,5 @@
 /**
  * 轨迹数据加载模块
- * 方法：
- * 1. 海拔曲线：每 1km 生成一个采样点，使用 checkpoints 数据插值获取 elev
- * 2. 一级虐点：从 trajectoryPts 找最近点获取 x, y 坐标
  */
 import routeData from '../../data/routes/route-995778.json';
 
@@ -30,6 +27,28 @@ function findNearestPoint(km) {
   return closest;
 }
 
+// 从 checkpoints 数据获取海拔插值
+function getInterpolatedElevation(km) {
+  const elevPoints = routeData.checkpoints.map(cp => ({ km: cp.km, elev: cp.elev }));
+  elevPoints.sort((a, b) => a.km - b.km);
+
+  if (km <= elevPoints[0].km) return elevPoints[0].elev;
+  if (km >= elevPoints[elevPoints.length - 1].km) return elevPoints[elevPoints.length - 1].elev;
+
+  let left = elevPoints[0], right = elevPoints[elevPoints.length - 1];
+  for (let i = 0; i < elevPoints.length - 1; i++) {
+    if (elevPoints[i].km <= km && elevPoints[i + 1].km >= km) {
+      left = elevPoints[i];
+      right = elevPoints[i + 1];
+      break;
+    }
+  }
+
+  if (right.km === left.km) return left.elev;
+  const t = (km - left.km) / (right.km - left.km);
+  return Math.round(left.elev + (right.elev - left.elev) * t);
+}
+
 // 打卡点（6个）
 export const checkpoints = routeData.checkpoints.map(cp => {
   const nearest = findNearestPoint(cp.km);
@@ -44,7 +63,7 @@ export const checkpoints = routeData.checkpoints.map(cp => {
   };
 });
 
-// 一级虐点（使用你提供的数据）
+// 一级虐点
 export const challengePoints = [
   { km: 21.65, name: '虐点1', elev: 185 },
   { km: 39.64, name: '虐点2', elev: 194 },
@@ -82,7 +101,7 @@ export const TOTAL_KM = 132.86;
 export const MAX_ELEV = 300;
 export const ROUTE_BOOK_ID = '#1387571';
 
-// 原始 waypoints（13个关键点，包含 isCheck 信息）
+// 原始 waypoints（13个关键点，包含 isCheck 信息）- 用于打卡点标注
 export const waypoints = [
   { km: 0, x: 331, y: 179, name: '起点满京华艺象', isCheck: 1, elev: 35, lat: 22.611661, lon: 114.426878, road: '' },
   { km: 11.07, x: 507, y: 299, name: '鹅宫码头', isCheck: 0, elev: 12, lat: 22.569781, lon: 114.488358, road: '' },
@@ -98,3 +117,15 @@ export const waypoints = [
   { km: 121.80, x: 490, y: 102, name: '径心水库返', isCheck: 0, elev: 265, lat: 22.638564, lon: 114.482453, road: '葵坝公路' },
   { km: 132.86, x: 330, y: 179, name: '终点满京华艺象', isCheck: 6, elev: 35, lat: 22.611641, lon: 114.426828, road: '' }
 ];
+
+// elevationPoints（133个采样点，每个点都有正确的 elev）- 用于海拔曲线
+export const elevationPoints = [];
+for (let km = 0; km <= 132.86; km += 1) {
+  const nearest = findNearestPoint(km);
+  elevationPoints.push({
+    km: Math.round(km * 100) / 100,
+    x: nearest.x,
+    y: nearest.y,
+    elev: getInterpolatedElevation(km)
+  });
+}
