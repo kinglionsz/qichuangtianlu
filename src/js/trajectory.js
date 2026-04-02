@@ -2,21 +2,22 @@
  * 骑行轨迹 Canvas 渲染引擎
  * 已优化：30fps帧率控制 + 脉冲值缓存
  */
+import { CANVAS_CONFIG, CHECKPOINT_CONFIG, TRAJECTORY_CONFIG, ANIMATION_CONFIG } from './config.js';
 import {
   coastPts, waypoints, trajectoryPts, checkpoints, challengePoints,
   maxElevPoint, TOTAL_KM, MAX_ELEV,
 } from './trajectoryData.js';
 
-// ── HUD 常量配置 ───────────────────────────────────────────────
+// ── HUD 常量配置 (从 config.js 导入) ─────────────────────────────
 const HUD = {
   ROUTE_BOOK_ID: '#1387571',         // 路书编号
-  TOTAL_DISTANCE: 132.86,             // 总里程 (km)
+  TOTAL_DISTANCE: CANVAS_CONFIG.TOTAL_DISTANCE,
   TOTAL_TIME_MINUTES: 525,           // 总耗时 (分钟)
-  LABEL_OFFSET_X: 5,                 // 左侧标签 X 偏移
-  LABEL_OFFSET_Y_1: 28,              // 第一行 Y 偏移
-  LABEL_OFFSET_Y_2: 42,              // 第二行 Y 偏移
-  LABEL_OFFSET_Y_3: 56,              // 第三行 Y 偏移
-  VALUE_OFFSET_X: 70,                // 右侧数值 X 偏移
+  LABEL_OFFSET_X: 5,
+  LABEL_OFFSET_Y_1: 28,
+  LABEL_OFFSET_Y_2: 42,
+  LABEL_OFFSET_Y_3: 56,
+  VALUE_OFFSET_X: 70,
 };
 
 // ── Canvas 初始化 ──────────────────────────────────────────────
@@ -25,9 +26,9 @@ const ctx    = canvas.getContext('2d');
 const CW = canvas.width;   // 1100
 const CH = canvas.height;  // 770
 
-// 轨迹偏移: 整体右移 +160px, 下移 +60px（避免被海拔图遮挡）
-const OFFSET_X = 160;
-const OFFSET_Y = 60;
+// 轨迹偏移: 从配置导入
+const OFFSET_X = CANVAS_CONFIG.OFFSET_X;
+const OFFSET_Y = CANVAS_CONFIG.OFFSET_Y;
 const route = waypoints.map(p => ({ ...p, x: p.x + OFFSET_X, y: p.y + OFFSET_Y }));
 const N = route.length;
 
@@ -39,7 +40,7 @@ const SN = smoothRoute.length;
 const _state = {
   progress: 0,
   playing: false,  // 默认暂停，降低CPU占用
-  speed: 1,
+  speed: ANIMATION_CONFIG.DEFAULT_SPEED,
   lastTime: 0
 };
 
@@ -60,7 +61,7 @@ export const TrajectoryEngine = {
     return _state.playing;
   },
   cycleSpeed() {
-    const ss = [1, 2, 4, .5];
+    const ss = ANIMATION_CONFIG.SPEED_VALUES;
     const ls = ['1x', '2x', '4x', '0.5x'];
     const i = (ss.indexOf(_state.speed) + 1) % ss.length;
     _state.speed = ss[i];
@@ -69,8 +70,7 @@ export const TrajectoryEngine = {
   },
   reset() {
     _state.progress = 0;
-    _state.playing = false; // 重置播放状态
-    // 重置按钮状态
+    _state.playing = false;
     const b = document.getElementById('btn-play');
     if (b) {
       b.textContent = 'PLAY';
@@ -86,20 +86,22 @@ function getSpeed() { return _state.speed; }
 function setLastTime(v) { _state.lastTime = v; }
 function getLastTime() { return _state.lastTime; }
 
-// ── 性能优化：帧率控制 (30 fps) ───────────────────────────────
-const TARGET_FRAME_INTERVAL = 1000 / 30;
+// ── 性能优化：帧率控制 ───────────────────────────────────────────
+const TARGET_FRAME_INTERVAL = ANIMATION_CONFIG.TARGET_FRAME_INTERVAL;
 let lastFrameTime = 0;
 
-// ── 性能优化：脉冲值缓存（每10帧更新一次）────────────────────
-let pulseValue      = 0.7;
-let fastPulseValue  = 0.6;
+// ── 性能优化：脉冲值缓存（每N帧更新一次）─────────────────────────
+const PULSE_INTERVAL = TRAJECTORY_CONFIG.pulseUpdateInterval;
+let pulseValue      = TRAJECTORY_CONFIG.pulseMin + 0.3;
+let fastPulseValue  = TRAJECTORY_CONFIG.pulseMin + 0.2;
 let pulseFrameCounter = 0;
 
 function updatePulseValues() {
-  if (++pulseFrameCounter >= 10) {
+  if (++pulseFrameCounter >= PULSE_INTERVAL) {
     pulseFrameCounter  = 0;
-    pulseValue      = 0.4 + Math.random() * 0.4;
-    fastPulseValue  = 0.3 + Math.random() * 0.5;
+    const { pulseMin, pulseMax } = TRAJECTORY_CONFIG;
+    pulseValue      = pulseMin + Math.random() * (pulseMax - pulseMin);
+    fastPulseValue  = pulseMin + Math.random() * (pulseMax - pulseMin);
   }
 }
 
