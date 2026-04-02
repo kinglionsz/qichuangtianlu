@@ -6,7 +6,7 @@ import { CANVAS_CONFIG, CHECKPOINT_CONFIG, TRAJECTORY_CONFIG, ANIMATION_CONFIG }
 import {
   coastPts, waypoints, trajectoryPts, checkpoints, challengePoints,
   maxElevPoint, TOTAL_KM, MAX_ELEV,
-} from './trajectoryData.js';
+} from './trajectoryData.json.js';
 
 // ── HUD 常量配置 (从 config.js 导入) ─────────────────────────────
 const HUD = {

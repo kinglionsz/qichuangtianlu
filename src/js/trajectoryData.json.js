@@ -5,7 +5,7 @@
 import { gpsToCanvas, convertPoints } from './coordinateUtils.js';
 
 // 直接导入 JSON 数据
-import routeData from '../data/routes/route-995778.json';
+import routeData from '../../data/routes/route-995778.json';
 
 // 转换轨迹点
 export const trajectoryPts = convertPoints(routeData.trajectory);
