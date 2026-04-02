@@ -27,9 +27,25 @@ function findNearestPoint(km) {
   return closest;
 }
 
-// 从 checkpoints 数据获取海拔插值
+// 从 checkpoints + challengePoints 数据获取海拔插值
 function getInterpolatedElevation(km) {
-  const elevPoints = routeData.checkpoints.map(cp => ({ km: cp.km, elev: cp.elev }));
+  // 合并 checkpoints 和 challengePoints 的海拔数据
+  const elevPoints = [
+    // checkpoints
+    { km: 0, elev: 35 },
+    { km: 22.21, elev: 12 },
+    { km: 44.40, elev: 8 },
+    { km: 66.47, elev: 12 },
+    { km: 110.70, elev: 145 },
+    { km: 132.86, elev: 35 },
+    // 一级虐点
+    { km: 21.65, elev: 185 },
+    { km: 39.64, elev: 194 },
+    { km: 46.48, elev: 94 },
+    { km: 53.94, elev: 194 },
+    { km: 95.56, elev: 103 },
+    { km: 122.05, elev: 256 }
+  ];
   elevPoints.sort((a, b) => a.km - b.km);
 
   if (km <= elevPoints[0].km) return elevPoints[0].elev;
@@ -118,7 +134,7 @@ export const waypoints = [
   { km: 132.86, x: 330, y: 179, name: '终点满京华艺象', isCheck: 6, elev: 35, lat: 22.611641, lon: 114.426828, road: '' }
 ];
 
-// elevationPoints（133个采样点，每个点都有正确的 elev）- 用于海拔曲线
+// elevationPoints（133个采样点，包含正确的 elev）- 用于海拔曲线
 export const elevationPoints = [];
 for (let km = 0; km <= 132.86; km += 1) {
   const nearest = findNearestPoint(km);
