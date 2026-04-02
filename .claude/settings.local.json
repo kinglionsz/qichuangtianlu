@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:kyzv5635w9sh.space.minimaxi.com)",
+      "WebSearch",
+      "Bash(npm run:*)",
+      "Bash(git:*)",
+      "Bash(xcopy X:\\\\Download\\\\cycling-site\\\\cycling-site\\\\imgs:*)",
+      "Bash(ls:*)",
+      "Bash(npx playwright:*)",
+      "Bash(node extract-route-data.cjs)"
+    ]
+  }
+}

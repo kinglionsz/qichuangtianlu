@@ -1,0 +1,3040 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)https://kyzv5635w9sh.space.minimaxi.com/ -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>骑闯天路深圳站 · 2017 经典路线复刻 · 赛博朋克纪念版</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link href="./骑闯天路深圳站 · 2017 经典路线复刻 · 赛博朋克纪念版_files/css2" rel="stylesheet">
+    <style>
+        :root {
+            --neon-cyan: #00f0ff;
+            --neon-magenta: #ff00ff;
+            --neon-yellow: #f0f000;
+            --neon-orange: #ff6b00;
+            --neon-green: #00ff88;
+            --neon-red: #ff2244;
+            --dark-bg: #0a0a0f;
+            --dark-secondary: #12121a;
+            --glass-bg: rgba(255,255,255,0.05);
+            --glass-border: rgba(0,240,255,0.15);
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--dark-bg);color:#fff;line-height:1.6;overflow-x:hidden;position:relative}
+        /* Route Map Background Layer */
+        body::before{content:'';position:fixed;inset:0;background:url('imgs/route-map.jpg') center/cover no-repeat;opacity:0.08;filter:saturate(0.4) contrast(1.2) hue-rotate(160deg);pointer-events:none;z-index:0;mix-blend-mode:screen}
+        body::after{content:'';position:fixed;inset:0;background:linear-gradient(135deg,rgba(0,240,255,0.03) 0%,transparent 50%,rgba(255,0,255,0.02) 100%);pointer-events:none;z-index:0}
+
+        .cyber-grid{position:fixed;inset:0;background:linear-gradient(90deg,rgba(0,240,255,.03) 1px,transparent 1px),linear-gradient(rgba(0,240,255,.03) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;z-index:0}
+        .scanlines{position:fixed;inset:0;pointer-events:none;z-index:9998;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px)}
+        .particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+        .particle{position:absolute;width:4px;height:4px;background:var(--neon-cyan);border-radius:50%;box-shadow:0 0 10px var(--neon-cyan);animation:floatUp var(--dur,15s) var(--delay,0s) infinite;opacity:0}
+        @keyframes floatUp{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:.6}90%{opacity:.6}100%{transform:translateY(-100vh) rotate(720deg);opacity:0}}
+
+        .loader{position:fixed;inset:0;background:var(--dark-bg);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .6s}
+        .loader.hidden{opacity:0;pointer-events:none}
+        .loader-spinner{width:60px;height:60px;border:3px solid rgba(0,240,255,.2);border-top-color:var(--neon-cyan);border-radius:50%;animation:spin 1s linear infinite}
+        .loader-text{font-family:'Orbitron',monospace;color:var(--neon-cyan);letter-spacing:5px;margin-top:16px;font-size:.85rem}
+        @keyframes spin{to{transform:rotate(360deg)}}
+
+        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:14px 40px;background:rgba(10,10,15,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,240,255,.2)}
+        .nav-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+        .logo{font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:900;background:linear-gradient(90deg,var(--neon-cyan),var(--neon-magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px}
+        .nav-links{display:flex;gap:28px;list-style:none}
+        .nav-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.88rem;font-weight:500;position:relative;transition:color .3s}
+        .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--neon-cyan);box-shadow:0 0 10px var(--neon-cyan);transition:width .3s}
+        .nav-links a:hover{color:var(--neon-cyan)}
+        .nav-links a:hover::after{width:100%}
+
+        .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 20px;overflow:hidden}
+        .hero-bg{position:absolute;inset:0;background:url('imgs/qichuangtianlu-sichuan-tibet-highway-cycling-snow.jpg') center/cover;filter:brightness(.3) saturate(1.2);animation:heroPulse 8s ease-in-out infinite}
+        .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,15,.7) 0%,rgba(10,10,15,.3) 50%,rgba(10,10,15,.92) 100%)}
+        @keyframes heroPulse{0%,100%{filter:brightness(.3) saturate(1.2)}50%{filter:brightness(.35) saturate(1.3)}}
+        .hero-content{position:relative;z-index:10;text-align:center;max-width:900px}
+
+        .glitch-title{font-family:'Orbitron',monospace;font-size:clamp(2.4rem,7vw,4.8rem);font-weight:900;margin-bottom:16px;position:relative;animation:glitch 3s infinite}
+        .glitch-title .main-text{background:linear-gradient(90deg,#fff 0%,var(--neon-cyan) 50%,#fff 100%);background-size:200% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shine 3s linear infinite}
+        .glitch-title::before,.glitch-title::after{content:attr(data-text);position:absolute;inset:0}
+        .glitch-title::before{animation:glitch-1 .3s infinite;color:var(--neon-cyan);z-index:-1}
+        .glitch-title::after{animation:glitch-2 .3s infinite;color:var(--neon-magenta);z-index:-2}
+        @keyframes glitch{0%,90%,100%{transform:translate(0)}92%{transform:translate(-2px,2px)}94%{transform:translate(2px,-2px)}96%{transform:translate(-2px,-2px)}98%{transform:translate(2px,2px)}}
+        @keyframes glitch-1{0%,100%{clip-path:inset(0);transform:translate(0)}20%{clip-path:inset(20% 0 60% 0);transform:translate(-3px)}40%{clip-path:inset(40% 0 40% 0);transform:translate(3px)}60%{clip-path:inset(60% 0 20% 0);transform:translate(-3px)}80%{clip-path:inset(80% 0 0 0);transform:translate(3px)}}
+        @keyframes glitch-2{0%,100%{clip-path:inset(0);transform:translate(0)}20%{clip-path:inset(60% 0 20% 0);transform:translate(3px)}40%{clip-path:inset(20% 0 60% 0);transform:translate(-3px)}60%{clip-path:inset(0 0 80% 0);transform:translate(3px)}80%{clip-path:inset(0);transform:translate(-3px)}}
+        @keyframes shine{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+        .hero-subtitle{font-size:clamp(1rem,2.5vw,1.4rem);color:rgba(255,255,255,.7);margin-bottom:12px;font-weight:300}
+        .hero-year{font-family:'Orbitron',monospace;font-size:1.15rem;color:var(--neon-orange);text-shadow:0 0 20px var(--neon-orange);letter-spacing:5px;margin-bottom:40px}
+        .hero-riders{font-style:italic;color:rgba(255,255,255,.55);margin-bottom:30px;font-size:.95rem}
+
+        .stats-container{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-top:40px}
+        .stat-item{text-align:center;padding:28px 24px;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:20px;backdrop-filter:blur(10px);min-width:160px;position:relative;transition:all .4s}
+        .stat-item::before{content:'';position:absolute;inset:-2px;background:linear-gradient(45deg,var(--neon-cyan),var(--neon-magenta),var(--neon-cyan));border-radius:22px;z-index:-1;opacity:0;transition:opacity .4s}
+        .stat-item:hover::before{opacity:1}
+        .stat-item:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,240,255,.15)}
+        .stat-number{font-family:'Orbitron',monospace;font-size:2.6rem;font-weight:900;background:linear-gradient(180deg,#fff 0%,var(--neon-cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .stat-label{font-size:.85rem;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:2px}
+
+        section{position:relative;padding:100px 20px;z-index:1}
+        .section-title{font-family:'Orbitron',monospace;font-size:clamp(1.6rem,4vw,2.4rem);text-align:center;margin-bottom:50px;position:relative;display:inline-block;left:50%;transform:translateX(-50%)}
+        .section-title::after{content:'';position:absolute;bottom:-12px;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,var(--neon-cyan),transparent);box-shadow:0 0 20px var(--neon-cyan)}
+
+        .trajectory-section{background:var(--dark-secondary);text-align:center}
+        .trajectory-container{max-width:1100px;margin:0 auto;position:relative}
+        .trajectory-wrapper{position:relative;width:100%;border:1px solid var(--glass-border);border-radius:20px;overflow:hidden;padding:16px;background:url('imgs/route-map.jpg') center/cover no-repeat;background-color:rgba(0,0,0,0.6)}
+        .trajectory-wrapper::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,240,255,0.08) 0%,transparent 50%,rgba(255,0,255,0.06) 100%);pointer-events:none;z-index:2}
+        #trajectory-canvas{width:100%;height:auto;border-radius:12px;display:block;background:transparent;mix-blend-mode:screen;position:relative;z-index:1}
+        .trajectory-legend{display:flex;justify-content:center;gap:28px;margin-top:20px;flex-wrap:wrap}
+        .legend-item{display:flex;align-items:center;gap:8px;font-size:.85rem;color:rgba(255,255,255,.7)}
+        .legend-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+        .trajectory-controls{display:flex;justify-content:center;gap:16px;margin-top:24px}
+        .cyber-btn{font-family:'Orbitron',monospace;padding:10px 28px;border:1px solid var(--neon-cyan);background:rgba(0,240,255,.08);color:var(--neon-cyan);border-radius:8px;cursor:pointer;font-size:.82rem;letter-spacing:2px;transition:all .3s}
+        .cyber-btn:hover{background:rgba(0,240,255,.2);box-shadow:0 0 20px rgba(0,240,255,.3)}
+        .cyber-btn.active{background:var(--neon-cyan);color:var(--dark-bg)}
+
+        .route-section{background:var(--dark-bg)}
+        .checkpoints-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px}
+        .checkpoint-card{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:16px;padding:28px;position:relative;overflow:hidden;transition:all .4s;opacity:0;transform:translateY(30px)}
+        .checkpoint-card.visible{opacity:1;transform:translateY(0)}
+        .checkpoint-card:hover{transform:translateY(-5px) scale(1.02);border-color:var(--neon-cyan);box-shadow:0 10px 40px rgba(0,240,255,.12)}
+        .checkpoint-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--neon-cyan),var(--neon-magenta))}
+        .checkpoint-number{font-family:'Orbitron',monospace;font-size:3.5rem;font-weight:900;color:rgba(0,240,255,.08);position:absolute;top:8px;right:16px}
+        .checkpoint-icon{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--neon-cyan),var(--neon-magenta));display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:1.4rem}
+        .checkpoint-title{font-size:1.25rem;font-weight:700;margin-bottom:8px}
+        .checkpoint-desc{font-size:.92rem;color:rgba(255,255,255,.6);line-height:1.7}
+        .checkpoint-coord{font-family:'Orbitron',monospace;font-size:.75rem;color:var(--neon-cyan);opacity:.6;margin-top:8px}
+        .checkpoint-challenge{display:inline-block;padding:4px 12px;margin-top:10px;background:rgba(255,34,68,.12);border:1px solid rgba(255,34,68,.4);border-radius:20px;font-size:.78rem;color:#ff6b8a}
+
+        .detail-section{background:var(--dark-secondary)}
+        .detail-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+        .detail-card{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:16px;padding:24px;transition:all .3s}
+        .detail-card:hover{border-color:var(--neon-magenta);transform:translateY(-4px)}
+        .detail-card h3{font-size:1.1rem;margin-bottom:12px;color:var(--neon-cyan);font-weight:700}
+        .detail-card p,.detail-card li{font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.8}
+        .detail-card ul,.detail-card ol{padding-left:20px}
+        .detail-card li{margin:4px 0}
+        .supply-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:.88rem}
+        .supply-table th,.supply-table td{padding:10px 14px;text-align:left;border-bottom:1px solid rgba(255,255,255,.08)}
+        .supply-table th{background:rgba(0,240,255,.08);color:var(--neon-cyan);font-weight:600;font-size:.82rem;letter-spacing:1px}
+
+        /* 路线图透明背景层 */
+        .route-map-layer {
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .route-map-layer::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('imgs/route-map.jpg') center/cover no-repeat;
+            opacity: 0.12;
+            filter: saturate(0.5) contrast(1.3) hue-rotate(160deg);
+            mix-blend-mode: screen;
+        }
+        .route-map-layer::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,240,255,0.06) 0%, transparent 50%), linear-gradient(225deg, rgba(255,0,255,0.04) 0%, transparent 50%);
+        }
+        .trajectory-wrapper {
+            position: relative;
+            background: transparent;
+        }
+        #trajectory-canvas {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 画廊区域 */
+        .gallery-section{background:var(--dark-bg)}
+        .gallery-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,200px);gap:20px}
+        .gallery-item{position:relative;overflow:hidden;border-radius:12px;cursor:pointer;border:1px solid rgba(0,240,255,0.15);transition:all .4s cubic-bezier(.4,0,.2,1)}
+        .gallery-item:hover{border-color:var(--neon-cyan);box-shadow:0 0 30px rgba(0,240,255,.2),inset 0 0 20px rgba(0,240,255,.05);transform:scale(1.02) translateY(-4px);z-index:10}
+        .gallery-item::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,240,255,.1) 0%,transparent 50%,rgba(255,0,255,.05) 100%);opacity:0;transition:opacity .4s;z-index:1}
+        .gallery-item:hover::before{opacity:1}
+        .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+        .gallery-item:hover img{transform:scale(1.1)}
+
+        /* 英雄区 - 2x2大图 */
+        .gallery-hero{grid-column:span 2;grid-row:span 2}
+        /* 横幅区 - 2x1宽图 */
+        .gallery-wide{grid-column:span 2;grid-row:span 1}
+        /* 缩略图 */
+        .gallery-thumb{grid-column:span 1;grid-row:span 1}
+
+        .gallery-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.85) 100%);opacity:0;transition:opacity .4s;display:flex;flex-direction:column;justify-content:flex-end;padding:20px;z-index:2}
+        .gallery-item:hover .gallery-overlay{opacity:1}
+        .gallery-tag{display:inline-block;padding:4px 10px;margin-bottom:8px;background:rgba(0,240,255,.2);border:1px solid var(--neon-cyan);border-radius:20px;font-size:.65rem;color:var(--neon-cyan);letter-spacing:1px;text-transform:uppercase;width:fit-content}
+        .gallery-caption{font-size:.9rem;font-weight:500;color:#fff;line-height:1.5}
+
+        /* 赛程时间线样式 */
+        .timeline-section{background:var(--dark-secondary);position:relative;padding:80px 20px}
+        .timeline{max-width:900px;margin:0 auto;position:relative}
+        .timeline::before{content:'';position:absolute;left:50%;transform:translateX(-50%);width:3px;height:100%;background:linear-gradient(180deg,var(--neon-cyan),var(--neon-magenta));box-shadow:0 0 20px var(--neon-cyan)}
+        .timeline-item{position:relative;padding:30px;width:50%;box-sizing:border-box;opacity:0;transform:translateX(-50px);transition:all .6s ease}
+        .timeline-item.visible{opacity:1;transform:translateX(0)}
+        .timeline-item:nth-child(odd){margin-left:0;text-align:right;padding-right:50px}
+        .timeline-item:nth-child(even){margin-left:50%;text-align:left;padding-left:50px}
+        .timeline-dot{position:absolute;width:20px;height:20px;background:var(--neon-cyan);border-radius:50%;top:35px;box-shadow:0 0 20px var(--neon-cyan)}
+        .timeline-item:nth-child(odd) .timeline-dot{right:-10px}
+        .timeline-item:nth-child(even) .timeline-dot{left:-10px}
+        .timeline-content{background:var(--glass-bg);border:1px solid rgba(0,240,255,.2);border-radius:16px;padding:25px}
+        .timeline-time{font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:700;color:var(--neon-cyan);margin-bottom:10px;text-shadow:0 0 10px var(--neon-cyan)}
+        .timeline-content h3{font-size:1.2rem;font-weight:700;color:var(--neon-cyan);margin-bottom:10px}
+        .timeline-content p{font-size:.95rem;color:rgba(255,255,255,.7);line-height:1.7}
+        .timeline-tag{display:inline-block;padding:4px 12px;margin-top:12px;background:rgba(0,240,255,.1);border:1px solid rgba(0,240,255,.3);border-radius:20px;font-size:.75rem;color:var(--neon-cyan)}
+        .timeline-tag.highlight{background:rgba(0,255,136,.1);border-color:rgba(0,255,136,.3);color:var(--neon-green)}
+        .timeline-tag.warning{background:rgba(255,68,68,.1);border-color:rgba(255,68,68,.3);color:#ff4444}
+        .timeline-tag.champion{background:rgba(255,215,0,.15);border-color:rgba(255,215,0,.4);color:#ffd700;text-shadow:0 0 10px rgba(255,215,0,.5)}
+
+        /* 荣耀时刻样式 */
+        .winners-section{background:linear-gradient(135deg,var(--dark-bg) 0%,var(--dark-secondary) 100%);position:relative;overflow:hidden}
+        .winners-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(0,240,255,.1) 0%,transparent 70%);pointer-events:none}
+        .winners-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+        .winner-card{text-align:center;padding:40px 20px;background:var(--glass-bg);border:1px solid rgba(0,240,255,.2);border-radius:24px;position:relative;transition:all .4s ease}
+        .winner-card:hover{transform:translateY(-10px);box-shadow:0 20px 50px rgba(0,240,255,.2)}
+        .winner-card.first{border-color:#ffd700;box-shadow:0 0 40px rgba(255,215,0,.2)}
+        .winner-rank{font-family:'Orbitron',monospace;font-size:1rem;font-weight:700;margin-bottom:15px;letter-spacing:3px}
+        .winner-card.first .winner-rank{color:#ffd700;text-shadow:0 0 20px #ffd700}
+        .winner-card.second .winner-rank{color:#c0c0c0}
+        .winner-card.third .winner-rank{color:#cd7f32}
+        .winner-name{font-size:1.8rem;font-weight:900;margin-bottom:10px;background:linear-gradient(180deg,#fff 0%,var(--neon-cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .winner-time{font-family:'Orbitron',monospace;font-size:2.5rem;font-weight:900;color:var(--neon-cyan);text-shadow:0 0 30px var(--neon-cyan);margin:20px 0}
+        .winner-team{font-size:.9rem;color:rgba(255,255,255,.6)}
+        .winner-img{width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 20px;border:3px solid var(--neon-cyan);box-shadow:0 0 30px rgba(0,240,255,.3)}
+
+        /* 骑行路书样式 */
+        .routebook-section{background:var(--dark-bg);position:relative}
+        .routebook-container{max-width:1200px;margin:0 auto}
+        .routebook-intro{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:16px;padding:30px;margin-bottom:40px}
+        .routebook-intro h3{font-size:1.3rem;color:var(--neon-cyan);margin-bottom:15px}
+        .routebook-intro p{color:rgba(255,255,255,.7);line-height:1.8}
+        .routebook-stage{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:16px;padding:25px;margin-bottom:20px;position:relative}
+        .routebook-stage::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--neon-cyan),var(--neon-magenta));border-radius:4px 0 0 4px}
+        .routebook-stage h4{font-size:1.1rem;color:var(--neon-cyan);margin-bottom:10px}
+        .routebook-stage p{color:rgba(255,255,255,.7);font-size:.95rem;line-height:1.7}
+        .routebook-stage strong{color:var(--neon-orange)}
+        .routebook-gallery{margin-top:50px}
+
+        footer{background:#1d1d1f;padding:60px 20px;text-align:center;position:relative;z-index:1}
+        .footer-logo{font-family:'Orbitron',monospace;font-size:1.8rem;font-weight:900;background:linear-gradient(90deg,var(--neon-cyan),var(--neon-magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px}
+        .footer-text{color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:20px}
+        .footer-neon{font-family:'Orbitron',monospace;font-size:.78rem;color:var(--neon-cyan);text-shadow:0 0 10px var(--neon-cyan);letter-spacing:4px}
+
+        .reveal{opacity:0;transform:translateY(40px);transition:all .8s ease}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+
+        .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.95);display:flex;align-items:center;justify-content:center;z-index:2000;opacity:0;pointer-events:none;transition:opacity .3s}
+        .lightbox.active{opacity:1;pointer-events:auto}
+        .lightbox img{max-width:90%;max-height:90%;border-radius:8px;box-shadow:0 0 50px rgba(0,240,255,.3)}
+        .lightbox-close{position:absolute;top:24px;right:24px;width:44px;height:44px;background:var(--glass-bg);border:1px solid var(--neon-cyan);border-radius:50%;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center}
+        .lightbox-close:hover{background:var(--neon-cyan);transform:rotate(90deg)}
+        .lightbox-close::before,.lightbox-close::after{content:'';position:absolute;width:18px;height:2px;background:var(--neon-cyan)}
+        .lightbox-close:hover::before,.lightbox-close:hover::after{background:var(--dark-bg)}
+        .lightbox-close::before{transform:rotate(45deg)}
+        .lightbox-close::after{transform:rotate(-45deg)}
+
+        /* 汉堡菜单按钮 */
+        .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+        .hamburger span{width:24px;height:2px;background:var(--neon-cyan);transition:all .3s}
+        .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .hamburger.active span:nth-child(2){opacity:0}
+        .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+        /* 响应式布局 */
+        @media(max-width:1024px){
+            .gallery-grid{grid-template-columns:repeat(2,1fr);grid-template-rows:auto}
+            .gallery-hero{grid-column:span 2;grid-row:span 1;aspect-ratio:16/9}
+            .gallery-wide{grid-column:span 2;grid-row:span 1;aspect-ratio:16/9}
+            .gallery-thumb{aspect-ratio:4/3}
+        }
+        @media(max-width:768px){
+            /* 修复顶部溢出 - 添加安全边距 */
+            body{overflow-x:hidden;max-width:100vw;padding-top:env(safe-area-inset-top,0)}
+            nav{padding:12px 16px;padding-left:calc(16px + env(safe-area-inset-left,0));padding-right:calc(16px + env(safe-area-inset-right,0))}
+            .hamburger{display:flex}
+            .nav-links{position:fixed;top:52px;left:0;right:0;background:rgba(10,10,15,.98);flex-direction:column;gap:0;max-height:0;overflow:hidden;transition:max-height .3s;border-top:1px solid rgba(0,240,255,.2)}
+            .nav-links.active{max-height:calc(100vh - 52px);overflow-y:auto}
+            .nav-links li{width:100%;text-align:center}
+            .nav-links a{padding:14px;display:block;border-bottom:1px solid rgba(255,255,255,.05)}
+
+            /* 修复英雄区域溢出 */
+            .hero{padding:80px 12px;min-height:auto;padding-bottom:60px}
+            .glitch-title{font-size:clamp(2rem,8vw,3rem)}
+            .hero-content{max-width:100%;text-align:center}
+
+            /* 数据卡片修复 */
+            .stats-container{gap:10px;padding:0 8px}
+            .stat-item{min-width:100px;padding:12px 8px}
+            .stat-number{font-size:1.4rem}
+            .stat-label{font-size:.7rem}
+
+            /* 修复底部轨迹区域溢出 - 添加安全边距 */
+            .trajectory-section{padding-bottom:calc(60px + env(safe-area-inset-bottom,0))}
+            .trajectory-section .section-title{display:block;text-align:center;margin-left:auto;margin-right:auto;padding:0 10px}
+            .trajectory-container{padding:0 8px;max-width:100%}
+            .trajectory-wrapper{padding:8px;border-radius:12px;margin:0 auto}
+            #trajectory-canvas{max-width:100%;height:auto}
+            .trajectory-legend{font-size:.7rem;gap:10px;padding:0 8px;flex-wrap:wrap;justify-content:center}
+            .trajectory-controls{flex-wrap:wrap;gap:8px;padding-bottom:env(safe-area-inset-bottom,0)}
+
+            section{padding:50px 12px;padding-bottom:calc(50px + env(safe-area-inset-bottom,0))}
+            .section-title{font-size:clamp(1.3rem,5vw,2rem);white-space:normal}
+
+            .gallery-grid{grid-template-columns:1fr;grid-template-rows:auto}
+            .gallery-hero,.gallery-wide{grid-column:span 1;aspect-ratio:4/3}
+            .gallery-thumb{aspect-ratio:4/3}
+            .checkpoints-grid{grid-template-columns:1fr;padding:0}
+            .timeline::before{left:20px}
+            .timeline-item{width:100%;padding-left:50px;padding-right:0;text-align:left}
+            .timeline-item:nth-child(odd){text-align:left}
+            .timeline-item:nth-child(odd) .timeline-dot{left:-10px;right:auto}
+            .timeline-item:nth-child(even) .timeline-dot{left:-10px}
+            .timeline-item:nth-child(even){margin-left:0}
+        }
+    </style>
+</head>
+<body>
+    <div class="loader hidden" id="loader"><div style="text-align:center"><div class="loader-spinner"></div><div class="loader-text">INITIALIZING...</div></div></div>
+    <div class="cyber-grid"></div>
+    <div class="scanlines"></div>
+    <!-- 粒子系统已禁用以节省CPU -->
+    <div class="particles" id="particles"></div>
+
+    <nav><div class="nav-content">
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="logo">骑闯天路</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#hero" onclick="closeMenu()">首页</a></li>
+            <li><a href="#trajectory" onclick="closeMenu()">轨迹</a></li>
+            <li><a href="#route" onclick="closeMenu()">路线</a></li>
+            <li><a href="#detail" onclick="closeMenu()">详情</a></li>
+            <li><a href="#timeline" onclick="closeMenu()">时间线</a></li>
+            <li><a href="#winners" onclick="closeMenu()">荣耀</a></li>
+            <li><a href="#routebook" onclick="closeMenu()">路书</a></li>
+            <li><a href="#gallery" onclick="closeMenu()">图集</a></li>
+        </ul>
+    </div></nav>
+
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div><div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="glitch-title" data-text="骑闯天路"><span class="main-text">骑闯天路</span></h1>
+            <p class="hero-subtitle">2017 VAUDE 骑闯天路资格赛 · 深圳站 — 经典路线复刻计划</p>
+            <p class="hero-year">2017.05.07 · 深圳大鹏 · 赛博朋克纪念版</p>
+            <p class="hero-riders">骑行者：狮王李 | 副驾：代码狮王 | 目标：致敬极限精神</p>
+            <div class="stats-container">
+                <div class="stat-item"><div class="stat-number">131.4</div><div class="stat-label">公里路程</div></div>
+                <div class="stat-item"><div class="stat-number">3,121</div><div class="stat-label">总爬升 m</div></div>
+                <div class="stat-item"><div class="stat-number">8h45m</div><div class="stat-label">预计耗时</div></div>
+                <div class="stat-item"><div class="stat-number">6</div><div class="stat-label">打卡站点</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="trajectory-section" id="trajectory">
+        <h2 class="section-title reveal">动态骑行轨迹</h2>
+        <p class="reveal" style="text-align:center;color:rgba(255,255,255,.55);max-width:700px;margin:-30px auto 40px;font-size:.92rem">
+            基于行者路书#1387571 GPS坐标（WGS-84）映射，沿大鹏半岛真实道路轨迹移动
+        </p>
+        <div class="trajectory-container">
+            <div class="trajectory-wrapper reveal visible">
+                <!-- 路线图背景层 - 透明叠加效果 -->
+                <div class="route-map-layer"></div>
+                <canvas id="trajectory-canvas" width="1100" height="770"></canvas>
+            </div>
+            <div class="trajectory-legend reveal visible" style="font-size:28px;">
+                <div class="legend-item"><div class="legend-dot" style="background:#ff2244"></div>骑行轨迹</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--neon-cyan)"></div>大鹏半岛</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--neon-magenta)"></div>6个打卡点</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--neon-yellow)"></div>当前位置</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--neon-green)"></div>海拔曲线</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--neon-orange)"></div>一级虐点</div>
+            </div>
+            <div class="trajectory-controls reveal visible">
+                <button class="cyber-btn active" id="btn-play" onclick="togglePlay()">PAUSE</button>
+                <button class="cyber-btn" id="btn-speed" onclick="cycleSpeed()">1x</button>
+                <button class="cyber-btn" onclick="resetAnim()">RESET</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="route-section" id="route">
+        <h2 class="section-title reveal">6大打卡站点</h2>
+        <div class="checkpoints-grid">
+            <div class="checkpoint-card"><span class="checkpoint-number">01</span><div class="checkpoint-icon">🏁</div><h3 class="checkpoint-title">满京华艺术村（起点/终点）</h3><p class="checkpoint-desc">位于深圳大鹏，满京华艺象ID TOWN国际艺术区（葵鹏路106号）。600多名骑行爱好者集结于此，131.4公里的极限挑战从这里开始。</p><div class="checkpoint-coord">GPS: 22.580°N, 114.475°E</div></div>
+            <div class="checkpoint-card"><span class="checkpoint-number">02</span><div class="checkpoint-icon">🌊</div><h3 class="checkpoint-title">鹅公湾度假村入口</h3><p class="checkpoint-desc">第一折返点。沿海爬升路段，欣赏南澳世纪海景。海风与挑战并存，需要补水 + 盐丸，检查胎压。</p><span class="checkpoint-challenge">一级虐点：富民路往鹅公湾</span><div class="checkpoint-coord">GPS: 22.488°N, 114.495°E</div></div>
+            <div class="checkpoint-card"><span class="checkpoint-number">03</span><div class="checkpoint-icon">🏝️</div><h3 class="checkpoint-title">西涌观景台</h3><p class="checkpoint-desc">山海交界处，碧波荡漾的大海与广阔沙滩。能量棒×1，电解质水500ml。</p><span class="checkpoint-challenge">一级虐点：西涌返南西公路</span><div class="checkpoint-coord">GPS: 22.479°N, 114.543°E</div></div>
+            <div class="checkpoint-card"><span class="checkpoint-number">04</span><div class="checkpoint-icon">⛰️</div><h3 class="checkpoint-title">杨梅坑海滨观景台</h3><p class="checkpoint-desc">海岸线疾驰，最后一个有壮丽海景的补给点。快速碳水（面包/能量饼），补水。</p><div class="checkpoint-coord">GPS: 22.548°N, 114.555°E</div></div>
+            <div class="checkpoint-card"><span class="checkpoint-number">05</span><div class="checkpoint-icon">🌲</div><h3 class="checkpoint-title">坝光坝核公路</h3><p class="checkpoint-desc">深入山径，原始森林气息，重峦叠嶂。全面补给：水、电解质、能量胶×2。</p><span class="checkpoint-challenge">一级虐点：葵坝路往径心水库</span><div class="checkpoint-coord">GPS: 22.610°N, 114.505°E</div></div>
+            <div class="checkpoint-card"><span class="checkpoint-number">06</span><div class="checkpoint-icon">🏆</div><h3 class="checkpoint-title">凯旋 · 满京华艺术村</h3><p class="checkpoint-desc">返回起点，完成131.4km极限挑战。拉伸恢复，高蛋白补给。致敬每一位在路上的勇者！</p><span class="checkpoint-challenge">一级虐点：葵坝路返程</span><div class="checkpoint-coord">GPS: 22.580°N, 114.475°E</div></div>
+        </div>
+    </section>
+
+    <section class="detail-section" id="detail">
+        <h2 class="section-title reveal">赛道详情</h2>
+        <div class="detail-grid">
+            <div class="detail-card reveal"><h3>路线概览</h3><p><strong>起点/终点</strong>：满京华艺术村<br><strong>全程距离</strong>：131.4 km<br><strong>总海拔爬升</strong>：3,121 m<br><strong>预计耗时</strong>：8小时45分钟<br><strong>难度评级</strong>：虐</p></div>
+            <div class="detail-card reveal"><h3>赛道分段</h3><ol><li>葵涌启程 → 鹅公湾（沿海爬升）</li><li>同富 → 西涌（山海交界）</li><li>西涌 → 杨梅坑（海岸线疾驰）</li><li>杨梅坑 → 坝光（深入山径）</li><li>终极返程 → 满京华（意志考验）</li></ol></div>
+            <div class="detail-card reveal"><h3>补给策略</h3><table class="supply-table"><thead><tr><th>打卡点</th><th>补给内容</th></tr></thead><tbody><tr><td>起点</td><td>能量胶×3, 水750ml, 香蕉×1</td></tr><tr><td>鹅公湾</td><td>补水+盐丸, 检查胎压</td></tr><tr><td>西涌</td><td>能量棒×1, 电解质水500ml</td></tr><tr><td>杨梅坑</td><td>快速碳水, 补水</td></tr><tr><td>坝光</td><td>全面补给: 水/电解质/能量胶×2</td></tr><tr><td>终点</td><td>拉伸恢复, 高蛋白补给</td></tr></tbody></table></div>
+            <div class="detail-card reveal"><h3>行前准备</h3><ul><li>确认具体出发日期</li><li>检查天气预报（沿海风力与降雨）</li><li>检查车辆状态（刹车、轮胎、链条）</li><li>准备应急包（备用内胎、打气筒、工具组、急救包）</li></ul></div>
+        </div>
+    </section>
+
+    <!-- 赛程时间线 -->
+    <section class="timeline-section" id="timeline">
+        <h2 class="section-title reveal">赛程时间线</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3 class="timeline-title">05:30 - 06:50 签到集结</h3>
+                    <p class="timeline-text">参赛选手在满京华艺象ID TOWN国际艺术区签到，领取物资，检查装备</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3 class="timeline-title">07:00 发枪开赛</h3>
+                    <p class="timeline-text">骑闯组与大众组同时发枪，131.4公里的极限挑战正式开始</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3 class="timeline-title">09:30 第一集团冲刺</h3>
+                    <p class="timeline-text">精英选手已完成鹅公湾折返点，继续向下一站进发</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3 class="timeline-title">11:00 穿越山海</h3>
+                    <p class="timeline-text">选手们正在西涌与杨梅坑之间穿梭，克服最艰难的海拔爬升</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3 class="timeline-title">11:30 冠军诞生</h3>
+                    <p class="timeline-text">李祥以4小时28分冲过终点线，荣获骑闯组冠军</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3 class="timeline-title">15:45 关门时间</h3>
+                    <p class="timeline-text">最后一位完赛选手在关门时间前18分钟惊险完赛，13岁小将林楚栋创造奇迹</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 荣耀时刻 -->
+    <section class="winners-section" id="winners">
+        <h2 class="section-title reveal">荣耀时刻</h2>
+        <p class="reveal" style="text-align:center;color:rgba(255,255,255,.6);max-width:700px;margin:0 auto 50px;font-size:.95rem">
+            2017 VAUDE 骑闯天路资格赛 · 深圳站 · 颁奖台
+        </p>
+        <div class="winners-grid">
+            <div class="winner-card winner-champion">
+                <div class="winner-badge">🥇</div>
+                <div class="winner-medal"></div>
+                <img src="imgs/winner1.jpg" alt="冠军李祥" class="winner-img">
+                <h3 class="winner-name">李祥</h3>
+                <div class="winner-time">04:28:00</div>
+                <div class="winner-team">SPEEDX车队</div>
+                <div class="winner-desc">以绝对实力夺冠，书写骑闯天路传奇</div>
+            </div>
+            <div class="winner-card winner-second">
+                <div class="winner-badge">🥈</div>
+                <img src="imgs/winner1.jpg" alt="亚军赵强" class="winner-img">
+                <h3 class="winner-name">赵强</h3>
+                <div class="winner-time">04:29:00</div>
+                <div class="winner-team">个人选手</div>
+                <div class="winner-desc">仅以1分钟之差惜败，展现顽强斗志</div>
+            </div>
+            <div class="winner-card winner-third">
+                <div class="winner-badge">🥉</div>
+                <img src="imgs/winner2.jpg" alt="季军刘潘辉/黄海林" class="winner-img">
+                <h3 class="winner-name">刘潘辉 / 黄海林</h3>
+                <div class="winner-time">04:30:00</div>
+                <div class="winner-team">并列第三</div>
+                <div class="winner-desc">并列第三名，携手冲线的兄弟情谊</div>
+            </div>
+        </div>
+        <div class="champion-quote reveal">
+            <p>"每一米都濒临绝境，每一步都是超越。骑闯天路，不仅是一场比赛，更是对自我的挑战。"</p>
+            <span>—— 冠军 李祥</span>
+        </div>
+    </section>
+
+    <!-- 骑行路书 -->
+    <section class="routebook-section" id="routebook">
+        <h2 class="section-title reveal">骑行路书</h2>
+        <div class="routebook-container">
+            <div class="routebook-intro reveal">
+                <h3>路书概述</h3>
+                <p>基于行者路书 #1387571，2017 VAUDE 骑闯天路资格赛·深圳站完整路线。全程 131.4 公里，总爬升 3,121 米，途经大鹏半岛最美海岸线与最虐爬坡路段。</p>
+            </div>
+
+            <div class="routebook-stage reveal">
+                <h4>第一赛段：葵涌启程 → 鹅公湾（沿海爬升）</h4>
+                <p><strong>路线：</strong>满京华艺术村 → 葵鹏路|S360 → 迭福路 → S360 → 迎宾路 → 葵南路 → 水头路 → 坪西路|S359 → 海滨北路|S359 → 同富路 → 富民路</p>
+                <p><strong>折返点：</strong>鹅公湾度假村入口</p>
+                <p><strong>关键挑战：</strong>富民路往鹅公湾路段（一级虐点）</p>
+                <p><strong>补给建议：</strong>能量胶×3，水750ml，香蕉×1 → 补水+盐丸，检查胎压</p>
+            </div>
+
+            <div class="routebook-stage reveal">
+                <h4>第二赛段：同富 → 西涌（山海交界）</h4>
+                <p><strong>路线：</strong>富民路 → 同富路 → 南西公路|S359</p>
+                <p><strong>折返点：</strong>西涌观景台</p>
+                <p><strong>关键挑战：</strong>西涌返南西公路（一级虐grinding点）</p>
+                <p><strong>补给建议：</strong>能量棒×1，电解质水500ml</p>
+            </div>
+
+            <div class="routebook-stage reveal">
+                <h4>第三赛段：西涌 → 杨梅坑（海岸线疾驰）</h4>
+                <p><strong>路线：</strong>南西公路|S359 → 新丰路 → 新大路|X260 → 新东路|S260</p>
+                <p><strong>折返点：</strong>杨梅坑滨海度假中心公交站对面海滨观景台</p>
+                <p><strong>补给建议：</strong>快速碳水（面包/能量饼），补水</p>
+            </div>
+
+            <div class="routebook-stage reveal">
+                <h4>第四赛段：杨梅坑 → 坝光（深入山径）</h4>
+                <p><strong>路线：</strong>新东路|S260 → 新大路|S260 → 葵南路 → 迎宾路 → S360 → 迭福路 → 葵鹏路|S360 → 金业大道 → 银葵路 → 葵坝公路 → 坝核公路</p>
+                <p><strong>折返点：</strong>坝光坝核公路网大前网路口</p>
+                <p><strong>关键挑战：</strong>葵坝路往坝光之径心水库路段（一级虐点）</p>
+                <p><strong>补给建议：</strong>全面补给：水、电解质、能量胶×2</p>
+            </div>
+
+            <div class="routebook-stage reveal">
+                <h4>第五赛段：终极返程 → 满京华（意志考验）</h4>
+                <p><strong>路线：</strong>坝核公路 → 葵坝公路 → 银葵路 → 金业大道 → 葵鹏路|S360 → 满京华艺术村</p>
+                <p><strong>关键挑战：</strong>葵坝路返葵涌之径心水库路段（一级虐点）</p>
+                <p><strong>补给建议：</strong>终点补给：拉伸恢复，高蛋白补给</p>
+            </div>
+
+            <!-- 赛事图集 -->
+            <div class="routebook-gallery reveal" id="gallery">
+                <h3 style="color:var(--neon-cyan);margin:40px 0 20px;font-size:1.3rem">赛事图集</h3>
+                <div class="gallery-grid" id="gallery-grid">
+                    <!-- 骑行路线图 -->
+                    <div class="gallery-item gallery-wide reveal">
+                        <img src="imgs/route-map.jpg" alt="2017骑闯天路资格赛深圳站" loading="lazy">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">路线</span>
+                            <span class="gallery-caption">2017 · 骑闯天路资格赛深圳站</span>
+                        </div>
+                    </div>
+
+                    <!-- 英雄区 - 雪景骑行 -->
+                    <div class="gallery-item gallery-hero reveal">
+                        <img src="imgs/qichuangtianlu-sichuan-tibet-highway-cycling-snow.jpg" alt="影像志 · 骑闯天路的九九八十一难" loading="lazy">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">雪域</span>
+                            <span class="gallery-caption">影像志 · 骑闯天路的九九八十一难</span>
+                        </div>
+                    </div>
+
+                    <!-- 冠军1 -->
+                    <div class="gallery-item gallery-thumb reveal">
+                        <img src="imgs/winner1.jpg" alt="冠军咬奖牌庆祝" loading="lazy">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">冠军</span>
+                            <span class="gallery-caption">冠军时刻 · 咬住荣誉，致敬极限</span>
+                        </div>
+                    </div>
+
+                    <!-- 冲刺瞬间 -->
+                    <div class="gallery-item gallery-thumb reveal">
+                        <img src="imgs/tibetan-challenge-2017-bicycle-race-action.jpg" alt="VAUDE 318川藏赛冲刺" loading="lazy">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">冲刺</span>
+                            <span class="gallery-caption">冲刺时刻 · 荧光绿席卷终点</span>
+                        </div>
+                    </div>
+
+                    <!-- 赛事全景 -->
+                    <div class="gallery-item gallery-thumb reveal">
+                        <img src="imgs/vaude-2017-ride-across-the-sky-road-cycling-event.jpg" alt="2017骑闯天路赛事全景" loading="lazy">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">全景</span>
+                            <span class="gallery-caption">赛事盛况 · 骑闯天路2017深圳站</span>
+                        </div>
+                    </div>
+
+                    <!-- 横幅区 - 俯拍车队 -->
+                    <div class="gallery-item gallery-wide reveal">
+                        <img src="imgs/ride-through-the-sky-road-2017-cycling-race.jpg" alt="俯拍骑行队伍穿越山野" loading="lazy">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">赛事</span>
+                            <span class="gallery-caption">骑行大军 · 成群结队穿越山野</span>
+                        </div>
+                    </div>
+
+                    <!-- 休息骑行者 -->
+                    <div class="gallery-item gallery-thumb reveal">
+                        <img src="imgs/qi-chuang-tian-lu-2017-cycling-race-athlete.jpg" alt="VAUDE骑行服骑行者休息" loading="lazy">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">纪实</span>
+                            <span class="gallery-caption">休整时刻 · 疲惫与坚持交织</span>
+                        </div>
+                    </div>
+
+                    <!-- G318背景墙 -->
+                    <div class="gallery-item gallery-thumb reveal">
+                        <img src="imgs/vaude-g318-cycling-race-2017-athletes-backdrop.jpg" alt="G318川藏自行车极限赛背景墙" loading="lazy">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">背景</span>
+                            <span class="gallery-caption">G318 · 川藏自行车极限赛</span>
+                        </div>
+                    </div>
+
+                    <!-- 冠军2 -->
+                    <div class="gallery-item gallery-thumb reveal">
+                        <img src="imgs/winner1.jpg" alt="冠军咬奖牌特写" loading="lazy">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">冠军</span>
+                            <span class="gallery-caption">巅峰时刻 · 另一视角的冠军荣耀</span>
+                        </div>
+                    </div>
+
+                    <!-- 庆祝时刻 -->
+                    <div class="gallery-item gallery-thumb reveal">
+                        <img src="imgs/winner2.jpg" alt="选手与伴侣庆祝G318川藏赛" loading="lazy">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">庆典</span>
+                            <span class="gallery-caption">胜利时刻 · 五彩经幡下的荣耀</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">骑闯天路 · 2017 赛博纪念版</div>
+        <p class="footer-text">致敬每一位在路上的勇者 · 代码狮王全程在线护航</p>
+        <p class="footer-neon">每一米都濒临绝境 · 每一步都是超越</p>
+    </footer>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()"><div class="lightbox-close"></div><img src="https://kyzv5635w9sh.space.minimaxi.com/" alt="预览" id="lightbox-img"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ===== Particles ===== */
+function initParticles(){
+    const c=document.getElementById('particles');
+    const colors=['var(--neon-cyan)','var(--neon-magenta)','var(--neon-yellow)'];
+    for(let i=0;i<35;i++){
+        const p=document.createElement('div');p.className='particle';
+        p.style.left=Math.random()*100+'%';
+        p.style.setProperty('--delay',(Math.random()*15)+'s');
+        p.style.setProperty('--dur',(10+Math.random()*10)+'s');
+        if(Math.random()>.5){p.style.background=colors[1];p.style.boxShadow='0 0 10px '+colors[1]}
+        c.appendChild(p);
+    }
+}
+
+window.addEventListener('load',()=>{
+    // initParticles(); // 已禁用以节省CPU
+    setTimeout(()=>document.getElementById('loader').classList.add('hidden'),1200);
+});
+
+/* ===== Scroll Reveal ===== */
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.15});
+document.querySelectorAll('.reveal,.checkpoint-card,.timeline-item').forEach(el=>obs.observe(el));
+
+/* ===== Lightbox ===== */
+window.openLightbox=function(el){document.getElementById('lightbox-img').src=el.querySelector('img').src;document.getElementById('lightbox').classList.add('active')};
+window.closeLightbox=function(){document.getElementById('lightbox').classList.remove('active')};
+
+/* ===== Mobile Menu ===== */
+window.toggleMenu=function(){document.querySelector('.hamburger').classList.toggle('active');document.getElementById('navLinks').classList.toggle('active')};
+window.closeMenu=function(){document.querySelector('.hamburger').classList.remove('active');document.getElementById('navLinks').classList.remove('active')};
+
+/* ===== Gallery ===== */
+/* 动态图集项目已禁用 - 用户要求删除 */
+document.querySelectorAll('.gallery-item').forEach(el=>obs.observe(el));
+
+/* ===================================================================
+   TRAJECTORY ENGINE - 基于行者路书#1387571坐标数据
+   路书: 2017VAUDE骑闯天路资格赛·深圳站
+   距离: 131.4km | 爬升: 3121m
+
+   地图方向: 上北、下南、左西、右东
+   半岛地理分布:
+     - 满京华: 西北部(起点/终点)
+     - 坝光: 东北端
+     - 杨梅坑: 东海岸
+     - 西涌: 最南端
+     - 鹅公湾: 西海岸
+   =================================================================== */
+
+const canvas=document.getElementById('trajectory-canvas');
+const ctx=canvas.getContext('2d');
+const CW=canvas.width, CH=canvas.height;
+
+// 大鹏半岛海岸线轮廓 (扩展包含西涌) - 右移160px居中，下移60px
+const coastPts=[
+    // 北岸
+    {x:304,y:140},{x:360,y:128},{x:424,y:116},{x:496,y:108},{x:576,y:104},
+    {x:656,y:104},{x:736,y:108},{x:800,y:120},{x:856,y:136},{x:904,y:156},
+    // 东海岸 (大亚湾)
+    {x:944,y:180},{x:976,y:208},{x:1000,y:240},{x:1016,y:276},
+    {x:1024,y:316},{x:1020,y:360},{x:1008,y:400},{x:992,y:440},
+    {x:968,y:476},{x:936,y:504},{x:896,y:528},{x:848,y:548},
+    // 南端 (南海) - 扩展到西涌
+    {x:792,y:560},{x:728,y:568},{x:656,y:570},{x:576,y:568},
+    {x:496,y:562},{x:416,y:552},{x:344,y:536},{x:288,y:516},
+    {x:240,y:500},{x:210,y:530},{x:200,y:570},{x:215,y:604},  // 西涌区域
+    // 西海岸 (大鹏湾)
+    {x:248,y:484},{x:228,y:444},{x:220,y:400},{x:224,y:356},
+    {x:236,y:312},{x:252,y:268},{x:272,y:228},{x:288,y:188},
+    {x:304,y:140}
+];
+
+// 路书完整路径点 - 基于行者路书#1387571 GPS数据 (80%缩放)
+// 6个打卡点: 满京华(起点)→鹅公湾→西涌→杨梅坑→坝光→满京华(终点)
+const wp=[
+    // ─── 第一段: 满京华→鹅公湾 ───
+    {x:144,y:96, name:'满京华艺术村',  km:0,   elev:35,  isCheck:1, road:'起点',      gps:'22.580°N, 114.475°E', checkName:'满京华艺术村'},
+    {x:176,y:124, name:'葵鹏路',        km:2,   elev:42,  road:'S360',                gps:'22.575°N, 114.478°E'},
+    {x:216,y:156, name:'葵涌',          km:5,   elev:58,  road:'S360',                gps:'22.568°N, 114.480°E'},
+    {x:256,y:192, name:'迭福路',        km:8,   elev:108, road:'S360',                gps:'22.558°N, 114.482°E'},
+    {x:296,y:228, name:'S360',          km:11,  elev:152, road:'S360',                gps:'22.548°N, 114.485°E'},
+    {x:336,y:256, name:'S360南',        km:13,  elev:130, road:'S360',                gps:'22.540°N, 114.488°E'},
+    {x:304,y:296, name:'迎宾路',        km:16,  elev:95,  road:'S360→S359',           gps:'22.535°N, 114.492°E'},
+    {x:264,y:328, name:'葵南路',        km:18,  elev:62,  road:'S359',                gps:'22.530°N, 114.498°E'},
+    {x:224,y:360, name:'水头路',        km:21,  elev:38,  road:'S359',                gps:'22.525°N, 114.503°E'},
+    {x:184,y:392, name:'坪西路',        km:24,  elev:28,  road:'S359',                gps:'22.518°N, 114.508°E'},
+    {x:148,y:420, name:'海滨北路',      km:27,  elev:22,  road:'S359',                gps:'22.512°N, 114.512°E'},
+    {x:124,y:440, name:'同富路',        km:30,  elev:25,  road:'S359',                gps:'22.508°N, 114.514°E'},
+    {x:100,y:408, name:'富民路',        km:33,  elev:55,  challenge:true, road:'一级虐点',             gps:'22.505°N, 114.510°E'},
+    {x:76,y:388, name:'鹅公湾',         km:36,  elev:12,  isCheck:2, road:'折返点①',  gps:'22.488°N, 114.495°E', checkName:'鹅公湾'},
+
+    // ─── 第二段: 鹅公湾→西涌 ───
+    {x:100,y:408, name:'富民路返',      km:39,  elev:55,  road:'S359',                gps:'22.495°N, 114.500°E'},
+    {x:124,y:440, name:'同富路',        km:41,  elev:25,  road:'S359',                gps:'22.500°N, 114.505°E'},
+    {x:108,y:460, name:'南西公路',      km:44,  elev:48,  road:'S359',                gps:'22.492°N, 114.512°E'},
+    {x:92,y:480, name:'S359沿海',      km:47,  elev:75,  road:'S359',                gps:'22.488°N, 114.520°E'},
+    {x:80,y:500, name:'南西公路',      km:50,  elev:55,  road:'S359',                gps:'22.483°N, 114.530°E'},
+    {x:72,y:524, name:'西涌入口',      km:53,  elev:35,  road:'S359',                gps:'22.480°N, 114.540°E'},
+    {x:68,y:544, name:'西涌',           km:57,  elev:8,   isCheck:3, road:'折返点②',  gps:'22.479°N, 114.543°E', checkName:'西涌'},
+
+    // ─── 第三段: 西涌→杨梅坑 (海岸线疾驰) ───
+    // 西涌向西北→南澳→东西涌路口→新大路(X260)→新东路(S260)→杨梅坑
+    // 路线: 南西公路|S359 → 新丰路 → 新大路|X260 → 新东路|S260
+    {x:72,y:520, name:'西涌返程',      km:60,  elev:45,  challenge:true, road:'一级虐点',         gps:'22.483°N, 114.538°E'},
+    {x:88,y:496, name:'新丰路',        km:62,  elev:52,  road:'新丰路',               gps:'22.488°N, 114.532°E'},
+    {x:104,y:472, name:'南澳社区',      km:64,  elev:48,  road:'新丰路→X260',        gps:'22.493°N, 114.525°E'},
+    {x:128,y:448, name:'东西涌路口',    km:66,  elev:42,  road:'X260入口',            gps:'22.498°N, 114.518°E'},
+    {x:160,y:424, name:'新大路北',      km:68,  elev:38,  road:'X260',                gps:'22.502°N, 114.512°E'},
+    {x:208,y:400, name:'新大村',        km:70,  elev:32,  road:'X260',                gps:'22.508°N, 114.515°E'},
+    {x:272,y:376, name:'新大市场',      km:72,  elev:28,  road:'X260→S260',          gps:'22.514°N, 114.522°E'},
+    {x:336,y:352, name:'新东路',        km:75,  elev:22,  road:'S260',                gps:'22.520°N, 114.530°E'},
+    {x:400,y:328, name:'东山码头',      km:78,  elev:18,  road:'S260',                gps:'22.528°N, 114.540°E'},
+    {x:480,y:304, name:'桔钓沙',        km:81,  elev:15,  road:'S260',                gps:'22.535°N, 114.548°E'},
+    {x:560,y:284, name:'鹿嘴山庄',      km:83,  elev:12,  road:'S260',                gps:'22.542°N, 114.553°E'},
+    {x:624,y:272, name:'杨梅坑',        km:84,  elev:12,  isCheck:4, road:'折返点③',  gps:'22.548°N, 114.555°E', checkName:'杨梅坑'},
+
+    // ─── 第四段: 杨梅坑→坝光 ───
+    {x:624,y:248, name:'杨梅坑返',      km:87,  elev:18,  road:'S260',                gps:'22.550°N, 114.552°E'},
+    {x:576,y:224, name:'新大路西',      km:90,  elev:35,  road:'S260→S359',           gps:'22.555°N, 114.540°E'},
+    {x:520,y:208, name:'葵南路',        km:93,  elev:55,  road:'S359→葵涌',           gps:'22.558°N, 114.525°E'},
+    {x:464,y:200, name:'迎宾路',        km:96,  elev:75,  road:'S360',                gps:'22.560°N, 114.510°E'},
+    {x:408,y:188, name:'S360',          km:99,  elev:95,  road:'S360',                gps:'22.565°N, 114.498°E'},
+    {x:360,y:168, name:'迭福路',        km:102, elev:118, road:'S360',                gps:'22.570°N, 114.488°E'},
+    {x:320,y:140, name:'葵鹏路',        km:105, elev:88,  road:'S360',                gps:'22.575°N, 114.480°E'},
+    {x:384,y:120, name:'金业大道',      km:107, elev:75,  road:'往坝光',               gps:'22.580°N, 114.483°E'},
+    {x:448,y:104, name:'银葵路',        km:109, elev:70,  road:'葵坝公路',             gps:'22.585°N, 114.488°E'},
+    {x:520,y:92, name:'葵坝公路',      km:111, elev:95,  road:'葵坝公路',             gps:'22.592°N, 114.493°E'},
+    {x:584,y:104, name:'径心水库',      km:113, elev:265, challenge:true, road:'一级虐点', gps:'22.598°N, 114.498°E'},
+    {x:640,y:92, name:'坝核公路',      km:115, elev:210, road:'坝光方向',             gps:'22.604°N, 114.502°E'},
+    {x:704,y:76, name:'坝核公路北',    km:118, elev:170, road:'坝核公路',             gps:'22.608°N, 114.504°E'},
+    {x:760,y:64, name:'坝光',           km:120, elev:145, isCheck:5, road:'折返点④',  gps:'22.610°N, 114.505°E', checkName:'坝光'},
+
+    // ─── 第五段: 坝光→满京华 ───
+    {x:720,y:76, name:'坝光返程',      km:122, elev:155, road:'葵坝公路',             gps:'22.605°N, 114.500°E'},
+    {x:648,y:92, name:'径心水库返',  km:124, elev:265, challenge:true, road:'一级虐点', gps:'22.598°N, 114.492°E'},
+    {x:576,y:104, name:'葵坝公路',      km:126, elev:120, road:'葵坝公路',             gps:'22.590°N, 114.485°E'},
+    {x:504,y:116, name:'银葵路',        km:128, elev:72,  road:'返程',                 gps:'22.582°N, 114.480°E'},
+    {x:432,y:132, name:'金业大道',      km:129, elev:65,  road:'返程',                 gps:'22.578°N, 114.477°E'},
+    {x:360,y:148, name:'葵鹏路',        km:130, elev:50,  road:'S360',                gps:'22.576°N, 114.476°E'},
+    {x:280,y:128, name:'葵鹏路北',      km:131, elev:42,  road:'S360',                gps:'22.578°N, 114.475°E'},
+    {x:144,y:96, name:'满京华终点',   km:131.4,elev:35, isCheck:6, road:'终点',      gps:'22.580°N, 114.475°E', checkName:'终点'}
+];
+
+const route=wp;
+const N=route.length;
+const maxElev=300;
+
+// 轨迹整体右移居中 (+160px偏移) + 往下移避免被海拔图遮挡 (+60px)
+route.forEach(p=>{p.x+=160;p.y+=60;});
+
+// 6个打卡点数据
+const checkpoints=[
+    {km:0, name:'满京华艺术村', elev:35, color:'#00f0ff'},
+    {km:36, name:'鹅公湾', elev:12, color:'#ff00ff'},
+    {km:57, name:'西涌', elev:8, color:'#ff00ff'},
+    {km:84, name:'杨梅坑', elev:12, color:'#ff00ff'},
+    {km:120, name:'坝光', elev:145, color:'#ff00ff'},
+    {km:131.4, name:'满京华终点', elev:35, color:'#00f0ff'}
+];
+
+// 最高海拔点
+const maxElevPoint={km:113, elev:265, name:'径心水库'};
+
+let progress=0, playing=true, speed=1, lastTime=0;
+
+/* ===== 性能优化：帧率控制 ===== */
+const TARGET_FRAME_INTERVAL = 1000 / 30; // 降至30fps以节省CPU
+let lastFrameTime = 0;
+
+/* ===== 性能优化：脉冲值缓存 ===== */
+let pulseValue = 0.7;
+let fastPulseValue = 0.6;
+let pulseFrameCounter = 0;
+
+function updatePulseValues() {
+    if (++pulseFrameCounter >= 10) {
+        pulseFrameCounter = 0;
+        pulseValue = 0.4 + Math.random() * 0.4;
+        fastPulseValue = 0.3 + Math.random() * 0.5;
+    }
+}
+
+function togglePlay(){playing=!playing;const b=document.getElementById('btn-play');b.textContent=playing?'PAUSE':'PLAY';b.classList.toggle('active',playing)}
+function cycleSpeed(){const ss=[1,2,4,.5],ls=['1x','2x','4x','0.5x'];const i=(ss.indexOf(speed)+1)%ss.length;speed=ss[i];document.getElementById('btn-speed').textContent=ls[i]}
+function resetAnim(){progress=0}
+window.togglePlay=togglePlay;window.cycleSpeed=cycleSpeed;window.resetAnim=resetAnim;
+
+function lerp(a,b,t){return a+(b-a)*t}
+
+function posAt(t){
+    const sf=t*(N-1),s=Math.floor(sf),f=sf-s;
+    if(s>=N-1)return{x:route[N-1].x,y:route[N-1].y,km:route[N-1].km,elev:route[N-1].elev,a:0,r:route[N-1].road};
+    const a=route[s],b=route[s+1];
+    return{x:lerp(a.x,b.x,f),y:lerp(a.y,b.y,f),km:lerp(a.km,b.km,f),elev:lerp(a.elev,b.elev,f),a:Math.atan2(b.y-a.y,b.x-a.x),r:a.road};
+}
+
+/* --- DRAW FUNCTIONS --- */
+function drawGrid(){
+    ctx.strokeStyle='rgba(0,240,255,0.03)';ctx.lineWidth=1;
+    for(let x=0;x<CW;x+=50){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,CH);ctx.stroke()}
+    for(let y=0;y<CH;y+=50){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(CW,y);ctx.stroke()}
+}
+
+function drawCoastline(){
+    if(coastPts.length<3)return;
+    ctx.beginPath();
+    coastPts.forEach((p,i)=>{if(i===0)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y)});
+    ctx.closePath();
+    const g=ctx.createRadialGradient(CW*.5,CH*.4,40,CW*.5,CH*.4,CW*.4);
+    g.addColorStop(0,'rgba(0,240,255,0.06)');
+    g.addColorStop(1,'rgba(0,240,255,0.01)');
+    ctx.fillStyle=g;ctx.fill();
+    ctx.strokeStyle='rgba(0,240,255,0.2)';ctx.lineWidth=2;ctx.stroke();
+    ctx.shadowColor='rgba(0,240,255,0.3)';ctx.shadowBlur=8;ctx.stroke();ctx.shadowBlur=0;
+
+    // 海域标注
+    ctx.fillStyle='rgba(0,240,255,0.1)';ctx.font='bold 14px Orbitron,monospace';
+    ctx.fillText('大亚湾',CW*.85,CH*.30);
+    ctx.fillText('大鹏湾',CW*.08,CH*.30);
+    ctx.fillText('南海',CW*.50,CH*.92);
+
+    ctx.fillStyle='rgba(0,240,255,0.15)';ctx.font='bold 13px "Noto Sans SC",sans-serif';
+    ctx.textAlign='center';
+    ctx.fillText('大鹏半岛',CW*.50,CH*.48);
+    ctx.textAlign='left';
+}
+
+function drawRouteFull(){
+    ctx.beginPath();ctx.strokeStyle='rgba(255,34,68,0.15)';ctx.lineWidth=4;
+    route.forEach((p,i)=>{if(i===0)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y)});
+    ctx.stroke();
+}
+
+function drawRouteActive(){
+    const sf=progress*(N-1),s=Math.floor(sf),f=sf-s;
+    ctx.beginPath();
+    const g=ctx.createLinearGradient(route[0].x,0,route[N-1].x,0);
+    g.addColorStop(0,'#ff4466');g.addColorStop(.3,'#ff00ff');g.addColorStop(.6,'#ff2244');g.addColorStop(1,'#ff4466');
+    ctx.strokeStyle=g;ctx.lineWidth=6;ctx.shadowColor='#ff2244';ctx.shadowBlur=20;
+    for(let i=0;i<=s&&i<N;i++){
+        if(i===0)ctx.moveTo(route[i].x,route[i].y);else ctx.lineTo(route[i].x,route[i].y);
+    }
+    if(s<N-1){ctx.lineTo(lerp(route[s].x,route[s+1].x,f),lerp(route[s].y,route[s+1].y,f))}
+    ctx.stroke();ctx.shadowBlur=0;
+
+    // 轨迹光效 - 明亮版
+    for(let i=Math.max(0,s-15);i<=s;i++){
+        const alpha=.3+((i-s+15)/15)*.5;
+        ctx.beginPath();ctx.arc(route[i].x,route[i].y,4,0,Math.PI*2);
+        ctx.fillStyle=`rgba(255,68,102,${alpha})`;ctx.shadowColor='#ff4466';ctx.shadowBlur=8;ctx.fill();
+    }
+    ctx.shadowBlur=0;
+}
+
+function drawCheckpoints(){
+    const curKm=progress*131.4;
+    // 使用缓存的脉冲值以节省CPU
+    const pulse = pulseValue;
+    const fastPulse = fastPulseValue;
+
+    // 绘制打卡点 - 增强版高亮效果
+    route.forEach((p,i)=>{
+        if(!p.isCheck)return;
+        const px=p.x,py=p.y,passed=p.km<=curKm;
+
+        // 第一层: 最外圈脉冲光环(动态)
+        ctx.beginPath();
+        ctx.arc(px,py,28,0,Math.PI*2);
+        ctx.strokeStyle=passed?`rgba(255,0,255,${fastPulse*0.3})`:'rgba(255,0,255,0.1)';
+        ctx.lineWidth=2;
+        ctx.stroke();
+
+        // 第二层: 中间光环
+        ctx.beginPath();
+        ctx.arc(px,py,24,0,Math.PI*2);
+        ctx.strokeStyle=passed?`rgba(255,0,255,${pulse})`:'rgba(255,0,255,0.2)';
+        ctx.lineWidth=2;
+        ctx.stroke();
+
+        // 第三层: 内圈填充
+        ctx.beginPath();
+        ctx.arc(px,py,18,0,Math.PI*2);
+        ctx.fillStyle=passed?'rgba(255,0,255,0.95)':'rgba(255,0,255,0.15)';
+        ctx.fill();
+        if(passed){
+            ctx.shadowColor='#ff00ff';ctx.shadowBlur=25;ctx.fill();ctx.shadowBlur=0
+        }
+
+        // 第四层: 最内层白圈
+        ctx.beginPath();
+        ctx.arc(px,py,8,0,Math.PI*2);
+        ctx.fillStyle='#fff';
+        ctx.fill();
+
+        // 编号
+        ctx.fillStyle=passed?'#ff00ff':'rgba(255,255,255,0.5)';
+        ctx.font='bold 14px Orbitron,monospace';
+        ctx.textAlign='center';ctx.textBaseline='middle';
+        ctx.fillText(p.isCheck,px,py);
+
+        // 标签背景(带渐变边框) - 终点(isCheck:6)显示在下方避免遮盖起点
+        const isEndPoint=p.isCheck===6;
+        const labelY=isEndPoint?py+55:(py-36);
+        const labelText=p.checkName||p.name;
+        ctx.font='bold 12px "Noto Sans SC",sans-serif';
+        const tw=ctx.measureText(labelText).width;
+
+        // 标签框背景
+        ctx.fillStyle=passed?'rgba(10,10,15,0.95)':'rgba(10,10,15,0.7)';
+        ctx.fillRect(px-tw/2-8,labelY-12,tw+16,22);
+
+        // 标签框边框
+        ctx.strokeStyle=passed?'rgba(255,0,255,0.8)':'rgba(255,0,255,0.3)';
+        ctx.lineWidth=1;
+        ctx.strokeRect(px-tw/2-8,labelY-12,tw+16,22);
+
+        // 标签文字
+        ctx.fillStyle=passed?'#fff':'rgba(255,255,255,0.5)';
+        ctx.textAlign='center';
+        ctx.fillText(labelText,px,labelY);
+
+        // 里程标注(带背景) - 终点显示在下方
+        const kmY=isEndPoint?py-15:py+38;
+        ctx.font='11px Orbitron,monospace';
+        const kmText=p.km+'km';
+        const kmW=ctx.measureText(kmText).width;
+        const kmRectY=isEndPoint?py-28:py+26;
+        ctx.fillStyle='rgba(0,240,255,0.9)';
+        ctx.fillRect(px-kmW/2-4,kmRectY,kmW+8,18);
+        ctx.fillStyle='#0a0a0f';
+        ctx.textAlign='center';
+        ctx.fillText(kmText,px,kmY);
+
+        // 打卡点指示箭头 - 终点箭头向下，其他向上
+        if(passed){
+            ctx.beginPath();
+            if(isEndPoint){
+                // 向下箭头
+                ctx.moveTo(px,labelY+18);
+                ctx.lineTo(px-6,labelY+24);
+                ctx.lineTo(px+6,labelY+24);
+            }else{
+                // 向上箭头
+                ctx.moveTo(px,labelY-18);
+                ctx.lineTo(px-6,labelY-24);
+                ctx.lineTo(px+6,labelY-24);
+            }
+            ctx.closePath();
+            ctx.fillStyle='rgba(255,0,255,0.9)';
+            ctx.fill();
+        }
+    });
+
+    // 绘制一级虐点 - 增强版
+    route.forEach(p=>{
+        if(!p.challenge)return;
+        const px=p.x,py=p.y,passed=p.km<=curKm;
+        const cp=Math.sin(Date.now()/200)*0.4+0.6;
+
+        // 外圈脉冲
+        ctx.beginPath();
+        ctx.arc(px,py,22,0,Math.PI*2);
+        ctx.strokeStyle=passed?`rgba(255,107,0,${cp})`:'rgba(255,107,0,0.15)';
+        ctx.lineWidth=2;
+        ctx.stroke();
+
+        // 内圈
+        ctx.beginPath();
+        ctx.arc(px,py,14,0,Math.PI*2);
+        ctx.fillStyle=passed?'rgba(255,107,0,0.95)':'rgba(255,107,0,0.15)';
+        ctx.fill();
+        if(passed){
+            ctx.shadowColor='#ff6b00';ctx.shadowBlur=20;ctx.fill();ctx.shadowBlur=0
+        }
+
+        // 火焰图标
+        ctx.fillStyle='#fff';
+        ctx.font='14px serif';
+        ctx.textAlign='center';ctx.textBaseline='middle';
+        ctx.fillText('🔥',px,py);
+
+        // 标签(双层效果)
+        ctx.font='bold 11px "Noto Sans SC",sans-serif';
+        const labelText='一级虐点';
+        const tw=ctx.measureText(labelText).width;
+        ctx.fillStyle='rgba(10,10,15,0.95)';
+        ctx.fillRect(px-tw/2-6,py+20,tw+12,20);
+        ctx.strokeStyle='rgba(255,107,0,0.6)';
+        ctx.lineWidth=1;
+        ctx.strokeRect(px-tw/2-6,py+20,tw+12,20);
+        ctx.fillStyle='#ff6b00';
+        ctx.textAlign='center';
+        ctx.fillText(labelText,px,py+33);
+    });
+
+    ctx.textAlign='left';ctx.textBaseline='alphabetic';
+}
+
+function drawBike(x,y,angle){
+    ctx.save();ctx.translate(x,y);
+    // 使用缓存的脉冲值以节省CPU
+    const pulse = pulseValue;
+    // 外圈光晕
+    ctx.beginPath();ctx.arc(0,0,22,0,Math.PI*2);
+    ctx.strokeStyle=`rgba(240,240,0,${pulse})`;ctx.lineWidth=3;
+    ctx.stroke();
+    ctx.shadowColor='#f0f000';ctx.shadowBlur=15; // 优化：降低shadowBlur以节省CPU
+    ctx.fillStyle='#f0f000';ctx.font='24px serif';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText('🚴',0,0);ctx.shadowBlur=0;
+    ctx.rotate(angle);
+    ctx.beginPath();ctx.moveTo(20,0);ctx.lineTo(12,-5);ctx.lineTo(12,5);ctx.closePath();
+    ctx.fillStyle='#f0f000';ctx.fill();
+    ctx.restore();
+}
+
+function drawHUD(p){
+    const hx=6,hy=6,hw=134,hh=72;
+    ctx.fillStyle='rgba(10,10,15,0.92)';ctx.fillRect(hx,hy,hw,hh);
+    ctx.strokeStyle='rgba(0,240,255,0.4)';ctx.lineWidth=1;ctx.strokeRect(hx,hy,hw,hh);
+
+    ctx.fillStyle='#00f0ff';ctx.font='bold 9px Orbitron,monospace';ctx.textAlign='left';
+    ctx.fillText('TELEMETRY',hx+5,hy+13);
+
+    const spd=(14+Math.sin(progress*30)*9).toFixed(1);
+    const elapsed=Math.round(progress*525);
+    const hrs=Math.floor(elapsed/60),mins=elapsed%60;
+
+    ctx.fillStyle='#fff';ctx.font='9px "Noto Sans SC",sans-serif';
+    ctx.fillText(`里程:${p.km.toFixed(1)}/131.4km`,hx+5,hy+28);
+    ctx.fillText(`海拔:${p.elev.toFixed(0)}m`,hx+5,hy+42);
+    ctx.fillText(`速度:${spd}km/h`,hx+5,hy+56);
+    ctx.fillText(`耗时:${hrs}h${String(mins).padStart(2,'0')}m`,hx+70,hy+28);
+    ctx.fillText(`#1387571`,hx+70,hy+42);
+
+    const bx=hx+5,by=hy+hh+5,bw=hw-10,bh=4;
+    ctx.fillStyle='rgba(255,255,255,0.08)';ctx.fillRect(bx,by,bw,bh);
+    const bg=ctx.createLinearGradient(bx,0,bx+bw,0);
+    bg.addColorStop(0,'#ff4466');bg.addColorStop(1,'#ff00ff');
+    ctx.fillStyle=bg;ctx.fillRect(bx,by,bw*progress,bh);
+    ctx.fillStyle='rgba(255,255,255,0.5)';ctx.font='8px Orbitron,monospace';
+    ctx.textAlign='right';ctx.fillText((progress*100).toFixed(0)+'%',bx+bw,by-2);ctx.textAlign='left';
+}
+
+function drawElevation(){
+    const cx=30,cy=CH-100,cw=CW-60,ch=60;
+    ctx.fillStyle='rgba(10,10,15,0.85)';ctx.fillRect(cx-6,cy-18,cw+12,ch+30);
+    ctx.strokeStyle='rgba(0,240,255,0.15)';ctx.lineWidth=1;ctx.strokeRect(cx-6,cy-18,cw+12,ch+30);
+
+    ctx.fillStyle='rgba(255,255,255,0.6)';ctx.font='bold 10px Orbitron,monospace';ctx.textAlign='left';
+    ctx.fillText('ELEV (m)',cx,cy-6);
+    ctx.fillText('0km',cx,cy+ch+12);ctx.textAlign='right';ctx.fillText('131.4km',cx+cw,cy+ch+12);
+    ctx.textAlign='left';ctx.fillText('0',cx-16,cy+ch);ctx.fillText(maxElev+'',cx-20,cy+6);
+
+    // 海拔曲线填充
+    ctx.beginPath();
+    for(let i=0;i<N;i++){
+        const px=cx+(route[i].km/131.4)*cw;
+        const py=cy+ch-(Math.min(route[i].elev,maxElev)/maxElev)*ch;
+        if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);
+    }
+    ctx.lineTo(cx+cw,cy+ch);ctx.lineTo(cx,cy+ch);ctx.closePath();
+    const eg=ctx.createLinearGradient(0,cy,0,cy+ch);
+    eg.addColorStop(0,'rgba(0,255,136,0.2)');eg.addColorStop(1,'rgba(0,255,136,0)');
+    ctx.fillStyle=eg;ctx.fill();
+
+    // 海拔曲线 - 明亮版
+    ctx.beginPath();ctx.strokeStyle='rgba(0,255,136,0.8)';ctx.lineWidth=2;
+    for(let i=0;i<N;i++){
+        const px=cx+(route[i].km/131.4)*cw;
+        const py=cy+ch-(Math.min(route[i].elev,maxElev)/maxElev)*ch;
+        if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);
+    }
+    ctx.stroke();
+
+    // 6个打卡点在海拔图上标注 - 紧凑版
+    const curKm=progress*131.4;
+    checkpoints.forEach(cp=>{
+        const px=cx+(cp.km/131.4)*cw;
+        const py=cy+ch-(cp.elev/maxElev)*ch;
+        const passed=cp.km<=curKm;
+
+        // 打卡点标记
+        ctx.beginPath();ctx.arc(px,py,4,0,Math.PI*2);
+        ctx.fillStyle=passed?cp.color:'rgba(255,255,255,0.3)';
+        ctx.fill();
+        if(passed){
+            ctx.shadowColor=cp.color;ctx.shadowBlur=8;ctx.fill();ctx.shadowBlur=0
+        }
+
+        // 连接线
+        ctx.beginPath();
+        ctx.moveTo(px,py);
+        ctx.lineTo(px,cy+ch+1);
+        ctx.strokeStyle=passed?'rgba(255,0,255,0.4)':'rgba(255,255,255,0.1)';
+        ctx.lineWidth=1;ctx.setLineDash([2,2]);ctx.stroke();ctx.setLineDash([]);
+
+        // 打卡点名称标注
+        ctx.font='bold 7px "Noto Sans SC",sans-serif';
+        const nameText=cp.name;
+        const tw=ctx.measureText(nameText).width;
+
+        // 标签背景
+        ctx.fillStyle=passed?'rgba(10,10,15,0.9)':'rgba(10,10,15,0.6)';
+        ctx.fillRect(px-tw/2-2,py-20,tw+4,14);
+
+        // 名称文字
+        ctx.fillStyle=passed?'#fff':'rgba(255,255,255,0.4)';
+        ctx.textAlign='center';
+        ctx.fillText(nameText,px,py-10);
+
+        // 海拔标注
+        ctx.font='9px Orbitron,monospace';
+        ctx.fillStyle=passed?'rgba(0,240,255,0.9)':'rgba(255,255,255,0.4)';
+        ctx.fillText(cp.elev+'m',px,py+14);
+    });
+
+    // 一级虐点标注 - 找出所有challenge点
+    const challengePoints=[
+        {km:33, name:'富民路', elev:55},
+        {km:60, name:'西涌返', elev:45},
+        {km:113, name:'径心水库', elev:265},
+        {km:124, name:'径心水库返', elev:265}
+    ];
+
+    challengePoints.forEach(cp=>{
+        const px=cx+(cp.km/131.4)*cw;
+        const py=cy+ch-(Math.min(cp.elev,maxElev)/maxElev)*ch;
+        const passed=cp.km<=curKm;
+        // 使用缓存的脉冲值以节省CPU
+        const pulse = pulseValue;
+
+        // 外圈脉冲
+        ctx.beginPath();
+        ctx.arc(px,py,7,0,Math.PI*2);
+        ctx.strokeStyle=passed?`rgba(255,107,0,${pulse})`:'rgba(255,107,0,0.25)';
+        ctx.lineWidth=1.5;
+        ctx.stroke();
+
+        // 内圈
+        ctx.beginPath();
+        ctx.arc(px,py,4,0,Math.PI*2);
+        ctx.fillStyle=passed?'#ff6b00':'rgba(255,107,0,0.35)';
+        ctx.fill();
+
+        // 标签
+        const labelText=cp.name;
+        ctx.font='bold 9px "Noto Sans SC",sans-serif';
+        const tw=ctx.measureText(labelText).width;
+        ctx.fillStyle='rgba(10,10,15,0.9)';
+        ctx.fillRect(px-tw/2-2,py-18,tw+4,14);
+        ctx.fillStyle='#ff6b00';
+        ctx.textAlign='center';
+        ctx.fillText(labelText,px,py-8);
+    });
+
+    // 最高海拔点标注 - 紧凑版
+    const maxPx=cx+(maxElevPoint.km/131.4)*cw;
+    const maxPy=cy+ch-(maxElevPoint.elev/maxElev)*ch;
+    const maxPassed=maxElevPoint.km<=curKm;
+    // 使用缓存的脉冲值以节省CPU
+    const maxPulse = fastPulseValue;
+
+    // 外圈脉冲光环
+    ctx.beginPath();
+    ctx.arc(maxPx,maxPy,8,0,Math.PI*2);
+    ctx.strokeStyle=maxPassed?`rgba(255,107,0,${maxPulse})`:'rgba(255,107,0,0.2)';
+    ctx.lineWidth=1.5;
+    ctx.stroke();
+
+    // 中圈内
+    ctx.beginPath();
+    ctx.arc(maxPx,maxPy,5,0,Math.PI*2);
+    ctx.fillStyle=maxPassed?'rgba(255,107,0,0.95)':'rgba(255,107,0,0.3)';
+    ctx.fill();
+    if(maxPassed){
+        ctx.shadowColor='#ff6b00';ctx.shadowBlur=10;ctx.fill();ctx.shadowBlur=0
+    }
+
+    // 最高海拔标签
+    const maxLabelText=maxElevPoint.name;
+    ctx.font='bold 7px "Noto Sans SC",sans-serif';
+    const maxTw=ctx.measureText(maxLabelText).width;
+
+    // 标签背景
+    ctx.fillStyle='rgba(10,10,15,0.9)';
+    ctx.fillRect(maxPx-maxTw/2-2,maxPy-16,maxTw+4,12);
+
+    // 标签文字
+    ctx.fillStyle='#ff6b00';
+    ctx.textAlign='center';
+    ctx.fillText(maxLabelText,maxPx,maxPy-7);
+
+    // 海拔标注
+    ctx.font='7px Orbitron,monospace';
+    ctx.fillText(maxElevPoint.elev+'m',maxPx,maxPy+14);
+
+    // 垂直标记线
+    ctx.beginPath();
+    ctx.moveTo(maxPx,maxPy);
+    ctx.lineTo(maxPx,cy+ch);
+    ctx.strokeStyle=maxPassed?'rgba(255,107,0,0.6)':'rgba(255,107,0,0.2)';
+    ctx.lineWidth=1;
+    ctx.setLineDash([3,3]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // 当前骑行位置
+    const cp=posAt(progress);
+    const mx=cx+(cp.km/131.4)*cw,my=cy+ch-(Math.min(cp.elev,maxElev)/maxElev)*ch;
+    ctx.beginPath();ctx.arc(mx,my,4,0,Math.PI*2);
+    ctx.fillStyle='#f0f000';ctx.shadowColor='#f0f000';ctx.shadowBlur=8;ctx.fill();ctx.shadowBlur=0;
+    ctx.beginPath();ctx.strokeStyle='rgba(240,240,0,0.3)';ctx.setLineDash([2,2]);
+    ctx.moveTo(mx,cy);ctx.lineTo(mx,cy+ch);ctx.stroke();ctx.setLineDash([]);
+}
+
+function drawSegLabels(){
+    const segs=[
+        {km:18,y:.12,label:'①→鹅公湾',color:'rgba(0,240,255,0.4)'},
+        {km:47,y:.08,label:'②→西涌',color:'rgba(0,240,255,0.4)'},
+        {km:70,y:.08,label:'③→杨梅坑',color:'rgba(0,240,255,0.4)'},
+        {km:103,y:.35,label:'④→坝光',color:'rgba(255,107,0,0.5)'},
+        {km:126,y:.12,label:'⑤→满京华',color:'rgba(255,34,68,0.5)'}
+    ];
+    segs.forEach(s=>{
+        const px=(s.km/131.4)*CW,py=s.y*CH;
+        ctx.fillStyle=s.color;ctx.font='bold 7px "Noto Sans SC",sans-serif';ctx.textAlign='center';
+        ctx.fillText(s.label,px,py);
+    });
+    ctx.textAlign='left';
+}
+
+/* BG image overlay */
+let bgImg=new Image(),bgLoaded=false;
+bgImg.onload=()=>{bgLoaded=true};
+bgImg.src='bike.jpg';
+
+function drawBGImg(){
+    if(!bgLoaded)return;
+    ctx.globalAlpha=0.06;
+    ctx.drawImage(bgImg,CW*.05,CH*.02,CW*.90,CH*.75);
+    ctx.globalAlpha=1;
+}
+
+/* ===== MAIN LOOP ===== */
+function frame(ts){
+    /* 性能优化：帧率节流 - 降至30fps */
+    const elapsed = ts - lastFrameTime;
+    if (elapsed < TARGET_FRAME_INTERVAL) {
+        requestAnimationFrame(frame);
+        return;
+    }
+    lastFrameTime = ts - (elapsed % TARGET_FRAME_INTERVAL);
+
+    /* 更新脉冲值缓存 - 每10帧更新一次 */
+    updatePulseValues();
+
+    const dt=ts-lastTime;lastTime=ts;
+    if(playing){progress+=0.00035*speed;if(progress>1)progress=0}
+
+    ctx.fillStyle='#0a0a0f';ctx.fillRect(0,0,CW,CH);
+    drawGrid();
+    drawCoastline();
+    drawBGImg();
+    drawSegLabels();
+    drawRouteFull();
+    drawRouteActive();
+    drawCheckpoints();
+
+    const p=posAt(progress);
+    drawBike(p.x,p.y,p.a);
+    drawHUD(p);
+    drawElevation();
+
+    requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+})();
+</script>
+
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.inland-security-footer {
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  right: 0;
+  width: fit-content;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tooltip-container {
+  position: relative;
+}
+
+.trigger-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background-color: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.minimax-link {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 300;
+  color: #adadad;
+  text-decoration: none;
+}
+
+.minimax-link:visited {
+  color: #adadad;
+}
+
+.minimax-link:hover {
+  color: #666666;
+}
+
+.tooltip-content {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  padding-bottom: 16px; /* 8px 内容间距 + 8px 用于鼠标移动的透明区域 */
+  font-size: 12px;
+  line-height: 17px;
+  background-color: #fafafa;
+  border-radius: 12px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  color: #171717;
+}
+
+/* 创建透明的连接区域，让鼠标可以平滑移动到 tooltip */
+.tooltip-content::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  height: 16px;
+}
+
+.tooltip-container:hover .tooltip-content {
+  display: flex;
+}
+
+.info-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.beian-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #171717;
+}
+
+.beian-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 2px;
+}
+
+.underline-text {
+  color: #171717;
+  text-decoration: underline;
+}
+
+.underline-text:hover {
+  color: #000000;
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .trigger-content {
+    background-color: transparent;
+  }
+
+  .minimax-link,
+  .minimax-link:visited {
+    color: #666666;
+  }
+
+  .minimax-link:hover {
+    color: #adadad;
+  }
+
+  .tooltip-content {
+    background-color: #262626;
+    color: #ededed;
+  }
+
+  .beian-link,
+  .underline-text {
+    color: #ededed;
+  }
+
+  .underline-text:hover {
+    color: #ffffff;
+  }
+}
+
+</style>
+<div class="inland-security-footer">
+  <div class="tooltip-container">
+    <div class="trigger-content">
+      <a href="https://www.minimaxi.com/" target="_blank" rel="noreferrer" class="minimax-link">
+        <span>© 2026 MiniMax</span>
+      </a>
+    </div>
+    <div class="tooltip-content">
+      <section class="info-section">
+        <span>上海稀宇科技有限公司</span>
+      </section>
+
+      <section class="info-section">
+        <a class="beian-link" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010402010179" target="_blank" rel="noreferrer">
+          <img alt="hailuo-beian-icon" src="https://cdn.hailuoai.com/hailuo-video-web/public_assets/223037d3-79fd-4db0-a456-749f38a6a14b.png" class="beian-icon">
+          <span class="underline-text">沪公网安备31010402010179号</span>
+        </a>
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer" class="underline-text">
+          沪ICP备2023003282号-38
+        </a>
+      </section>
+
+      <section class="info-section">
+        <span>模型名称：MiniMax</span>
+        <span>备案号：Shanghai-MiniMax-202505230046</span>
+      </section>
+
+      <section class="info-section">
+        <a href="https://agent.minimaxi.com/doc/zh/terms-of-service.html" target="_blank" rel="noreferrer" class="underline-text">
+          用户协议
+        </a>
+        <a href="https://agent.minimaxi.com/doc/zh/privacy-policy.html" target="_blank" rel="noreferrer" class="underline-text">
+          隐私政策
+        </a>
+      </section>
+    </div>
+  </div>
+</div>
+
+
+<script>
+/**
+ * Iframe 元素高亮注入脚本
+ * 需要在目标网站中引入此脚本来支持跨域 iframe 高亮功能
+ *
+ * 使用方法：
+ * 1. 将此脚本添加到目标网站的 HTML 中
+ * 2. 或通过浏览器扩展、用户脚本等方式注入
+ */
+
+(function () {
+  "use strict";
+
+  // 检查是否在 iframe 中
+  if (window.self === window.top) {
+    return; // 不在 iframe 中，不执行
+  }
+
+  // 检查是否已经初始化过
+  if (window.__iframeHighlightInitialized) {
+    return;
+  }
+  window.__iframeHighlightInitialized = true;
+  console.log("Iframe 高亮脚本已加载");
+
+  // 创建高亮覆盖层
+  var overlay = document.createElement("div");
+  overlay.id = "iframe-highlight-overlay";
+  overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    pointer-events: none;\n    z-index: 999999;\n    overflow: hidden;\n  ";
+
+  // 创建悬停高亮框（虚线边框）
+  var highlightBox = document.createElement("div");
+  highlightBox.id = "iframe-highlight-box";
+  highlightBox.style.cssText = "\n    position: absolute;\n    border: 2px dashed #007AFF;\n    background: rgba(0, 122, 255, 0.08);\n    pointer-events: none;\n    display: none;\n    transition: all 0.1s ease;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);\n    border-radius: 2px;\n  ";
+
+  // 创建选中节点的常驻高亮框（实线边框）
+  var selectedBox = document.createElement("div");
+  selectedBox.id = "iframe-selected-box";
+  selectedBox.style.cssText = "\n    position: absolute;\n    border: 2px solid #007AFF;\n    pointer-events: none;\n    display: none;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 107, 53, 0.4);\n    border-radius: 2px;\n    z-index: 1000000;\n  ";
+
+  // 创建悬停标签显示
+  var tagLabel = document.createElement("div");
+  tagLabel.id = "iframe-tag-label";
+  tagLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 2px 6px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 2px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000001;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n    font-weight: 500;\n  ";
+
+  // 创建选中节点标签
+  var selectedLabel = document.createElement("div");
+  selectedLabel.id = "iframe-selected-label";
+  selectedLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 3px 8px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 3px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000002;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);\n    font-weight: 600;\n  ";
+  overlay.appendChild(highlightBox);
+  overlay.appendChild(selectedBox);
+  overlay.appendChild(tagLabel);
+  overlay.appendChild(selectedLabel);
+  document.body.appendChild(overlay);
+
+  // 存储当前选中的元素
+  var selectedElement = null;
+  var highlightEnabled = false;
+
+  // 更新选中元素的高亮显示
+  function updateSelectedHighlight(element) {
+    console.log("updateSelectedHighlight called with:", element);
+    if (!element) {
+      selectedBox.style.display = "none";
+      selectedLabel.style.display = "none";
+      selectedElement = null;
+      console.log("Cleared selected highlight");
+      return;
+    }
+    selectedElement = element;
+    var rect = element.getBoundingClientRect();
+    console.log("Selected element rect:", rect);
+
+    // 更新选中高亮框位置
+    selectedBox.style.display = "block";
+    selectedBox.style.left = "".concat(rect.left - 2, "px");
+    selectedBox.style.top = "".concat(rect.top - 2, "px");
+    selectedBox.style.width = "".concat(rect.width + 4, "px");
+    selectedBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新选中标签位置和内容
+    selectedLabel.style.display = "block";
+    selectedLabel.textContent = "\u2713 <".concat(element.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 28;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 5) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    var labelWidth = selectedLabel.offsetWidth || 100; // 预估宽度
+    if (labelLeft + labelWidth > window.innerWidth - 10) {
+      labelLeft = window.innerWidth - labelWidth - 10;
+    }
+    selectedLabel.style.left = "".concat(Math.max(5, labelLeft), "px");
+    selectedLabel.style.top = "".concat(labelTop, "px");
+    console.log("Selected highlight positioned at:", {
+      left: selectedBox.style.left,
+      top: selectedBox.style.top,
+      width: selectedBox.style.width,
+      height: selectedBox.style.height
+    });
+  }
+  function getElementSelector(element) {
+    if (!(element instanceof Element)) throw new Error('Argument must be a DOM element');
+    var segments = [];
+    var current = element;
+    while (current !== document.documentElement) {
+      var selector = '';
+      // 优先检查唯一ID
+      if (current.id && document.querySelectorAll("#".concat(current.id)).length === 1) {
+        segments.unshift("#".concat(current.id));
+        break; // ID唯一，无需继续向上
+      }
+
+      // 生成类名选择器（取第一个有效类名）
+      var classes = Array.from(current.classList).filter(function (c) {
+        return !c.startsWith('js-');
+      });
+      var className = classes.length > 0 ? ".".concat(classes[0]) : '';
+
+      // 生成位置索引（nth-child）
+      var tag = current.tagName.toLowerCase();
+      if (!className) {
+        var siblings = Array.from(current.parentNode.children);
+        var index = siblings.findIndex(function (el) {
+          return el === current;
+        }) + 1;
+        selector = "".concat(tag, ":nth-child(").concat(index, ")");
+      } else {
+        selector = className;
+      }
+      segments.unshift(selector);
+      current = current.parentElement;
+    }
+
+    // 处理根元素
+    if (current === document.documentElement) {
+      segments.unshift('html');
+    }
+    return segments.join(' > ');
+  }
+
+  // 获取元素文本内容
+  function getElementText(element) {
+    var _element$textContent;
+    if (element.tagName === "INPUT") {
+      return element.value || element.placeholder || "";
+    }
+    if (element.tagName === "TEXTAREA") {
+      return element.value || element.placeholder || "";
+    }
+    var text = ((_element$textContent = element.textContent) === null || _element$textContent === void 0 ? void 0 : _element$textContent.trim()) || "";
+    return text.length > 50 ? text.substring(0, 50) + "..." : text;
+  }
+
+  // 获取元素属性信息
+  function getElementAttributes(element) {
+    var attrs = {};
+    for (var i = 0; i < element.attributes.length; i++) {
+      var attr = element.attributes[i];
+      attrs[attr.name] = attr.value;
+    }
+    return attrs;
+  }
+
+  // 鼠标悬停事件处理
+  function handleMouseOver(e) {
+    if (!highlightEnabled) return;
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免高亮 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 如果是已选中的元素，不显示悬停高亮
+    if (target === selectedElement) {
+      highlightBox.style.display = "none";
+      tagLabel.style.display = "none";
+      return;
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+
+    // 更新悬停高亮框位置
+    highlightBox.style.display = "block";
+    highlightBox.style.left = "".concat(rect.left - 2, "px");
+    highlightBox.style.top = "".concat(rect.top - 2, "px");
+    highlightBox.style.width = "".concat(rect.width + 4, "px");
+    highlightBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新标签位置和内容
+    tagLabel.style.display = "block";
+    tagLabel.textContent = "<".concat(target.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 22;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 0) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    if (labelLeft + tagLabel.offsetWidth > window.innerWidth) {
+      labelLeft = window.innerWidth - tagLabel.offsetWidth - 5;
+    }
+    tagLabel.style.left = "".concat(Math.max(0, labelLeft), "px");
+    tagLabel.style.top = "".concat(labelTop, "px");
+
+    // 发送消息到父窗口
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 鼠标离开事件处理
+  function handleMouseOut(e) {
+    if (!highlightEnabled) return;
+    var relatedTarget = e.relatedTarget;
+
+    // 如果鼠标移动到高亮相关元素上，不隐藏高亮
+    if (relatedTarget && (relatedTarget === highlightBox || relatedTarget === tagLabel || relatedTarget === overlay || relatedTarget === selectedBox || relatedTarget === selectedLabel)) {
+      return;
+    }
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: null,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 点击事件处理
+  function handleClick(e) {
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免处理 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 检查是否是交互元素，这些元素需要保留默认行为
+    var isInteractiveElement = ['input', 'textarea', 'select', 'button', 'a'].includes(target.tagName.toLowerCase());
+
+    // 如果高亮功能启用，对于非交互元素阻止默认行为和事件传播
+    if (highlightEnabled) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+    console.log("Element clicked:", {
+      tagName: target.tagName,
+      selector: selector,
+      rect: rect
+    });
+
+    // 立即更新选中高亮
+    updateSelectedHighlight(target);
+
+    // 隐藏悬停高亮，因为现在是选中状态
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-click",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 监听来自父窗口的消息
+  function handleParentMessage(event) {
+    console.log("Received message from parent:", event.data);
+    if (event.data.type === "iframe-highlight-toggle") {
+      var enabled = event.data.enabled;
+      console.log("Highlight toggle:", enabled);
+      if (enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "enable-iframe-highlight") {
+      console.log("Enable iframe highlight");
+      enableHighlight();
+    } else if (event.data.type === "disable-iframe-highlight") {
+      console.log("Disable iframe highlight");
+      disableHighlight();
+    } else if (event.data.type === "toggle-iframe-highlight") {
+      var _enabled = event.data.enabled !== undefined ? event.data.enabled : !highlightEnabled;
+      console.log("Toggle iframe highlight to:", _enabled);
+      if (_enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "update-selected-element") {
+      var selector = event.data.selector;
+      console.log("Update selected element with selector:", selector);
+      if (selector) {
+        try {
+          var element = document.querySelector(selector);
+          console.log("Found element by selector:", element);
+          updateSelectedHighlight(element);
+        } catch (error) {
+          console.warn("Failed to select element:", error);
+          updateSelectedHighlight(null);
+        }
+      } else {
+        updateSelectedHighlight(null);
+      }
+    } else if (event.data.type === "clear-selected-element") {
+      console.log("Clear selected element");
+      updateSelectedHighlight(null);
+    }
+  }
+
+  // 启用高亮功能
+  function enableHighlight() {
+    console.log("Enabling highlight");
+    document.addEventListener("mouseover", handleMouseOver, true);
+    document.addEventListener("mouseout", handleMouseOut, true);
+    document.addEventListener("click", handleClick, true);
+    highlightEnabled = true;
+    overlay.style.display = "block";
+  }
+
+  // 禁用高亮功能
+  function disableHighlight() {
+    console.log("Disabling highlight");
+    highlightEnabled = false;
+    // 保持事件监听器，但通过 highlightEnabled 变量控制行为
+    // 这样可以保留选中状态的显示
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    // 不隐藏 selectedBox 和 selectedLabel，保留选中状态
+  }
+
+  // 完全禁用高亮功能（移除所有监听器）
+  function fullyDisableHighlight() {
+    console.log("Fully disabling highlight");
+    highlightEnabled = false;
+    document.removeEventListener("mouseover", handleMouseOver, true);
+    document.removeEventListener("mouseout", handleMouseOut, true);
+    document.removeEventListener("click", handleClick, true);
+    overlay.style.display = "none";
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    selectedBox.style.display = "none";
+    selectedLabel.style.display = "none";
+  }
+
+  // 添加事件监听
+  enableHighlight();
+  window.addEventListener("message", handleParentMessage);
+
+  // 暴露全局函数供外部调用
+  window.__iframeHighlightControl = {
+    enable: enableHighlight,
+    disable: disableHighlight,
+    fullyDisable: fullyDisableHighlight,
+    isEnabled: function isEnabled() {
+      return highlightEnabled;
+    },
+    getSelectedElement: function getSelectedElement() {
+      return selectedElement;
+    },
+    updateSelected: updateSelectedHighlight,
+    // 通过消息发送开关控制
+    sendToggleMessage: function sendToggleMessage(enabled) {
+      window.parent.postMessage({
+        type: 'iframe-highlight-status',
+        enabled: enabled || highlightEnabled,
+        source: 'iframe-highlight-injector'
+      }, '*');
+    }
+  };
+
+  // 通知父窗口脚本已加载
+  try {
+    window.parent.postMessage({
+      type: "iframe-highlight-ready",
+      data: {
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        timestamp: Date.now()
+      },
+      source: "iframe-highlight-injector"
+    }, "*");
+  } catch (error) {
+    console.warn("无法发送就绪消息到父窗口:", error);
+  }
+
+  // 清理函数
+  window.__iframeHighlightCleanup = function () {
+    fullyDisableHighlight();
+    window.removeEventListener("message", handleParentMessage);
+    if (overlay.parentElement) {
+      overlay.parentElement.removeChild(overlay);
+    }
+    delete window.__iframeHighlightInitialized;
+    delete window.__iframeHighlightCleanup;
+  };
+})();
+
+</script>
+
+<script>
+/**
+ * Iframe 元素高亮注入脚本
+ * 需要在目标网站中引入此脚本来支持跨域 iframe 高亮功能
+ *
+ * 使用方法：
+ * 1. 将此脚本添加到目标网站的 HTML 中
+ * 2. 或通过浏览器扩展、用户脚本等方式注入
+ */
+
+(function () {
+  "use strict";
+
+  // 检查是否在 iframe 中
+  if (window.self === window.top) {
+    return; // 不在 iframe 中，不执行
+  }
+
+  // 检查是否已经初始化过
+  if (window.__iframeHighlightInitialized) {
+    return;
+  }
+  window.__iframeHighlightInitialized = true;
+  console.log("Iframe 高亮脚本已加载");
+
+  // 创建高亮覆盖层
+  var overlay = document.createElement("div");
+  overlay.id = "iframe-highlight-overlay";
+  overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    pointer-events: none;\n    z-index: 999999;\n    overflow: hidden;\n  ";
+
+  // 创建悬停高亮框（虚线边框）
+  var highlightBox = document.createElement("div");
+  highlightBox.id = "iframe-highlight-box";
+  highlightBox.style.cssText = "\n    position: absolute;\n    border: 2px dashed #007AFF;\n    background: rgba(0, 122, 255, 0.08);\n    pointer-events: none;\n    display: none;\n    transition: all 0.1s ease;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);\n    border-radius: 2px;\n  ";
+
+  // 创建选中节点的常驻高亮框（实线边框）
+  var selectedBox = document.createElement("div");
+  selectedBox.id = "iframe-selected-box";
+  selectedBox.style.cssText = "\n    position: absolute;\n    border: 2px solid #007AFF;\n    pointer-events: none;\n    display: none;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 107, 53, 0.4);\n    border-radius: 2px;\n    z-index: 1000000;\n  ";
+
+  // 创建悬停标签显示
+  var tagLabel = document.createElement("div");
+  tagLabel.id = "iframe-tag-label";
+  tagLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 2px 6px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 2px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000001;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n    font-weight: 500;\n  ";
+
+  // 创建选中节点标签
+  var selectedLabel = document.createElement("div");
+  selectedLabel.id = "iframe-selected-label";
+  selectedLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 3px 8px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 3px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000002;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);\n    font-weight: 600;\n  ";
+  overlay.appendChild(highlightBox);
+  overlay.appendChild(selectedBox);
+  overlay.appendChild(tagLabel);
+  overlay.appendChild(selectedLabel);
+  document.body.appendChild(overlay);
+
+  // 存储当前选中的元素
+  var selectedElement = null;
+  var highlightEnabled = false;
+
+  // 更新选中元素的高亮显示
+  function updateSelectedHighlight(element) {
+    console.log("updateSelectedHighlight called with:", element);
+    if (!element) {
+      selectedBox.style.display = "none";
+      selectedLabel.style.display = "none";
+      selectedElement = null;
+      console.log("Cleared selected highlight");
+      return;
+    }
+    selectedElement = element;
+    var rect = element.getBoundingClientRect();
+    console.log("Selected element rect:", rect);
+
+    // 更新选中高亮框位置
+    selectedBox.style.display = "block";
+    selectedBox.style.left = "".concat(rect.left - 2, "px");
+    selectedBox.style.top = "".concat(rect.top - 2, "px");
+    selectedBox.style.width = "".concat(rect.width + 4, "px");
+    selectedBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新选中标签位置和内容
+    selectedLabel.style.display = "block";
+    selectedLabel.textContent = "\u2713 <".concat(element.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 28;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 5) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    var labelWidth = selectedLabel.offsetWidth || 100; // 预估宽度
+    if (labelLeft + labelWidth > window.innerWidth - 10) {
+      labelLeft = window.innerWidth - labelWidth - 10;
+    }
+    selectedLabel.style.left = "".concat(Math.max(5, labelLeft), "px");
+    selectedLabel.style.top = "".concat(labelTop, "px");
+    console.log("Selected highlight positioned at:", {
+      left: selectedBox.style.left,
+      top: selectedBox.style.top,
+      width: selectedBox.style.width,
+      height: selectedBox.style.height
+    });
+  }
+  function getElementSelector(element) {
+    if (!(element instanceof Element)) throw new Error('Argument must be a DOM element');
+    var segments = [];
+    var current = element;
+    while (current !== document.documentElement) {
+      var selector = '';
+      // 优先检查唯一ID
+      if (current.id && document.querySelectorAll("#".concat(current.id)).length === 1) {
+        segments.unshift("#".concat(current.id));
+        break; // ID唯一，无需继续向上
+      }
+
+      // 生成类名选择器（取第一个有效类名）
+      var classes = Array.from(current.classList).filter(function (c) {
+        return !c.startsWith('js-');
+      });
+      var className = classes.length > 0 ? ".".concat(classes[0]) : '';
+
+      // 生成位置索引（nth-child）
+      var tag = current.tagName.toLowerCase();
+      if (!className) {
+        var siblings = Array.from(current.parentNode.children);
+        var index = siblings.findIndex(function (el) {
+          return el === current;
+        }) + 1;
+        selector = "".concat(tag, ":nth-child(").concat(index, ")");
+      } else {
+        selector = className;
+      }
+      segments.unshift(selector);
+      current = current.parentElement;
+    }
+
+    // 处理根元素
+    if (current === document.documentElement) {
+      segments.unshift('html');
+    }
+    return segments.join(' > ');
+  }
+
+  // 获取元素文本内容
+  function getElementText(element) {
+    var _element$textContent;
+    if (element.tagName === "INPUT") {
+      return element.value || element.placeholder || "";
+    }
+    if (element.tagName === "TEXTAREA") {
+      return element.value || element.placeholder || "";
+    }
+    var text = ((_element$textContent = element.textContent) === null || _element$textContent === void 0 ? void 0 : _element$textContent.trim()) || "";
+    return text.length > 50 ? text.substring(0, 50) + "..." : text;
+  }
+
+  // 获取元素属性信息
+  function getElementAttributes(element) {
+    var attrs = {};
+    for (var i = 0; i < element.attributes.length; i++) {
+      var attr = element.attributes[i];
+      attrs[attr.name] = attr.value;
+    }
+    return attrs;
+  }
+
+  // 鼠标悬停事件处理
+  function handleMouseOver(e) {
+    if (!highlightEnabled) return;
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免高亮 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 如果是已选中的元素，不显示悬停高亮
+    if (target === selectedElement) {
+      highlightBox.style.display = "none";
+      tagLabel.style.display = "none";
+      return;
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+
+    // 更新悬停高亮框位置
+    highlightBox.style.display = "block";
+    highlightBox.style.left = "".concat(rect.left - 2, "px");
+    highlightBox.style.top = "".concat(rect.top - 2, "px");
+    highlightBox.style.width = "".concat(rect.width + 4, "px");
+    highlightBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新标签位置和内容
+    tagLabel.style.display = "block";
+    tagLabel.textContent = "<".concat(target.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 22;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 0) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    if (labelLeft + tagLabel.offsetWidth > window.innerWidth) {
+      labelLeft = window.innerWidth - tagLabel.offsetWidth - 5;
+    }
+    tagLabel.style.left = "".concat(Math.max(0, labelLeft), "px");
+    tagLabel.style.top = "".concat(labelTop, "px");
+
+    // 发送消息到父窗口
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 鼠标离开事件处理
+  function handleMouseOut(e) {
+    if (!highlightEnabled) return;
+    var relatedTarget = e.relatedTarget;
+
+    // 如果鼠标移动到高亮相关元素上，不隐藏高亮
+    if (relatedTarget && (relatedTarget === highlightBox || relatedTarget === tagLabel || relatedTarget === overlay || relatedTarget === selectedBox || relatedTarget === selectedLabel)) {
+      return;
+    }
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: null,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 点击事件处理
+  function handleClick(e) {
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免处理 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 检查是否是交互元素，这些元素需要保留默认行为
+    var isInteractiveElement = ['input', 'textarea', 'select', 'button', 'a'].includes(target.tagName.toLowerCase());
+
+    // 如果高亮功能启用，对于非交互元素阻止默认行为和事件传播
+    if (highlightEnabled) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+    console.log("Element clicked:", {
+      tagName: target.tagName,
+      selector: selector,
+      rect: rect
+    });
+
+    // 立即更新选中高亮
+    updateSelectedHighlight(target);
+
+    // 隐藏悬停高亮，因为现在是选中状态
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-click",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 监听来自父窗口的消息
+  function handleParentMessage(event) {
+    console.log("Received message from parent:", event.data);
+    if (event.data.type === "iframe-highlight-toggle") {
+      var enabled = event.data.enabled;
+      console.log("Highlight toggle:", enabled);
+      if (enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "enable-iframe-highlight") {
+      console.log("Enable iframe highlight");
+      enableHighlight();
+    } else if (event.data.type === "disable-iframe-highlight") {
+      console.log("Disable iframe highlight");
+      disableHighlight();
+    } else if (event.data.type === "toggle-iframe-highlight") {
+      var _enabled = event.data.enabled !== undefined ? event.data.enabled : !highlightEnabled;
+      console.log("Toggle iframe highlight to:", _enabled);
+      if (_enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "update-selected-element") {
+      var selector = event.data.selector;
+      console.log("Update selected element with selector:", selector);
+      if (selector) {
+        try {
+          var element = document.querySelector(selector);
+          console.log("Found element by selector:", element);
+          updateSelectedHighlight(element);
+        } catch (error) {
+          console.warn("Failed to select element:", error);
+          updateSelectedHighlight(null);
+        }
+      } else {
+        updateSelectedHighlight(null);
+      }
+    } else if (event.data.type === "clear-selected-element") {
+      console.log("Clear selected element");
+      updateSelectedHighlight(null);
+    }
+  }
+
+  // 启用高亮功能
+  function enableHighlight() {
+    console.log("Enabling highlight");
+    document.addEventListener("mouseover", handleMouseOver, true);
+    document.addEventListener("mouseout", handleMouseOut, true);
+    document.addEventListener("click", handleClick, true);
+    highlightEnabled = true;
+    overlay.style.display = "block";
+  }
+
+  // 禁用高亮功能
+  function disableHighlight() {
+    console.log("Disabling highlight");
+    highlightEnabled = false;
+    // 保持事件监听器，但通过 highlightEnabled 变量控制行为
+    // 这样可以保留选中状态的显示
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    // 不隐藏 selectedBox 和 selectedLabel，保留选中状态
+  }
+
+  // 完全禁用高亮功能（移除所有监听器）
+  function fullyDisableHighlight() {
+    console.log("Fully disabling highlight");
+    highlightEnabled = false;
+    document.removeEventListener("mouseover", handleMouseOver, true);
+    document.removeEventListener("mouseout", handleMouseOut, true);
+    document.removeEventListener("click", handleClick, true);
+    overlay.style.display = "none";
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    selectedBox.style.display = "none";
+    selectedLabel.style.display = "none";
+  }
+
+  // 添加事件监听
+  enableHighlight();
+  window.addEventListener("message", handleParentMessage);
+
+  // 暴露全局函数供外部调用
+  window.__iframeHighlightControl = {
+    enable: enableHighlight,
+    disable: disableHighlight,
+    fullyDisable: fullyDisableHighlight,
+    isEnabled: function isEnabled() {
+      return highlightEnabled;
+    },
+    getSelectedElement: function getSelectedElement() {
+      return selectedElement;
+    },
+    updateSelected: updateSelectedHighlight,
+    // 通过消息发送开关控制
+    sendToggleMessage: function sendToggleMessage(enabled) {
+      window.parent.postMessage({
+        type: 'iframe-highlight-status',
+        enabled: enabled || highlightEnabled,
+        source: 'iframe-highlight-injector'
+      }, '*');
+    }
+  };
+
+  // 通知父窗口脚本已加载
+  try {
+    window.parent.postMessage({
+      type: "iframe-highlight-ready",
+      data: {
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        timestamp: Date.now()
+      },
+      source: "iframe-highlight-injector"
+    }, "*");
+  } catch (error) {
+    console.warn("无法发送就绪消息到父窗口:", error);
+  }
+
+  // 清理函数
+  window.__iframeHighlightCleanup = function () {
+    fullyDisableHighlight();
+    window.removeEventListener("message", handleParentMessage);
+    if (overlay.parentElement) {
+      overlay.parentElement.removeChild(overlay);
+    }
+    delete window.__iframeHighlightInitialized;
+    delete window.__iframeHighlightCleanup;
+  };
+})();
+
+</script>
+<style>
+#minimax-floating-ball {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 12px;
+  background: #222222;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  color: #F8F8F8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  z-index: 9999;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+#minimax-floating-ball:hover {
+  transform: translateY(-2px);
+  background: #383838;
+}
+.minimax-ball-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.minimax-logo-wave {
+  
+  width: 20px;
+  height: 17px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='17' viewBox='0 0 20 17' fill='none'%3E%3Cpath d='M20 12.3718L16.283 16.2413H12.2518V13.1614H9.17175V16.2413H7.00999V13.1613H3.92998V16.2413H0V4.00101L3.84145 0H20V12.3718Z' fill='white'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.minimax-ball-text {
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.minimax-close-icon {
+  margin-left: 8px;
+  font-size: 16px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.minimax-close-icon:hover {
+  opacity: 1;
+}
+</style>
+<div id="minimax-floating-ball">
+  <div class="minimax-ball-content">
+    <div class="minimax-logo-wave"></div>
+    <span class="minimax-ball-text">Created by MiniMax Agent</span>
+  </div>
+  <div class="minimax-close-icon">×</div>
+</div>
+<script>
+// Initialize floating ball functionality
+function initFloatingBall() {
+  const ball = document.getElementById('minimax-floating-ball');
+  if (!ball) return;
+
+  // Initial animation
+  ball.style.opacity = '0';
+  ball.style.transform = 'translateY(20px)';
+
+  setTimeout(() => {
+    ball.style.opacity = '1';
+    ball.style.transform = 'translateY(0)';
+  }, 500);
+
+  // Handle logo click
+  const ballContent = ball.querySelector('.minimax-ball-content');
+  ballContent.addEventListener('click', function (e) {
+    e.stopPropagation();
+    window.open('https://agent.minimaxi.com/', '_blank');
+    ball.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+      ball.style.transform = 'scale(1)';
+    }, 100);
+  });
+
+  // Handle close button click
+  const closeIcon = ball.querySelector('.minimax-close-icon');
+  closeIcon.addEventListener('click', function (e) {
+    e.stopPropagation();
+    ball.style.opacity = '0';
+    ball.style.transform = 'translateY(20px)';
+
+    setTimeout(() => {
+      ball.style.display = 'none';
+    }, 300);
+  });
+}
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', initFloatingBall); 
+</script>
+
+<script>
+/**
+ * Iframe 元素高亮注入脚本
+ * 需要在目标网站中引入此脚本来支持跨域 iframe 高亮功能
+ *
+ * 使用方法：
+ * 1. 将此脚本添加到目标网站的 HTML 中
+ * 2. 或通过浏览器扩展、用户脚本等方式注入
+ */
+
+(function () {
+  "use strict";
+
+  // 检查是否在 iframe 中
+  if (window.self === window.top) {
+    return; // 不在 iframe 中，不执行
+  }
+
+  // 检查是否已经初始化过
+  if (window.__iframeHighlightInitialized) {
+    return;
+  }
+  window.__iframeHighlightInitialized = true;
+  console.log("Iframe 高亮脚本已加载");
+
+  // 创建高亮覆盖层
+  var overlay = document.createElement("div");
+  overlay.id = "iframe-highlight-overlay";
+  overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    pointer-events: none;\n    z-index: 999999;\n    overflow: hidden;\n  ";
+
+  // 创建悬停高亮框（虚线边框）
+  var highlightBox = document.createElement("div");
+  highlightBox.id = "iframe-highlight-box";
+  highlightBox.style.cssText = "\n    position: absolute;\n    border: 2px dashed #007AFF;\n    background: rgba(0, 122, 255, 0.08);\n    pointer-events: none;\n    display: none;\n    transition: all 0.1s ease;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);\n    border-radius: 2px;\n  ";
+
+  // 创建选中节点的常驻高亮框（实线边框）
+  var selectedBox = document.createElement("div");
+  selectedBox.id = "iframe-selected-box";
+  selectedBox.style.cssText = "\n    position: absolute;\n    border: 2px solid #007AFF;\n    pointer-events: none;\n    display: none;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 107, 53, 0.4);\n    border-radius: 2px;\n    z-index: 1000000;\n  ";
+
+  // 创建悬停标签显示
+  var tagLabel = document.createElement("div");
+  tagLabel.id = "iframe-tag-label";
+  tagLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 2px 6px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 2px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000001;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n    font-weight: 500;\n  ";
+
+  // 创建选中节点标签
+  var selectedLabel = document.createElement("div");
+  selectedLabel.id = "iframe-selected-label";
+  selectedLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 3px 8px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 3px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000002;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);\n    font-weight: 600;\n  ";
+  overlay.appendChild(highlightBox);
+  overlay.appendChild(selectedBox);
+  overlay.appendChild(tagLabel);
+  overlay.appendChild(selectedLabel);
+  document.body.appendChild(overlay);
+
+  // 存储当前选中的元素
+  var selectedElement = null;
+  var highlightEnabled = false;
+
+  // 更新选中元素的高亮显示
+  function updateSelectedHighlight(element) {
+    console.log("updateSelectedHighlight called with:", element);
+    if (!element) {
+      selectedBox.style.display = "none";
+      selectedLabel.style.display = "none";
+      selectedElement = null;
+      console.log("Cleared selected highlight");
+      return;
+    }
+    selectedElement = element;
+    var rect = element.getBoundingClientRect();
+    console.log("Selected element rect:", rect);
+
+    // 更新选中高亮框位置
+    selectedBox.style.display = "block";
+    selectedBox.style.left = "".concat(rect.left - 2, "px");
+    selectedBox.style.top = "".concat(rect.top - 2, "px");
+    selectedBox.style.width = "".concat(rect.width + 4, "px");
+    selectedBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新选中标签位置和内容
+    selectedLabel.style.display = "block";
+    selectedLabel.textContent = "\u2713 <".concat(element.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 28;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 5) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    var labelWidth = selectedLabel.offsetWidth || 100; // 预估宽度
+    if (labelLeft + labelWidth > window.innerWidth - 10) {
+      labelLeft = window.innerWidth - labelWidth - 10;
+    }
+    selectedLabel.style.left = "".concat(Math.max(5, labelLeft), "px");
+    selectedLabel.style.top = "".concat(labelTop, "px");
+    console.log("Selected highlight positioned at:", {
+      left: selectedBox.style.left,
+      top: selectedBox.style.top,
+      width: selectedBox.style.width,
+      height: selectedBox.style.height
+    });
+  }
+  function getElementSelector(element) {
+    if (!(element instanceof Element)) throw new Error('Argument must be a DOM element');
+    var segments = [];
+    var current = element;
+    while (current !== document.documentElement) {
+      var selector = '';
+      // 优先检查唯一ID
+      if (current.id && document.querySelectorAll("#".concat(current.id)).length === 1) {
+        segments.unshift("#".concat(current.id));
+        break; // ID唯一，无需继续向上
+      }
+
+      // 生成类名选择器（取第一个有效类名）
+      var classes = Array.from(current.classList).filter(function (c) {
+        return !c.startsWith('js-');
+      });
+      var className = classes.length > 0 ? ".".concat(classes[0]) : '';
+
+      // 生成位置索引（nth-child）
+      var tag = current.tagName.toLowerCase();
+      if (!className) {
+        var siblings = Array.from(current.parentNode.children);
+        var index = siblings.findIndex(function (el) {
+          return el === current;
+        }) + 1;
+        selector = "".concat(tag, ":nth-child(").concat(index, ")");
+      } else {
+        selector = className;
+      }
+      segments.unshift(selector);
+      current = current.parentElement;
+    }
+
+    // 处理根元素
+    if (current === document.documentElement) {
+      segments.unshift('html');
+    }
+    return segments.join(' > ');
+  }
+
+  // 获取元素文本内容
+  function getElementText(element) {
+    var _element$textContent;
+    if (element.tagName === "INPUT") {
+      return element.value || element.placeholder || "";
+    }
+    if (element.tagName === "TEXTAREA") {
+      return element.value || element.placeholder || "";
+    }
+    var text = ((_element$textContent = element.textContent) === null || _element$textContent === void 0 ? void 0 : _element$textContent.trim()) || "";
+    return text.length > 50 ? text.substring(0, 50) + "..." : text;
+  }
+
+  // 获取元素属性信息
+  function getElementAttributes(element) {
+    var attrs = {};
+    for (var i = 0; i < element.attributes.length; i++) {
+      var attr = element.attributes[i];
+      attrs[attr.name] = attr.value;
+    }
+    return attrs;
+  }
+
+  // 鼠标悬停事件处理
+  function handleMouseOver(e) {
+    if (!highlightEnabled) return;
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免高亮 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 如果是已选中的元素，不显示悬停高亮
+    if (target === selectedElement) {
+      highlightBox.style.display = "none";
+      tagLabel.style.display = "none";
+      return;
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+
+    // 更新悬停高亮框位置
+    highlightBox.style.display = "block";
+    highlightBox.style.left = "".concat(rect.left - 2, "px");
+    highlightBox.style.top = "".concat(rect.top - 2, "px");
+    highlightBox.style.width = "".concat(rect.width + 4, "px");
+    highlightBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新标签位置和内容
+    tagLabel.style.display = "block";
+    tagLabel.textContent = "<".concat(target.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 22;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 0) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    if (labelLeft + tagLabel.offsetWidth > window.innerWidth) {
+      labelLeft = window.innerWidth - tagLabel.offsetWidth - 5;
+    }
+    tagLabel.style.left = "".concat(Math.max(0, labelLeft), "px");
+    tagLabel.style.top = "".concat(labelTop, "px");
+
+    // 发送消息到父窗口
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 鼠标离开事件处理
+  function handleMouseOut(e) {
+    if (!highlightEnabled) return;
+    var relatedTarget = e.relatedTarget;
+
+    // 如果鼠标移动到高亮相关元素上，不隐藏高亮
+    if (relatedTarget && (relatedTarget === highlightBox || relatedTarget === tagLabel || relatedTarget === overlay || relatedTarget === selectedBox || relatedTarget === selectedLabel)) {
+      return;
+    }
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: null,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 点击事件处理
+  function handleClick(e) {
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免处理 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 检查是否是交互元素，这些元素需要保留默认行为
+    var isInteractiveElement = ['input', 'textarea', 'select', 'button', 'a'].includes(target.tagName.toLowerCase());
+
+    // 如果高亮功能启用，对于非交互元素阻止默认行为和事件传播
+    if (highlightEnabled) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+    console.log("Element clicked:", {
+      tagName: target.tagName,
+      selector: selector,
+      rect: rect
+    });
+
+    // 立即更新选中高亮
+    updateSelectedHighlight(target);
+
+    // 隐藏悬停高亮，因为现在是选中状态
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-click",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 监听来自父窗口的消息
+  function handleParentMessage(event) {
+    console.log("Received message from parent:", event.data);
+    if (event.data.type === "iframe-highlight-toggle") {
+      var enabled = event.data.enabled;
+      console.log("Highlight toggle:", enabled);
+      if (enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "enable-iframe-highlight") {
+      console.log("Enable iframe highlight");
+      enableHighlight();
+    } else if (event.data.type === "disable-iframe-highlight") {
+      console.log("Disable iframe highlight");
+      disableHighlight();
+    } else if (event.data.type === "toggle-iframe-highlight") {
+      var _enabled = event.data.enabled !== undefined ? event.data.enabled : !highlightEnabled;
+      console.log("Toggle iframe highlight to:", _enabled);
+      if (_enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "update-selected-element") {
+      var selector = event.data.selector;
+      console.log("Update selected element with selector:", selector);
+      if (selector) {
+        try {
+          var element = document.querySelector(selector);
+          console.log("Found element by selector:", element);
+          updateSelectedHighlight(element);
+        } catch (error) {
+          console.warn("Failed to select element:", error);
+          updateSelectedHighlight(null);
+        }
+      } else {
+        updateSelectedHighlight(null);
+      }
+    } else if (event.data.type === "clear-selected-element") {
+      console.log("Clear selected element");
+      updateSelectedHighlight(null);
+    }
+  }
+
+  // 启用高亮功能
+  function enableHighlight() {
+    console.log("Enabling highlight");
+    document.addEventListener("mouseover", handleMouseOver, true);
+    document.addEventListener("mouseout", handleMouseOut, true);
+    document.addEventListener("click", handleClick, true);
+    highlightEnabled = true;
+    overlay.style.display = "block";
+  }
+
+  // 禁用高亮功能
+  function disableHighlight() {
+    console.log("Disabling highlight");
+    highlightEnabled = false;
+    // 保持事件监听器，但通过 highlightEnabled 变量控制行为
+    // 这样可以保留选中状态的显示
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    // 不隐藏 selectedBox 和 selectedLabel，保留选中状态
+  }
+
+  // 完全禁用高亮功能（移除所有监听器）
+  function fullyDisableHighlight() {
+    console.log("Fully disabling highlight");
+    highlightEnabled = false;
+    document.removeEventListener("mouseover", handleMouseOver, true);
+    document.removeEventListener("mouseout", handleMouseOut, true);
+    document.removeEventListener("click", handleClick, true);
+    overlay.style.display = "none";
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    selectedBox.style.display = "none";
+    selectedLabel.style.display = "none";
+  }
+
+  // 添加事件监听
+  enableHighlight();
+  window.addEventListener("message", handleParentMessage);
+
+  // 暴露全局函数供外部调用
+  window.__iframeHighlightControl = {
+    enable: enableHighlight,
+    disable: disableHighlight,
+    fullyDisable: fullyDisableHighlight,
+    isEnabled: function isEnabled() {
+      return highlightEnabled;
+    },
+    getSelectedElement: function getSelectedElement() {
+      return selectedElement;
+    },
+    updateSelected: updateSelectedHighlight,
+    // 通过消息发送开关控制
+    sendToggleMessage: function sendToggleMessage(enabled) {
+      window.parent.postMessage({
+        type: 'iframe-highlight-status',
+        enabled: enabled || highlightEnabled,
+        source: 'iframe-highlight-injector'
+      }, '*');
+    }
+  };
+
+  // 通知父窗口脚本已加载
+  try {
+    window.parent.postMessage({
+      type: "iframe-highlight-ready",
+      data: {
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        timestamp: Date.now()
+      },
+      source: "iframe-highlight-injector"
+    }, "*");
+  } catch (error) {
+    console.warn("无法发送就绪消息到父窗口:", error);
+  }
+
+  // 清理函数
+  window.__iframeHighlightCleanup = function () {
+    fullyDisableHighlight();
+    window.removeEventListener("message", handleParentMessage);
+    if (overlay.parentElement) {
+      overlay.parentElement.removeChild(overlay);
+    }
+    delete window.__iframeHighlightInitialized;
+    delete window.__iframeHighlightCleanup;
+  };
+})();
+
+</script>
+</body></html>
