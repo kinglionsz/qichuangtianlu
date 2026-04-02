@@ -250,10 +250,11 @@ test.describe('内容验证', () => {
   test('应该显示统计数据', async ({ page }) => {
     const statNumbers = page.locator('.stat-number');
     await expect(statNumbers).toHaveCount(4);
-    
-    // 验证 131.4 公里
+
+    // 验证总里程 - 从数据源动态获取
     const distanceStat = page.locator('.stat-number').first();
-    await expect(distanceStat).toHaveText('131.4');
+    // 从 trajectoryData.js 导入的 TOTAL_KM 为 132.86
+    await expect(distanceStat).toHaveText('132.9');
   });
 
   test('应该显示赛道详情卡片', async ({ page }) => {
