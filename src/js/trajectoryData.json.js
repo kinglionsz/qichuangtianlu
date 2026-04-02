@@ -51,7 +51,7 @@ export const challengePoints = [
   { km: 46.48, name: '虐点3', elev: 94 },
   { km: 53.94, name: '虐点4', elev: 194 },
   { km: 95.56, name: '虐点5', elev: 103 },
-  { km: 122.05, name: '虐点6', elev: 136 }
+  { km: 122.05, name: '虐点6', elev: 256 }
 ].map(cp => {
   const nearest = findNearestPoint(cp.km);
   return {
