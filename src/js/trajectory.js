@@ -76,6 +76,20 @@ export const TrajectoryEngine = {
       b.textContent = 'PLAY';
       b.classList.remove('active');
     }
+    // 立即触发一次重绘以显示初始状态
+    ctx.fillStyle = '#0a0a0f';
+    ctx.fillRect(0, 0, CW, CH);
+    drawGrid();
+    drawCoastline();
+    drawSegLabels();
+    drawRouteFull();
+    drawCheckpoints();
+    drawChallengePointsOnRoute();
+
+    const p = posAt(0);
+    drawBike(p.x, p.y, p.a);
+    drawHUD(p);
+    drawElevation();
   }
 };
 
