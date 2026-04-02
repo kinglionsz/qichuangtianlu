@@ -44,6 +44,7 @@ function getInterpolatedElevation(km) {
     { km: 46.48, elev: 94 },
     { km: 53.94, elev: 194 },
     { km: 95.56, elev: 103 },
+    { km: 99.60, elev: 265 },  // 径心水库
     { km: 122.05, elev: 256 }
   ];
   elevPoints.sort((a, b) => a.km - b.km);
