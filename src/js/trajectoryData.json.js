@@ -38,32 +38,24 @@ export const checkpoints = routeData.checkpoints.map((cp) => {
   };
 });
 
-// 虐点 - 直接使用原有 waypoints 中的坐标
-const waypointCoords = {
-  0: { x: 331, y: 179, elev: 35 },
-  11.07: { x: 507, y: 299, elev: 12 },
-  22.21: { x: 514, y: 511, elev: 12 },
-  33.30: { x: 506, y: 398, elev: 0 },
-  44.40: { x: 605, y: 565, elev: 8 },
-  55.40: { x: 583, y: 457, elev: 0 },
-  66.47: { x: 710, y: 342, elev: 12 },
-  77.50: { x: 512, y: 303, elev: 0 },
-  88.60: { x: 329, y: 184, elev: 0 },
-  99.60: { x: 490, y: 102, elev: 265 },
-  110.70: { x: 753, y: 69, elev: 145 },
-  121.80: { x: 490, y: 102, elev: 265 },
-  132.86: { x: 330, y: 179, elev: 35 }
-};
-
+// 虐点 - 需要从 trajectoryPts 中找最近的点
 export const challengePoints = routeData.challengePoints.map(cp => {
-  // 直接从 waypointCoords 获取坐标
-  const coord = waypointCoords[cp.km];
+  // 从 trajectoryPts 找最近的点
+  let closest = trajectoryPts[0];
+  let minDist = Math.abs(trajectoryPts[0].km - cp.km);
+  for (let i = 1; i < trajectoryPts.length; i++) {
+    const dist = Math.abs(trajectoryPts[i].km - cp.km);
+    if (dist < minDist) {
+      minDist = dist;
+      closest = trajectoryPts[i];
+    }
+  }
   return {
     km: cp.km,
     name: cp.name,
-    elev: cp.elev || (coord ? coord.elev : 0),
-    x: coord ? coord.x : 331,
-    y: coord ? coord.y : 179
+    elev: cp.elev || 0,
+    x: closest.x,
+    y: closest.y
   };
 });
 
