@@ -2,9 +2,6 @@
  * 轨迹数据加载模块
  * 直接使用原有的 Canvas 坐标（已人工调整好）
  * 保留 GPS 坐标作为元数据
- *
- * 注意：此模块直接复用原有的 trajectoryData.js 数据
- * 只是作为 JSON 数据格式的适配层
  */
 import routeData from '../../data/routes/route-995778.json';
 
@@ -18,29 +15,76 @@ export const trajectoryPts = routeData.trajectory.map(p => ({
   elev: p.elev || 0
 }));
 
-// 打卡点 - 直接使用原有坐标，并包含海拔信息
-export const checkpoints = routeData.checkpoints.map(cp => ({
-  km: cp.km,
-  name: cp.name,
-  elev: cp.elev,
-  color: cp.color,
-  lat: cp.lat,
-  lon: cp.lon,
-  type: cp.type
-}));
+// 打卡点 - 找到对应的坐标
+export const checkpoints = routeData.checkpoints.map((cp, index) => {
+  // 从 trajectory 找到对应的坐标
+  let closest = trajectoryPts[0];
+  let minDist = Math.abs(trajectoryPts[0].km - cp.km);
+  for (let i = 1; i < trajectoryPts.length; i++) {
+    const dist = Math.abs(trajectoryPts[i].km - cp.km);
+    if (dist < minDist) {
+      minDist = dist;
+      closest = trajectoryPts[i];
+    }
+  }
+  return {
+    km: cp.km,
+    name: cp.name,
+    elev: cp.elev,
+    color: cp.color,
+    lat: cp.lat,
+    lon: cp.lon,
+    type: cp.type,
+    x: closest.x,
+    y: closest.y
+  };
+});
 
-// 虐点 - 从 checkpoints 获取海拔信息
+// 虐点 - 从 trajectory 获取坐标
 export const challengePoints = routeData.challengePoints.map(cp => {
+  let closest = trajectoryPts[0];
+  let minDist = Math.abs(trajectoryPts[0].km - cp.km);
+  for (let i = 1; i < trajectoryPts.length; i++) {
+    const dist = Math.abs(trajectoryPts[i].km - cp.km);
+    if (dist < minDist) {
+      minDist = dist;
+      closest = trajectoryPts[i];
+    }
+  }
   return {
     ...cp,
+    lat: closest.lat,
+    lon: closest.lon,
+    x: closest.x,
+    y: closest.y,
     elev: cp.elev || 0
   };
 });
 
 // 最高海拔点
-export const maxElevPoint = routeData.maxElevPoint;
+export const maxElevPoint = (() => {
+  const cp = routeData.maxElevPoint;
+  let closest = trajectoryPts[0];
+  let minDist = Math.abs(trajectoryPts[0].km - cp.km);
+  for (let i = 1; i < trajectoryPts.length; i++) {
+    const dist = Math.abs(trajectoryPts[i].km - cp.km);
+    if (dist < minDist) {
+      minDist = dist;
+      closest = trajectoryPts[i];
+    }
+  }
+  return {
+    km: cp.km,
+    name: cp.name,
+    elev: cp.elev,
+    lat: cp.lat,
+    lon: cp.lon,
+    x: closest.x,
+    y: closest.y
+  };
+})();
 
-// 海岸线点 - 直接使用 Canvas 坐标
+// 海岸线点
 export const coastPts = routeData.coastline.map(p => ({
   x: p.x,
   y: p.y
@@ -51,18 +95,15 @@ export const TOTAL_KM = routeData.metadata.totalDistance;
 export const MAX_ELEV = routeData.metadata.maxElevation;
 export const ROUTE_BOOK_ID = routeData.metadata.routeBookId;
 
-// waypoints - 从 checkpoints 和 trajectory 组合生成
-// 使用 checkpoints 的海拔数据
+// 海拔插值函数
 function getInterpolatedElevation(km) {
-  // 从 checkpoints 获取海拔数据点
   const elevPoints = routeData.checkpoints.map(cp => ({ km: cp.km, elev: cp.elev }));
-  elevPoints.push({ km: 0, elev: 35 }); // 起点
   elevPoints.sort((a, b) => a.km - b.km);
 
-  // 找到最近的左右点
-  let left = elevPoints[0];
-  let right = elevPoints[elevPoints.length - 1];
+  if (km <= elevPoints[0].km) return elevPoints[0].elev;
+  if (km >= elevPoints[elevPoints.length - 1].km) return elevPoints[elevPoints.length - 1].elev;
 
+  let left = elevPoints[0], right = elevPoints[elevPoints.length - 1];
   for (let i = 0; i < elevPoints.length - 1; i++) {
     if (elevPoints[i].km <= km && elevPoints[i + 1].km >= km) {
       left = elevPoints[i];
@@ -71,28 +112,47 @@ function getInterpolatedElevation(km) {
     }
   }
 
-  // 线性插值
   if (right.km === left.km) return left.elev;
   const t = (km - left.km) / (right.km - left.km);
   return Math.round(left.elev + (right.elev - left.elev) * t);
 }
 
-// 生成完整的 waypoints 数组，包含正确的海拔数据
-export const waypoints = [
-  // 起点
-  { km: 0.00, x: 331, y: 179, name: '起点满京华艺象', isCheck: 1, elev: 35, lat: 22.611661, lon: 114.426878, road: '' },
-  // 中间点（从 trajectory 采样，并使用 checkpoints 的海拔插值）
-  ...trajectoryPts.filter((_, i) => i > 0 && i % 25 === 0 && i < trajectoryPts.length - 1).map(p => ({
-    km: p.km,
-    x: p.x,
-    y: p.y,
-    name: '',
-    isCheck: 0,
-    elev: getInterpolatedElevation(p.km),
-    lat: p.lat,
-    lon: p.lon,
-    road: ''
-  })),
-  // 终点
-  { km: 132.86, x: 330, y: 179, name: '终点满京华艺象', isCheck: 6, elev: 35, lat: 22.611641, lon: 114.426828, road: '' }
+// 找到 km 对应的坐标
+function getCoordAtKm(km) {
+  let closest = trajectoryPts[0];
+  let minDist = Math.abs(trajectoryPts[0].km - km);
+  for (let i = 1; i < trajectoryPts.length; i++) {
+    const dist = Math.abs(trajectoryPts[i].km - km);
+    if (dist < minDist) {
+      minDist = dist;
+      closest = trajectoryPts[i];
+    }
+  }
+  return { x: closest.x, y: closest.y };
+}
+
+// 构建 waypoints - 包含所有 6 个打卡点
+const checkpointData = [
+  { km: 0, isCheck: 1, name: '满京华艺术村' },
+  { km: 22.21, isCheck: 2, name: '鹅公湾' },
+  { km: 44.40, isCheck: 3, name: '西涌' },
+  { km: 66.47, isCheck: 4, name: '杨梅坑' },
+  { km: 110.70, isCheck: 5, name: '坝光' },
+  { km: 132.86, isCheck: 6, name: '满京华终点' }
 ];
+
+export const waypoints = checkpointData.map(cp => {
+  const coord = getCoordAtKm(cp.km);
+  const cpData = routeData.checkpoints.find(c => Math.abs(c.km - cp.km) < 1);
+  return {
+    km: cp.km,
+    x: coord.x,
+    y: coord.y,
+    name: cpData ? cpData.name : cp.name,
+    isCheck: cp.isCheck,
+    elev: cpData ? cpData.elev : getInterpolatedElevation(cp.km),
+    lat: cpData ? cpData.lat : 0,
+    lon: cpData ? cpData.lon : 0,
+    road: ''
+  };
+});
