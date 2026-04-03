@@ -2,6 +2,14 @@
 
 ![项目预览](/imgs/ride-through-the-sky-road-2017-cycling-race.jpg)
 
+## CI/CD 状态
+
+[![CI](https://github.com/kinglionsz/qichuangtianlu/actions/workflows/ci.yml/badge.svg)](https://github.com/kinglionsz/qichuangtianlu/actions/workflows/ci.yml)
+[![Pages](https://github.com/kinglionsz/qichuangtianlu/actions/workflows/ci.yml/badge.svg?event=pages)](https://kinglionsz.github.io/qichuangtianlu)
+[![Lighthouse](https://github.com/kinglionsz/qichuangtianlu/actions/workflows/ci.yml/badge.svg?event=lighthouse)](https://github.com/kinglionsz/qichuangtianlu/actions/workflows/lighthouse.yml)
+
+**部署地址**: https://kinglionsz.github.io/qichuangtianlu
+
 ## 更新日志
 
 ### 2026-04-03 性能优化巅峰版 🚀
