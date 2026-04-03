@@ -14,8 +14,6 @@ export function cycleSpeed() { TrajectoryEngine.cycleSpeed(); }
 export function resetAnim() { TrajectoryEngine.reset(); }
 
 // ── 标记模块已加载（供 Playwright 测试检测）────────────────────
-window.__TRAJECTORY_READY = true;
-console.log('[Trajectory] Module ready');
 const HUD = {
   ROUTE_BOOK_ID: '#1387571',         // 路书编号
   TOTAL_DISTANCE: CANVAS_CONFIG.TOTAL_DISTANCE,
@@ -705,13 +703,7 @@ function frame(ts) {
   requestAnimationFrame(frame);
 }
 
-// ── 控制按钮 API ─────────────────────────────────────────────
-// 使用 TrajectoryEngine 的方法
-export function togglePlay() { return TrajectoryEngine.togglePlay(); }
-export function cycleSpeed() { TrajectoryEngine.cycleSpeed(); }
-export function resetAnim() { TrajectoryEngine.reset(); }
-
-// 启动 - 等待 DOM 和 Canvas 准备就绪
+// ── 启动 - 等待 DOM 和 Canvas 准备就绪
 function initTrajectory() {
   if (!canvas || !ctx) {
     console.error('[Trajectory] Canvas not found');
@@ -734,3 +726,7 @@ if (document.readyState === 'loading') {
 // 2. 重新计算所有绘制坐标（OFFSET_X, OFFSET_Y, hx, hy 等）
 // 3. 保持宽高比或重新设计 HUD 布局
 // ══════════════════════════════════════════════════════════════
+
+// ── 标记模块已加载（供 Playwright 测试检测）────────────────────
+window.__TRAJECTORY_READY = true;
+console.log('[Trajectory] Module ready');
