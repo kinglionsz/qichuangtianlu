@@ -5,9 +5,9 @@
  * - Mobile Menu
  * - Gallery click
  * - Event Listeners (init/destroy)
+ * 
+ * 性能优化：动态导入 trajectory.js，减少首屏 JS 执行时间
  */
-
-import { togglePlay, cycleSpeed, resetAnim } from './trajectory.js';
 
 // ── Scroll Reveal ─────────────────────────────────────────────
 const revealObserver = new IntersectionObserver(
@@ -74,7 +74,10 @@ window.addEventListener('load', () => {
 });
 
 // ── 事件绑定初始化 ─────────────────────────────────────────────
-export function initEventListeners() {
+export async function initEventListeners() {
+  // 动态导入 trajectory.js（性能优化：减少首屏 JS 执行时间）
+  const { togglePlay, cycleSpeed, resetAnim } = await import('./trajectory.js');
+  
   // 汉堡菜单
   const hamburgerEl = document.getElementById('hamburger');
   if (hamburgerEl) {

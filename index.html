@@ -59,7 +59,14 @@
        英雄区
   ══════════════════════════════════════ -->
   <section class="hero" id="hero">
-    <div class="hero-bg"></div>
+    <!-- 性能优化：使用 img 标签替代 CSS 背景图，添加尺寸防止 CLS -->
+    <img class="hero-bg" 
+         src="/imgs/qichuangtianlu-sichuan-tibet-highway-cycling-snow.webp" 
+         width="1920" 
+         height="1080"
+         alt="骑闯天路深圳站背景图"
+         fetchpriority="high"
+         decoding="async">
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1 class="glitch-title" data-text="骑闯天路">

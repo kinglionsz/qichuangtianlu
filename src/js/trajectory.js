@@ -131,11 +131,12 @@ function posAt(t) {
   const f  = sf - s;
   if (s >= SN - 1) return { x: smoothRoute[SN-1].x, y: smoothRoute[SN-1].y, km: smoothRoute[SN-1].km, a: 0, r: '' };
   const a = smoothRoute[s], b = smoothRoute[s + 1];
-  // 海拔从 route (waypoints) 插值获取
-  const elevIdx = t * (N - 1);
-  const es = Math.min(Math.floor(elevIdx), N - 1);
+  // 海拔从 elevationPoints (133个点) 插值获取
+  const EN = elevationPoints.length;
+  const elevIdx = t * (EN - 1);
+  const es = Math.min(Math.floor(elevIdx), EN - 1);
   const ef = elevIdx - es;
-  const elev = es < N - 1 ? lerp(route[es].elev, route[es+1].elev, ef) : route[N-1].elev;
+  const elev = es < EN - 1 ? lerp(elevationPoints[es].elev, elevationPoints[es+1].elev, ef) : elevationPoints[EN-1].elev;
   // 路段名从最近的 waypoint 获取
   const road = a.road || (route[es] ? route[es].road : '');
   return {
