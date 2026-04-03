@@ -3,7 +3,8 @@
     "allow": [
       "Bash(npm *)",
       "Bash(git commit *)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(type *)"
     ]
   },
   "$version": 3

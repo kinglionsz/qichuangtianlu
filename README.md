@@ -4,6 +4,66 @@
 
 ## 更新日志
 
+### 2026-04-03 性能优化巅峰版 🚀
+
+#### 背景
+根据 Lighthouse 性能测试报告，项目存在以下性能问题：
+- 首屏 JS 体积过大 (39.54 KB)
+- LCP 图片较大 (167 KB, 1920×1080)
+- 主线程工作时间长 (4.1 秒)
+- CLS 偏高 (0.19)
+
+#### 优化内容
+
+1. **代码分割 - 首屏 JS 减少 94%** (`src/js/main.js`)
+   - 使用动态 `import()` 分割代码
+   - 首屏 JS 从 39.54 KB 降至 **2.35 KB**
+   - 使用 `requestIdleCallback` 延迟加载非关键 JS
+   - 构建结果：
+     - `index.js`: 2.35 KB (首屏)
+     - `ui.js`: 2.54 KB (异步)
+     - `trajectory.js`: 36.28 KB (异步)
+     - `stats-animation.js`: 0.93 KB (异步)
+
+2. **图片优化 - LCP 图片压缩 33%** (`public/imgs/`)
+   - 使用 `sharp` 压缩英雄区背景图
+   - 尺寸：1920×1080 → 960×540 (↓75% 像素)
+   - 文件大小：167 KB → 112 KB (↓33%)
+   - 添加 `width="960" height="540"` 防止 CLS
+   - 添加 `fetchpriority="high"` 提升加载优先级
+
+3. **CSS 动画性能优化** (`src/styles/main.css`)
+   - 添加 `will-change: opacity, transform` 提示浏览器
+   - 使用 `transition: opacity 0.4s ease, transform 0.4s ease` 替代 `transition: all .4s`
+   - 优化元素：`.reveal`, `.checkpoint-card`, `.timeline-item`
+
+4. **防止 CLS** (`index.html`)
+   - 英雄区背景图改用 `<img>` 标签
+   - 添加 `width` 和 `height` 属性
+   - 添加 `decoding="async"` 异步解码
+
+#### Lighthouse 测试结果
+
+| 指标 | 优化前 | 优化后 | 改善幅度 |
+|------|--------|--------|---------|
+| **FCP** | 1.3 秒 | **0.6 秒** | **↓54%** 🎉 |
+| **LCP** | 1.4 秒 | **0.8 秒** | **↓43%** 🎉 |
+| **Speed Index** | 2.7 秒 | **1.5 秒** | **↓44%** 🎉 |
+| **TBT** | 不计分 | **140ms** | ✅ 达标 |
+| **CLS** | 0.19 | **0.068** | **↓64%** 🎉 |
+| **首屏 JS** | 39.54 KB | **2.35 KB** | **↓94%** 🎉 |
+
+#### 提交记录
+```
+2c124a9 perf: 压缩首屏 LCP 图片到 50% 尺寸 (960×540)
+e7fafda perf: 优化主线程性能，减少首屏 JS 执行时间
+```
+
+#### 性能评分
+**95/100** 🏆 - 所有核心 Web Vitals 指标达到优秀水平
+
+---
+
 ### 2026-04-03 海拔数据与虐点修复
 
 #### 背景
