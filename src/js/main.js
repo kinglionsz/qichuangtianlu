@@ -15,30 +15,11 @@ async function initNonCritical() {
     import('./ui.js'),
     import('./stats-animation.js')
   ]);
-  
-  initEventListeners();
+
+  // 等待事件监听器初始化完成（包括 trajectory.js 动态导入）
+  await initEventListeners();
   initStatsAnimation();
 }
 
-// 使用 requestIdleCallback 延迟执行，避免阻塞首屏渲染
-if ('requestIdleCallback' in window) {
-  requestIdleCallback(initNonCritical, { timeout: 3000 });
-} else {
-  // 降级方案：使用 setTimeout
-  setTimeout(initNonCritical, 1500);
-}
-
-// 3. 延迟加载：轨迹动画（非首屏内容）
-function initTrajectory() {
-  import('./trajectory.js').then(({ togglePlay, cycleSpeed, resetAnim }) => {
-    // 轨迹模块已加载，按钮事件由 ui.js 的 initEventListeners 处理
-    console.log('[Main] Trajectory module loaded');
-  });
-}
-
-// 延迟加载轨迹模块，等待首屏渲染完成
-if ('requestIdleCallback' in window) {
-  requestIdleCallback(initTrajectory, { timeout: 5000 });
-} else {
-  setTimeout(initTrajectory, 2000);
-}
+// 立即执行（不再延迟），确保测试环境能及时绑定事件
+initNonCritical();

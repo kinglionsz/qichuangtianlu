@@ -78,50 +78,54 @@ test.describe('轨迹动画功能', () => {
 
   test('点击 PLAY 按钮应该开始播放', async ({ page }) => {
     const playBtn = page.locator('#btn-play');
-    await playBtn.click(); // 开始播放
+    // 滚动到按钮确保可见，然后使用 force 点击
+    await playBtn.scrollIntoViewIfNeeded();
+    await smartClick(page, '#btn-play');
     await expect(playBtn).toHaveText('PAUSE');
     await expect(playBtn).toHaveClass(/active/);
   });
 
   test('点击 PAUSE 按钮应该暂停动画', async ({ page }) => {
     const playBtn = page.locator('#btn-play');
-    await playBtn.click(); // 先播放
+    await playBtn.scrollIntoViewIfNeeded();
+    await smartClick(page, '#btn-play'); // 先播放
     await page.waitForTimeout(500);
-    await playBtn.click(); // 再暂停
+    await smartClick(page, '#btn-play'); // 再暂停
     await expect(playBtn).toHaveText('PLAY');
     await expect(playBtn).not.toHaveClass(/active/);
   });
 
   test('速度切换应该循环变化', async ({ page }) => {
     const speedBtn = page.locator('#btn-speed');
-    
+
     // 初始 1x
     await expect(speedBtn).toHaveText('1x');
-    
+
     // 点击切换到 2x
-    await speedBtn.click();
+    await speedBtn.scrollIntoViewIfNeeded();
+    await smartClick(page, '#btn-speed');
     await expect(speedBtn).toHaveText('2x');
-    
+
     // 点击切换到 4x
-    await speedBtn.click();
+    await smartClick(page, '#btn-speed');
     await expect(speedBtn).toHaveText('4x');
-    
+
     // 点击切换到 0.5x
-    await speedBtn.click();
+    await smartClick(page, '#btn-speed');
     await expect(speedBtn).toHaveText('0.5x');
-    
+
     // 点击切换回 1x
-    await speedBtn.click();
+    await smartClick(page, '#btn-speed');
     await expect(speedBtn).toHaveText('1x');
   });
 
   test('点击 RESET 按钮应该重置动画', async ({ page }) => {
-    const playBtn = page.locator('#btn-play');
-    
-    // 点击重置
     const resetBtn = page.locator('button:has-text("RESET")');
-    await resetBtn.click();
-    
+
+    // 点击重置
+    await resetBtn.scrollIntoViewIfNeeded();
+    await smartClick(page, 'button:has-text("RESET")');
+
     // RESET 不改变播放状态，只重置进度
     // 验证按钮存在且可点击
     await expect(resetBtn).toBeVisible();
@@ -134,15 +138,16 @@ test.describe('轨迹动画功能', () => {
     const resetBtn = page.locator('#btn-reset');
 
     // 测试播放按钮 - 点击后应切换到 PAUSE
-    await playBtn.click();
+    await playBtn.scrollIntoViewIfNeeded();
+    await smartClick(page, '#btn-play');
     await expect(playBtn).toHaveText('PAUSE');
 
     // 测试速度切换
-    await speedBtn.click();
+    await smartClick(page, '#btn-speed');
     await expect(speedBtn).toHaveText('2x');
 
     // 测试重置按钮
-    await resetBtn.click();
+    await smartClick(page, '#btn-reset');
     await expect(playBtn).toHaveText('PLAY'); // 重置后回到暂停状态
   });
 });
