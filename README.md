@@ -4,9 +4,8 @@
 
 ## CI/CD 状态
 
-[![CI](https://github.com/kinglionsz/qichuangtianlu/actions/workflows/ci.yml/badge.svg)](https://github.com/kinglionsz/qichuangtianlu/actions/workflows/ci.yml)
-[![Pages](https://github.com/kinglionsz/qichuangtianlu/actions/workflows/ci.yml/badge.svg?event=pages)](https://kinglionsz.github.io/qichuangtianlu)
-[![Lighthouse](https://github.com/kinglionsz/qichuangtianlu/actions/workflows/ci.yml/badge.svg?event=lighthouse)](https://github.com/kinglionsz/qichuangtianlu/actions/workflows/lighthouse.yml)
+[![CI](https://github.com/kinglionsz/qichuangtianlu/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/kinglionsz/qichuangtianlu/actions/workflows/ci.yml)
+[![Pages](https://github.com/kinglionsz/qichuangtianlu/actions/workflows/ci.yml/badge.svg?branch=master&event=pages)](https://kinglionsz.github.io/qichuangtianlu)
 
 **部署地址**: https://kinglionsz.github.io/qichuangtianlu
 
