@@ -8,7 +8,14 @@ import {
   maxElevPoint, TOTAL_KM, MAX_ELEV, elevationPoints,
 } from './trajectoryData.json.js';
 
-// ── HUD 常量配置 (从 config.js 导入) ─────────────────────────────
+// ── 导出控制函数（供 ui.js 调用）────────────────────────────────
+export function togglePlay() { return TrajectoryEngine.togglePlay(); }
+export function cycleSpeed() { TrajectoryEngine.cycleSpeed(); }
+export function resetAnim() { TrajectoryEngine.reset(); }
+
+// ── 标记模块已加载（供 Playwright 测试检测）────────────────────
+window.__TRAJECTORY_READY = true;
+console.log('[Trajectory] Module ready');
 const HUD = {
   ROUTE_BOOK_ID: '#1387571',         // 路书编号
   TOTAL_DISTANCE: CANVAS_CONFIG.TOTAL_DISTANCE,

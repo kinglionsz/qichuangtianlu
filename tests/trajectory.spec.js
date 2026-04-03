@@ -47,6 +47,11 @@ test.describe('轨迹动画功能', () => {
     await page.goto('/');
     // 等待 Canvas 初始化（本地测试环境宽限 10 秒）
     await page.waitForSelector('#trajectory-canvas', { timeout: 10000 });
+    // 等待 trajectory.js 模块加载完成（通过控制台日志判断）
+    await page.waitForFunction(() => {
+      return window.__TRAJECTORY_READY === true ||
+             document.querySelector('#btn-play')?.dataset.moduleLoaded === 'true';
+    }, { timeout: 15000 });
   });
 
   test('应该存在 Canvas 元素', async ({ page }) => {
