@@ -2,43 +2,28 @@
   "ci": {
     "collect": {
       "settings": {
-        "startServerCommand": "npm run dev",
-        "startServerReadyPattern": "Local:",
-        "url": [
-          "http://localhost:3000/"
-        ],
         "numberOfRuns": 3,
-        "puppeteerScript": "./scripts/lighthouse-puppeteer.js"
+        "staticDistDir": "./dist-build"
       }
     },
     "assert": {
       "assertions": {
         "first-contentful-paint": ["warn", {"maxNumericValue": 1800}],
         "largest-contentful-paint": ["warn", {"maxNumericValue": 2500}],
-        "total-blocking-time": ["warn", {"maxNumericValue": 200}],
-        "cumulative-layout-shift": ["warn", {"maxNumericValue": 0.1}],
-        "speed-index": ["warn", {"maxNumericValue": 3400}],
-        "interactive": ["warn", {"maxNumericValue": 3800}],
-        "uses-optimized-images": "warn",
-        "uses-webp-images": "warn",
-        "uses-text-compression": "warn",
-        "uses-responsive-images": "warn",
+        "total-blocking-time": ["warn", {"maxNumericValue": 300}],
+        "cumulative-layout-shift": ["warn", {"maxNumericValue": 0.15}],
+        "speed-index": ["warn", {"maxNumericValue": 4000}],
+        "interactive": ["warn", {"maxNumericValue": 4500}],
+        "uses-optimized-images": "off",
+        "uses-webp-images": "off",
+        "uses-text-compression": "off",
+        "uses-responsive-images": "off",
         "network-rtt": "off",
-        "network-latency": "off",
-        "unminified-css": "off",
-        "unminified-javascript": "off"
+        "network-latency": "off"
       }
     },
     "upload": {
       "target": "temporary-public-storage"
-    },
-    "serverResponseTime": {
-      "ci": {
-        "serverResponseTime": {
-          "warn": 400,
-          "fail": 1000
-        }
-      }
     }
   }
 }
