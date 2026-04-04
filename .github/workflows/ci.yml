@@ -159,7 +159,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
   # ──────────────────────────────────────────────────────────────
-  # Lighthouse 性能测试
+  # Lighthouse 性能测试（测试已部署的网站）
   # ──────────────────────────────────────────────────────────────
   lighthouse:
     name: Lighthouse Performance
